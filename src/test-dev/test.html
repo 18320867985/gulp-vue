@@ -11,7 +11,7 @@
 			<script src="../js/html5shiv.js" type="text/javascript" charset="utf-8"></script>
 			<script src="../js/respond.min.js" type="text/javascript" charset="utf-8"></script>
 		<![endif]-->
-
+		<link rel="stylesheet" type="text/css" href="../css/all.css"/>
 		<style type="text/css">
 			@charset "utf-8";
 			
@@ -19,36 +19,6 @@
 				padding: 10px;
 			}
 			
-			* {
-				padding: 0;
-				margin: 0;
-			}
-			ul{
-				list-style: none;
-			}
-			
-			img{
-				display: inline-block;
-			}
-			
-			/*nav*/
-			.nav{
-				box-sizing: border-box;
-				width: 1000px;
-				border: 1px solid #ddd;
-				overflow: hidden;
-			}
-			.nav-wrap ul{
-				white-space: nowrap;
-				background: red;
-				overflow: hidden;
-			}
-			
-			.nav-wrap ul li{
-			 display: inline-block;
-			 padding: 10px;
-			 float: none;
-			}
 			
 		</style>
 
@@ -56,29 +26,22 @@
 
 	<body>
 		
-		<div class="nav" id="nav" > 
-			<div class="nav-wrap">
-				<ul>
-					
-					<li class="a b" style="color:blue">2</li>
-					<li  style="color:red">1</li>
-					<li>3</li>
-					<li>1</li>
-					
-				</ul>
-				
-			</div>
-		</div>
-	
-		
-
+		<div id="app">
+			<vue-select></vue-select>
+			
+			
 		</div>
 
-		<script src="../js-dev/libs/jq/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/all.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/config.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			
 			 "use strict";
+			 
+			 var vm=new Vue({
+			 	el:"#app"
+			 	
+			 });
 			
 			
 	

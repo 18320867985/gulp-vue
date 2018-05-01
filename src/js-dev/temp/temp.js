@@ -678,3 +678,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 	});
 })();
+Vue.component("vue-select", {
+	template: "<ul class=\"vue-test\">\n\t\t\t\t<li>11111</li>\n\t\t\t\t<li>11111</li>\n\t\t\t\t<li>11111</li>\n\t\t\t\t<li>11111</li>\n\t\t\t\t</ul>",
+	data: {},
+	methods: {},
+	computed: function computed() {}
+});
