@@ -1,5 +1,5 @@
 {
-  "name": "sujin-shop",
+  "name": "gulp-vue",
   "version": "1.0.0",
   "main": "gulpfile.js",
   "dependencies": {
