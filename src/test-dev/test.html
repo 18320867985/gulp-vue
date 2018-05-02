@@ -11,40 +11,54 @@
 			<script src="../js/html5shiv.js" type="text/javascript" charset="utf-8"></script>
 			<script src="../js/respond.min.js" type="text/javascript" charset="utf-8"></script>
 		<![endif]-->
-		<link rel="stylesheet" type="text/css" href="../css/all.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/all.css" />
 		<style type="text/css">
 			@charset "utf-8";
-			
-			body{
+			body {
 				padding: 10px;
 			}
-			
-			
 		</style>
 
 	</head>
 
 	<body>
-		
+
 		<div id="app">
 			<vue-select></vue-select>
-			
-			
+
 		</div>
 
-	<script src="../js/all.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/config.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/all.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
+			"use strict";
+//			var arrs = [{
+//					name: "aaa"
+//				},
+//				{
+//					name: "kkk"
+//				},
+//				{
+//					name: "bbb1"
+//				},
+//				{
+//					name: "ccc1"
+//				},
+//
+//			];
 			
-			 "use strict";
-			 
-			 var vm=new Vue({
-			 	el:"#app"
-			 	
-			 });
+			var arrs=[1,2,3,4,5]
+
+			//var arr2=	arrs.concat([2,2,5]);
+			//console.log(arrs.push("9999"));
+			var i = 4;
+			///alert(arrs.slice(i,i+5));
+			var bl = arrs.reduce((sum,o) => {
+				return sum+=o;
+			});
 			
 			
-	
+			console.log(bl)
 		</script>
 
 	</body>
