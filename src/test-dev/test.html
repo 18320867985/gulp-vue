@@ -25,40 +25,41 @@
 
 		<div id="app">
 			<vue-select></vue-select>
-
+			<!--<ul v-for="item in list">
+				<li>{{item.Name}}</li>
+			</ul>-->
+			{{list}}
+		
 		</div>
 
 		<script src="../js/config.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mobile-1.0.0.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../js/all.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-resource.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			"use strict";
-//			var arrs = [{
-//					name: "aaa"
-//				},
-//				{
-//					name: "kkk"
-//				},
-//				{
-//					name: "bbb1"
-//				},
-//				{
-//					name: "ccc1"
-//				},
-//
-//			];
-			
-			var arrs=[1,2,3,4,5]
-
-			//var arr2=	arrs.concat([2,2,5]);
-			//console.log(arrs.push("9999"));
-			var i = 4;
-			///alert(arrs.slice(i,i+5));
-			var bl = arrs.reduce((sum,o) => {
-				return sum+=o;
-			});
-			
-			
-			console.log(bl)
+//		var vm=	new Vue({
+//			el:"#app",
+//			data:{
+//				list:[1,2,3]
+//			},
+//			mounted:function(){
+//				
+//				m.getCORS("http://localhost:4015/api/values/3",{},function(data){
+//					this.list=data;
+//				}.bind(this));	
+//			},
+//			
+//			
+//		});
+		
+		m.getCORS("http://localhost:4015/api/values/3",{},function(data){
+					console.log(data);
+				});
+		m.postCORS("http://localhost:4015/api/values/3",{},function(data){
+					console.log(data);
+				});
 		</script>
 
 	</body>
