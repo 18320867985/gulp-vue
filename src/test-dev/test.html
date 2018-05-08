@@ -54,13 +54,35 @@
 //			
 //		});
 		
-		m.getCORS("http://localhost:4015/api/values/3",{},function(data){
-					console.log(data);
-				});
-		m.postCORS("http://localhost:4015/api/values/3",{},function(data){
-					console.log(data);
-				});
-		</script>
+ let o= new  Object();
+ o.age=12;
+ 
+ function FF(){
+ 	this.age=12;
+ }
+ 
+ var o1=new FF();
+ let o2=Object.create(o1);
+	o2.sex="man";
+	o2.work="man2"
+    
+   
+    console.log(o2)
+    
+    function  create(o){
+    	var o2=new Object();
+    	o2.prototype=o;
+    	o2.constructor=o.constructor;
+    	return o2;
+    }
+
+var o3=create(o1);
+ console.log(o2.constructor)
+ Object.preventExtensions(o);
+ 
+  
+ 
+ </script>
 
 	</body>
 
