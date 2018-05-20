@@ -130,7 +130,7 @@ var paths = {
 
 	//es6: ['./src/js-dev/libs/es6/*.js'],
 
-	//typeScript: ['./src/js-dev/libs/ts/*.ts'],
+	//typeScript: ['./src/js-dev/ts/*.ts'],
 
 }
 
@@ -354,7 +354,7 @@ gulp.task("t_es6", function() {
 gulp.task("t_ts", function() {
 
 	tsProject.src().pipe(tsProject())
-	.js.pipe(gulp.dest("src/js-dev/es5"));
+	.js.pipe(gulp.dest("src/js-dev/ts"));
 
 });
 
