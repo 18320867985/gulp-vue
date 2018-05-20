@@ -104,15 +104,18 @@ var paths = {
 	 */
 	jsBabel: [
 
-		"src/js-dev/common/**/*.js", 		// 1.公共模块
+		"src/js-dev/1-common/**/*.js", 		// 1.公共类库
 		
-		"src/js-dev/api/**/*.js", 			// 2.自定api
+		"src/js-dev/2-namespace/**/*.js", 	// 2.命名空间
+		
+		"src/js-dev/3-api/**/*.js", 		// 2.自定api
 
-		"src/js-dev/component/**/*.js", 	// 3.公共组件
+		"src/js-dev/4-component/**/*.js", 	// 3.公共组件
 
-		"src/js-dev/modules/**/*.js" 		// 4.自定义模块
+		"src/js-dev/5-modules/**/*.js" 		// 4.自定义模块
 
 	],
+
 
 	// less文件
 	lessPath: ['./src/css-dev/less/**/*.less'],
