@@ -6061,8 +6061,7 @@ ul {
   width: 75%; }
 
 .table-8 {
-  width: 80%;
-  float: left; }
+  width: 80%; }
 
 .table-8-5 {
   width: 85%; }
@@ -6303,7 +6302,7 @@ select.form-control {
 
 .vue-test li {
   margin-top: 10px;
-  color: red;
+  color: blue;
   font-size: 38px; }
 
 /*错误显示*/

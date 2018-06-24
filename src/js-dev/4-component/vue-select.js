@@ -1,14 +1,21 @@
+
+let temolate=`
+				<ul class="vue-test">
+					<li>{{name}}:{{name}}</li>
+					<li>{{name}}</li>
+					<li>{{name}}</li>
+					<li>{{age}}</li>
+				</ul>`;
+				
 Vue.component("vue-select", {
-	template: `<ul class="vue-test">
-				<li>11111</li>
-				<li>11111</li>
-				<li>11111</li>
-				<li>11111</li>
-				</ul>`,
+	template: temolate,
 	data: {},
 	methods: {
 
 	},
-	computed(){}
+	
+	props:["name","age"],
+
 	
 });
+

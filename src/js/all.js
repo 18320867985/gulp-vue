@@ -219,6 +219,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 			// data map
 			map: function map(data, fn) {
 				data = data || [];
+				var arrs = [];
 				if (data.constructor !== Array) {
 					throw new Error("第一个参数必须是个数组，第二是回调函数");
 				}
@@ -231,11 +232,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 					for (var i = 0; i < data.length; i++) {
 
-						data[i] = fn(data[i]) || data[i];
+						arrs[i] = fn(data[i]) || data[i];
 					}
 				}
 
-				return data;
+				return arrs;
 			},
 
 			//  data first
@@ -594,100 +595,110 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 		}
 
 	});
-
-	// exrend geolocation
-	Common.extend({
-		geolocation: {
-
-			// 检测是否支持地理定位
-			support: function support() {
-				if (navigator.geolocation) {
-					return true;
-				} else {
-					alert("浏览器不支持地理定位。");
-					return false;
-				}
-			},
-
-			//定位失败
-			showError: function showError(error) {
-				switch (error.code) {
-					case error.PERMISSION_DENIED:
-						alert("定位失败,用户拒绝请求地理定位");
-						break;
-					case error.POSITION_UNAVAILABLE:
-						alert("定位失败,位置信息是不可用");
-						break;
-					case error.TIMEOUT:
-						alert("定位失败,请求获取用户位置超时");
-						break;
-					case error.UNKNOWN_ERROR:
-						alert("定位失败,定位系统失效");
-						break;
-				}
-			},
-
-			//获取当前定位的位置
-			getCurrentPosition: function getCurrentPosition(showPosition) {
-
-				if (Common.geolocation.support()) {
-
-					if (typeof showPosition === "function") {
-						navigator.geolocation.getCurrentPosition(showPosition, Common.geolocation.showError);
-					}
-				}
-			},
-
-			//获取当前定位的位置coords
-			getCoords: function getCoords() {
-
-				var coords = {};
-				if (Common.geolocation.support()) {
-					navigator.geolocation.getCurrentPosition(function (position) {
-						coords.lat = position.coords.latitude; //纬度 
-						coords.lag = position.coords.longitude; //经度 
-
-						alert(position);
-					}, Common.geolocation.showError);
-				}
-
-				return coords || null;
-			},
-
-			//获取当前定位的位置coords纬度 
-			getCoordsLat: function getCoordsLat() {
-
-				var coords = {};
-				if (Common.geolocation.support()) {
-					navigator.geolocation.getCurrentPosition(function (position) {
-
-						coords.lat = position.coords.latitude; //纬度 
-					}, Common.geolocation.showError);
-				}
-
-				return coords.lat || null;
-			},
-			//获取当前定位的位置coords经度
-			getCoordsLag: function getCoordsLag() {
-
-				var coords = {};
-				if (Common.geolocation.support()) {
-					navigator.geolocation.getCurrentPosition(function (position) {
-
-						coords.lag = position.coords.longitude; //经度 
-					}, Common.geolocation.showError);
-				}
-
-				return coords.lag || null;
-			}
-
-		}
-
-	});
 })();
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/*鸭式变形法*/
+// 定义接口
+function Interface(interName, props) {
+    if (arguments.length !== 2) {
+        throw new Error("parameter length must is two");
+    }
+    if (typeof interName !== "string") {
+        throw new Error("interName must is string");
+    }
+    this.interName = interName;
+    this.props = [];
+    if ((typeof props === "undefined" ? "undefined" : _typeof(props)) === "object" && props.constructor === Array) {
+
+        for (var i in props) {
+            if (typeof props[i] === "string") {
+                this.props.push(props[i]);
+            }
+        }
+    }
+}
+
+// 检查是否实现接口
+Interface.check = function (obj) {
+    if (arguments.length < 2) {
+        throw new Error("arguments  length must  is two");
+    }
+    // 遍历接口
+    for (var i = 1; i < arguments.length; i++) {
+        var inter = arguments[i];
+        if (inter.constructor !== Interface) {
+            throw new Error("not Interface type ");
+        }
+        for (var y in inter.props) {
+            var propName = inter.props[y];
+
+            if (!obj[propName]) {
+                throw new Error(" Interface " + inter.interName + "  not implemented  properties name is " + propName);
+            }
+        }
+    }
+
+    return true;
+};
+
+/*实现例子*/
+
+//// 创建接口 Icat
+//var Icat = new Interface("Icat", ["add", "get"]);
+
+//// 创建类 Cat 并实现Icat接口
+//var Cat = function (name) {
+//    this.name = name;
+//    this.constructor.prototype.add = function () {
+//        alert("add");
+//    }
+//    this.constructor.prototype.get = function () {
+//        alert("get");
+//    }
+
+//    // 检查是否实现接口
+//    Interface.check(this, Icat);
+//}
+
+//var cat1 = new Cat();
+//cat1.add();
+var rootName = "hqs"; // 顶级命名空间
+var rootObj = window[rootName] = {};
+
+var namespace = {}; // 
+namespace.extend = function (ns, nsString) {
+	if (typeof nsString !== "string") {
+		throw new Error("nsString must string type");
+	}
+	var parent = ns;
+	var arrs = nsString.split(".");
+	for (var i = 0; i < arrs.length; i++) {
+		var prop = arrs[i];
+		if (typeof ns[prop] === "undefined") {
+			parent[prop] = {};
+		}
+		parent = parent[prop];
+	}
+
+	return parent;
+};
+
+/*namespace.extend(rootObj, "api").bsDate=(function(){})()*/
+
+var temolate = "\n\t\t\t\t<ul class=\"vue-test\">\n\t\t\t\t\t<li>{{name}}:{{name}}</li>\n\t\t\t\t\t<li>{{name}}</li>\n\t\t\t\t\t<li>{{name}}</li>\n\t\t\t\t\t<li>{{age}}</li>\n\t\t\t\t</ul>";
+
 Vue.component("vue-select", {
-	template: "<ul class=\"vue-test\">\n\t\t\t\t<li>11111</li>\n\t\t\t\t<li>11111</li>\n\t\t\t\t<li>11111</li>\n\t\t\t\t<li>11111</li>\n\t\t\t\t</ul>",
+	template: temolate,
 	data: {},
 	methods: {},
-	computed: function computed() {}
+
+	props: ["name", "age"]
+
 });
+
+
+namespace.extend(rootObj, "page").index = function () {
+
+	return {};
+}();
