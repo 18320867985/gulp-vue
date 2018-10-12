@@ -1,0 +1,163 @@
+/*
+ * 模式管理-创建场景
+ * 
+ */
+
+.overview {}
+
+.overview-form {
+    //  background: #ccc;
+    width: 600px;
+    padding: 20px;
+    margin: 0 auto
+}
+
+.overview-form-gp {
+    h2 {
+        font-size: 19px;
+        font-family: PingFangSC-Regular;
+        color: rgba(128, 132, 141, 1);
+    }
+    ._input {
+        input {
+            width: 383px;
+            height: 40px;
+            padding: 8px 12px;
+            line-height: 24px;
+            padding-left: 30px;
+            margin: 20px 0;
+            font-size: 18px;
+            border: 1px solid $text-primary;
+            border-radius: 20px;
+            background: transparent;
+            &.active {
+                background: #fff;
+                border: 1px solid #fff;
+            }
+        }
+        /*webkit*/
+        $input-font:18px;
+        $input-color:#999;
+        input::-webkit-input-placeholder {
+            font-size: $input-font;
+            color: $input-color;
+        }
+        /*IE10+*/
+        input:-ms-input-placeholder {
+            font-size: $input-font;
+            color: $input-color;
+        }
+        /*Firefox4-18*/
+        input:-moz-placeholder {
+            font-size: $input-font;
+            color: $input-color;
+        }
+        /*Firefox19+*/
+        input::-moz-placeholder {
+            font-size: $input-font;
+            color: $input-color;
+        }
+        // 查询
+        .btn {
+            width: 108px;
+            height: 35px;
+            background: rgba(244, 244, 252, 1);
+            border-radius: 18px;
+            margin-left: 30px;
+            padding: 0;
+            line-height: 35px;
+            text-align: center;
+            font-size: 18px;
+            &.active {
+                background: rgba(70, 124, 195, 1);
+                color: #fff;
+                &:hover {
+                    background: darken( rgba(70, 124, 195, 1), 10%);
+                    color: darken( #fff, 10%);
+                }
+            }
+        }
+        // 添加图标
+        .iconfont {
+            font-size: 87px;
+            background: #fff;
+            color: #777;
+            cursor: pointer;
+        }
+    }
+    // 保存
+    .btn._subimt {
+        width: 211px;
+        margin-top: 30px;
+    }
+    /*编辑场景*/
+    ._edit {
+         position: relative;
+        ._item {
+            position: relative;
+             float: left;
+          &+._item{
+              margin-left: 40px;
+          }
+        }
+        
+        
+        ._item-cont {
+            position: relative;
+            width: 87px;
+            height: 87px;
+            background: rgba(244, 244, 252, 1);
+            border-radius: 9px;
+            overflow: hidden;
+            h3 {
+                font-size: 19px;
+                font-family: PingFangSC-Regular;
+                font-weight: 600;
+                color: rgba(70, 124, 195, 1);
+                text-align: center;
+            }
+            ._index {
+                position: absolute;
+                right: -4px;
+                bottom: -6px;
+                display: inline-block;
+                height: 31px;
+                width: 31px;
+                line-height: 31px;
+                text-align: center;
+                border-radius: 50%;
+                background: $text-primary;
+                color: #fff;
+            }
+        }
+        .btn {
+            margin-top: 10px;
+            background: rgba(244, 244, 252, 1);
+            width: 88px;
+            height: 30px;
+            line-height: 30px;
+            padding: 0;
+            text-align: center;
+            color: rgba(113, 114, 126, 1);
+            line-height: 7px;
+            &.active {
+                background: $text-primary;
+                color: #fff;
+                &:hover {
+                    background: darken( $text-primary, 10%);
+                    color: darken(#fff, 10%);
+                }
+            }
+        }
+        
+        .iconfont {
+                position: absolute;
+                left: 95px;
+                top: 30px;
+                font-size: 28px;
+                color: $text-primary;
+                font-weight: 500;
+                cursor: pointer;
+            }
+    }
+}

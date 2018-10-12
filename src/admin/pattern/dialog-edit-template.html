@@ -1,0 +1,38 @@
+﻿<div class="pop-mask  pop-edit editor active" id="dialog" v-if="visible">
+  <div class="pop-box">
+    <h2 class="_ttl" v-text="options.title"></h2>
+
+
+
+    <div class="pop-box-gp" v-for="item in metadata">
+      <label for="" v-text="item.display"></label>
+
+      <input type="text" :name="item.field" v-model="model[item.field]" v-if="item.type === 'text'" />
+
+      <textarea :name="item.field" v-model="model[item.field]" v-if="item.type === 'richtext'" class="richtext form-control required" rows="5" cols="20" ref="textarea"></textarea>
+
+      <textarea :name="item.field" v-model="model[item.field]" v-if="item.type === 'textarea'" class="form-control required" rows="5" cols="20"></textarea>
+
+      <select :name="item.field" v-model="model[item.field]" v-if="item.type === 'select'" class="form-control">
+        <option v-for="option in item.options" :value="option.value" v-text="option.display"></option>
+      </select>
+
+      <div style="" class="uploader-container" v-if="item.type === 'upload'">
+        <input class="result" :name="item.field" type="hidden" v-model="model[item.field]" />
+
+        <div class="uploader">
+          <input type="file" class="file" onchange="startUpload(this)" />
+          <div class="progress" style="display: none;">
+            <div class="bar"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="pop-box-gp _submit">
+      <button v-on:click="cancel()" class="btn btn-default" type="button">取消</button>
+      <button v-on:click="ok()" ref="saveShowName" class="btn btn-primary" type="button">确认</button>
+    </div>
+  </div>
+</div>

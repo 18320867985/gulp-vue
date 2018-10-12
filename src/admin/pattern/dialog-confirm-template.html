@@ -1,0 +1,12 @@
+﻿<div class="pop-mask pop-confirm active" id="dialog" v-if="visible">
+  <div class="pop-box">
+    <h2 class="_ttl" v-text="options.title"></h2>
+
+    <div class="pop-box-gp _submit">
+      <button v-on:click="cancel()" class="btn btn-default" type="button">取消</button>
+      <button v-on:click="ok()" ref="saveShowName2" class="btn btn-primary" type="button">确认</button>
+    </div>
+
+  </div>
+
+</div>

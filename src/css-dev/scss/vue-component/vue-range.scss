@@ -1,0 +1,47 @@
+
+/*
+ * 
+ vue-range
+    <div class="vue-range">
+        <input type="range" name="" id="yingliang"  step="1" min="1" max="10" value="8" />
+        <span>8</span>
+    </div>
+ 
+  */
+
+.vue-range {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 20px;
+    width: 150px;
+    input[type=range] {
+        width: 100px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    span {
+        vertical-align: middle;
+        color: #777;
+        margin-left: 10px;
+        font-size: 12px;
+        vertical-align: middle;
+    }
+    
+    // 重置样式
+    input[type=range] {
+        -webkit-appearance: none;
+        height: 5px;
+        background: #f8f8f8;
+        border-radius: 10px;
+        cursor: pointer;
+        vertical-align: middle;
+    }
+    input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 10px;
+        height: 10px;
+        background: $text-primary;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+}

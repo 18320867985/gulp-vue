@@ -1,0 +1,442 @@
+/*登录页*/
+
+.login {
+    position: relative;
+    height: 100%;
+    min-height: 600px;
+    perspective: 1000px;
+    &.container-fluid-12 .row {
+        height: 100%;
+    }
+    .row {
+        height: 100% !important;
+    }
+}
+
+
+/*3d动画*/
+
+.css-3d-wrap {
+    display: none;
+}
+
+.csstransforms3d {
+    .row {
+        transform-style: preserve-3d;
+        .login-box {
+            transition: all 1s;
+            transform: rotateY(0deg);
+            animation: logo 2s 0s ease forwards;
+        }
+        .login-box:hover {
+            //transform: rotateY(0deg);
+        }
+    }
+    // ie 10+
+    &.-ms- .css-3d-wrap {
+        display: none;
+    }
+    .css-3d-wrap {
+        position: relative;
+        height: 100%;
+        margin: 0 auto;
+        display: block;
+        perspective: 1200px;
+    }
+    .outset {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        margin: auto;
+        transform-style: preserve-3d;
+        transform: rotateX(15deg) rotateY(45deg);
+        &:hover .side.front {
+            transform: translateZ(60px);
+        }
+        &:hover .side.top {
+            transform: rotateX(90deg) translateZ(60px);
+        }
+        &:hover .side.left {
+            transform: rotateY(-90deg) translateZ(60px);
+        }
+        &:hover .side.right {
+            transform: rotateY(90deg) translateZ(60px);
+        }
+        &:hover .side.bottom {
+            transform: rotateX(-90deg) translateZ(60px);
+        }
+        &:hover .side.back {
+            transform: rotateY(180deg) translateZ(60px);
+        }
+    }
+    .outset .side {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        border: 1px solid #fff;
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+        color: white;
+        display: none;
+        transition: all .8s;
+        backface-visibility: visible;
+    }
+    .inset {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        transform-style: preserve-3d;
+    }
+    .inset .side2 {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        top: 15px;
+        left: 15px;
+        text-align: center;
+        border: 1px solid #fff;
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+        color: white;
+        display: none;
+        transition: all .8s;
+        backface-visibility: visible;
+        background: rgba(255, 100, 100, .7);
+    }
+    .w1 {
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        animation: rotate 30s 5s infinite ease-in alternate both, rotate-top 5s ease-in-out;
+    }
+    .w1 .side {
+        font-size: 16px;
+        background: rgba(90, 121, 169, 0.8);
+    }
+    .outset .side.front {
+        display: block;
+        transform: translateZ(30px);
+    }
+    .outset .side.top {
+        display: block;
+        transform: rotateX(90deg) translateZ(30px);
+    }
+    .outset .side.right {
+        display: block;
+        transform: rotateY(90deg) translateZ(30px);
+    }
+    .outset .side.left {
+        display: block;
+        transform: rotateY(-90deg) translateZ(30px);
+    }
+    .outset .side.bottom {
+        display: block;
+        transform: rotateX(-90deg) translateZ(30px);
+    }
+    .outset .side.back {
+        display: block;
+        transform: rotateY(180deg) translateZ(30px);
+    }
+    .inset .side2.front {
+        display: block;
+        transform: translateZ(15px);
+    }
+    .inset .side2.top {
+        display: block;
+        transform: rotateX(90deg) translateZ(15px);
+    }
+    .inset .side2.right {
+        display: block;
+        transform: rotateY(90deg) translateZ(15px);
+    }
+    .inset .side2.left {
+        display: block;
+        transform: rotateY(-90deg) translateZ(15px);
+    }
+    inset .side2.bottom {
+        display: block;
+        transform: rotateX(-90deg) translateZ(15px);
+    }
+    .inset .back {
+        display: block;
+        transform: rotateY(180deg) translateZ(15px);
+    }
+    @keyframes rotate {
+        0% {
+            transform: rotateX(35deg) rotateY(35deg);
+        }
+        100% {
+            transform: rotateX(-360deg) rotateY(-360deg);
+        }
+    }
+    @keyframes rotate-top {
+        0% {
+            transform: translateX(-150px) translateY(-50px) rotateX(65deg) rotateY(65deg);
+        }
+        100% {
+            transform: translateX(0px) translateY(0px) rotateX(35deg) rotateY(35deg);
+        }
+    }
+}
+
+@keyframes logo {
+    %0 {
+        transform: rotateY(15deg);
+    }
+    50% {
+        transform: rotateY(10deg);
+    }
+    100% {
+        transform: rotateY(0deg);
+    }
+}
+
+
+/* body背景*/
+
+.login-bg {
+    width: 100%;
+    height: 100%;
+    background: url(../images/login-bg.png) no-repeat center center;
+    background-attachment: fixed;
+}
+
+
+/*logo 图标*/
+
+.login-logo {
+    position: absolute;
+    left: 56px;
+    top: 26px;
+    z-index: 99;
+    width: 145px;
+    img {
+        width: 100%;
+    }
+}
+
+.login-box {
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    z-index: 99;
+    width: 357px;
+    min-height: 374px;
+    margin-top: -187px;
+    background: rgba(213, 216, 225, 1);
+    background-size: 100% 100%;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 2px #ddd;
+    /*标题*/
+    >h2 {
+        margin-top: 60px;
+        margin-bottom: 40px;
+        font-size: 22px;
+        font-weight: 500;
+        font-family: "微软雅黑"; //Adobe Heiti Std R;
+        text-align: center;
+        color: #3C5D8E;
+    }
+    .form-gp {
+        position: relative;
+        width: 206px;
+        margin: 0 auto;
+        margin-bottom: 8px;
+    }
+    /*文本框*/
+    .txt {
+        width: 100%;
+        height: 34px;
+        padding: 6px 10px;
+        padding-left: 50px;
+        border-radius: 20px;
+        font-size: 16px;
+        line-height: 20px;
+        border: 1px solid #fff;
+        color: #fff;
+        outline: none;
+        background: transparent;
+    }
+    input::-webkit-input-placeholder {
+        color: #fff;
+        line-height: 20px;
+        font-size: 16px;
+    }
+    /*IE10+*/
+    input:-ms-input-placeholder {
+        color: #fff;
+        line-height: 20px;
+        font-size: 16px;
+    }
+    /*Firefox4-18*/
+    input:-moz-placeholder {
+        color: #fff;
+        line-height: 20px;
+        font-size: 16px;
+    }
+    /*Firefox19+*/
+    input::-moz-placeholder {
+        color: #fff;
+        line-height: 20px;
+        font-size: 16px;
+    }
+    /*文本进入焦点*/
+    .form-gp.active {
+        .txt {
+            background: #fff;
+            color: #333;
+        }
+        .iconfont {
+            color: #ccc;
+        }
+        input::-webkit-input-placeholder {
+            color: #ccc;
+        }
+        /*IE10+*/
+        input:-ms-input-placeholder {
+            color: #ccc;
+        }
+        /*Firefox4-18*/
+        input:-moz-placeholder {
+            color: #ccc;
+        }
+        /*Firefox19+*/
+        input::-moz-placeholder {
+            color: #ccc;
+        }
+    }
+    /* 图标*/
+    .form-gp .iconfont {
+        position: absolute;
+        top: 0;
+        left: 15px;
+        font-size: 24px;
+        color: #fff;
+        color: #fff;
+    }
+    .form-gp-ck {
+        padding: 0 10px;
+    }
+    .checkbox {
+        cursor: pointer;
+        .iconfont {
+            left: 0;
+            top: -6px;
+            font-size: 24px;
+            color: #A3B0C4;
+        }
+        ._keep {
+            margin-left: 23px;
+            color: #A3B0C4;
+        }
+        .ok {
+            display: none;
+        }
+        &.active {
+            .ok {
+                display: inline-block;
+            }
+            .df {
+                display: none;
+            }
+            * {
+                color: $text-primary;
+            }
+        }
+    }
+    a.find-pwd {
+        margin-top: 9px;
+        color: #3C5D8E;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    .form-gp.submit-box {
+        margin-top: 36px !important;
+    }
+    .submit {
+        width: 100%;
+        height: 34px;
+        line-height: 34px;
+        text-align: center;
+        color: #fff;
+        outline: none;
+        border: none;
+        background: #f0f0f0;
+        color: #999;
+        border-radius: 15px;
+        font-size: 17px;
+        font-weight: normal;
+        line-height: 27px;
+        transition: all .5s;
+        cursor: default;
+        &.active {
+            background: rgb(60, 93, 142);
+            color: rgba(255, 255, 255, 1);
+            cursor: pointer;
+            &:hover {
+                background: darken(#3c5d8e, 10%)
+            }
+        }
+    }
+    
+    /*error 提示*/
+   .login-error{
+       display: none;
+       width: 90%;
+       margin: 0  auto;
+       padding: 3px;
+       color:$text-danger;
+       border: 1px solid $text-danger;
+       border-radius: 20px;
+       background:#fff;
+       opacity: 0;
+       transition:  all .8s;
+       white-space: nowrap;
+       text-overflow: ellipsis;
+       overflow: hidden;
+       &.active{
+           display: block;
+             opacity: 0.6;
+             animation:login-error .1s  ;
+       }
+   }
+   
+  @keyframes login-error{
+      0%{
+          transform: translateX(0px);
+      }
+      25{
+          transform: translateX(-10px); 
+      }
+       50%{
+           transform: translate(10px); 
+      }
+       75{
+          transform: translateX(-10px); 
+      }
+       90%{
+           transform: translate(10px); 
+      }
+      100%{
+           transform: translate(0px); 
+      }
+  }
+    
+    
+}
+
+.login-footer {
+    position: absolute;
+    bottom: 20px;
+    z-index: 99;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+}

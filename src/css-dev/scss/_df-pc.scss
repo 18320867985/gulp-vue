@@ -1,17 +1,20 @@
-﻿
-/*默认样式*/
+﻿/*默认样式*/
 
 // clear element padding margin outline
-*{
+* {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
     outline: none;
+}
+
+html {
+    height: 100%;
 }
 
 body {
     font-size: 14px;
     font-family: $font-family;
- 
 }
 
 .container-12 {
@@ -39,9 +42,22 @@ body {
     margin-left: -15px;
 }
 
+
+/*iframe 使用*/
+
+@media (min-width:960px) {
+    .container-child-center {
+        margin-right: auto;
+        margin-left: auto;
+        width: 960px;
+    }
+}
+
+
 .container {
     min-width: 300px;
 }
+
 
 /*ie8*/
 
@@ -57,12 +73,9 @@ body {
     margin-left: -15px;
 }
 
-
-
 img {
     display: inline-block;
 }
-
 
 ul {
     list-style: none;
@@ -94,7 +107,7 @@ ul {
 /*边框与背景*/
 
 .rd {
-    border-radius: 5px;
+    border-radius: 15px;
 }
 
 .rd-no {
@@ -120,7 +133,6 @@ ul {
 .bg-no2 {
     background: none !important;
 }
-
 
 .width-0-5 {
     width: 5%;
@@ -219,110 +231,91 @@ ul {
 
 .width-100 {
     width: 100%;
-   clear: both;
+    clear: both;
 }
 
+
 /* use table width no float */
+
 .table-0-5 {
     width: 5%;
-  
 }
 
 .table-1 {
     width: 10%;
-  
 }
 
 .table-1-5 {
     width: 15%;
- 
 }
 
 .table-2 {
     width: 20%;
-   
 }
 
 .table-2-5 {
     width: 25%;
-   
 }
 
 .table-3 {
     width: 30%;
-   
 }
 
 .table-3-5 {
     width: 35%;
-   
 }
 
 .tabel-4 {
     width: 40%;
-   
 }
 
 .table-4-5 {
     width: 45%;
-   
 }
 
 .table-5 {
     width: 50%;
-  
 }
 
 .table-5-5 {
     width: 55%;
-   
 }
 
 .table-6 {
     width: 60%;
- 
 }
 
 .table-6-5 {
     width: 65%;
- 
 }
 
 .table-7 {
     width: 70%;
-  
 }
 
 .table-7-5 {
     width: 75%;
- 
 }
 
 .table-8 {
     width: 80%;
-   
 }
 
 .table-8-5 {
     width: 85%;
- 
 }
 
 .table-9 {
     width: 90%;
-   
 }
 
 .table-9-5 {
     width: 95%;
- 
 }
 
 .table-100 {
     width: 100%;
-  
 }
-
 
 
 /*定位display*/
@@ -338,8 +331,6 @@ ul {
 .fixed {
     position: fixed
 }
-
-
 
 .inline-block {
     display: inline-block;
@@ -363,45 +354,7 @@ input:focus,
     outline: none !important;
 }
 
-.input-underline {
-    border-top: none !important;
-    border-left: none !important;
-    border-right: none !important;
-    box-shadow: 0px 0px 0px #fff, 0px 0px 0px #fff !important;
-}
 
-.input-underline:focus {
-    border-top: none !important;
-    border-left: none !important;
-    border-right: none !important;
-    box-shadow: 0px 0px 0px #fff, 0px 0px 0px #fff !important;
-}
-
-.input-br-no {
-    border: none !important;
-    box-shadow: 0px 0px 0px #fff, 0px 0px 0px #fff !important;
-    background: none;
-}
-
-.input-br-no:focus {
-    border: none !important;
-    background: none;
-    box-shadow: 0px 0px 0px #fff, 0px 0px 0px #fff !important;
-}
-
-.input-xs-x {
-    line-height: 28px;
-    height: 28px;
-    padding: 2px 8px;
-    font-size: 12px;
-}
-
-.btn-xs-x {
-    line-height: 28px !important;
-    height: 28px !important;
-    padding: 0px 7px !important;
-    font-size: 12px !important;
-}
 
 
 /*其他*/
@@ -415,6 +368,12 @@ input:focus,
 }
 
 .v-hide {
+    display: none;
+}
+.v-show {
+    display: block;
+}
+.v-app{
     display: none;
 }
 
@@ -441,60 +400,6 @@ input:focus,
 }
 
 
-/*内联表单*/
-
-.container-12,
-.container-fluid-12 {
-    .form-inline .form-group {
-        display: inline-block;
-        margin-bottom: 0;
-        vertical-align: middle;
-    }
-    .form-inline .form-control {
-        display: inline-block;
-        width: auto;
-        vertical-align: middle;
-    }
-    .form-inline .form-control-static {
-        display: inline-block;
-    }
-    .form-inline .input-group {
-        display: inline-table;
-        vertical-align: middle;
-    }
-    .form-inline .input-group .input-group-addon,
-    .form-inline .input-group .input-group-btn,
-    .form-inline .input-group .form-control {
-        width: auto;
-    }
-    .form-inline .input-group>.form-control {
-        width: 100%;
-    }
-    .form-inline .control-label {
-        margin-bottom: 0;
-        vertical-align: middle;
-    }
-    .form-inline .radio,
-    .form-inline .checkbox {
-        display: inline-block;
-        margin-top: 0;
-        margin-bottom: 0;
-        vertical-align: middle;
-    }
-    .form-inline .radio label,
-    .form-inline .checkbox label {
-        padding-left: 0;
-    }
-    .form-inline .radio input[type="radio"],
-    .form-inline .checkbox input[type="checkbox"] {
-        position: relative;
-        margin-left: 0;
-    }
-    .form-inline .has-feedback .form-control-feedback {
-        top: 0;
-    }
-}
-
 
 /* 输入框focus焦点*/
 
@@ -520,43 +425,46 @@ select option {
 
 /*webkit*/
 
-input::-webkit-input-placeholder {}
+//input::-webkit-input-placeholder {}
+//
+//
+///*IE10+*/
+//
+//input:-ms-input-placeholder {}
+//
+//
+///*Firefox4-18*/
+//
+//input:-moz-placeholder {}
+//
+//
+///*Firefox19+*/
+//
+//input::-moz-placeholder {}
 
-
-/*IE10+*/
-
-input:-ms-input-placeholder {}
-
-
-/*Firefox4-18*/
-
-input:-moz-placeholder {}
-
-
-/*Firefox19+*/
-
-input::-moz-placeholder {}
 
 /*ellipsis*/
+
 .ellipsis {
     max-width: 100%;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
+
 .ellipsis-no {
     white-space: normal;
     word-break: break-all;
     word-wrap: break-word;
 }
-.table-fixed{
+
+.table-fixed {
     table-layout: fixed;
 }
-.table-auto{
-    
+
+.table-auto {
     table-layout: auto;
 }
-
 
 .padding-l-no {
     padding-left: 0;
@@ -591,6 +499,23 @@ input::-moz-placeholder {}
     clear: both;
 }
 
+.spin{
+    display: inline-block;
+     font-size: 18px;
+     margin: 0 5px;
+    animation:  spin-keyframes 2s   linear infinite;
+}
+
+@keyframes spin-keyframes{
+   0%{
+       transform: rotate(0deg);
+   }
+  100%{
+        transform: rotate(360deg);
+   }
+}
+
+
 
 /*select兼容safari */
 
@@ -598,9 +523,24 @@ select.form-control {
     line-height: 28px;
 }
 
-/*modal ie8*/
-.no-opacity .modal{
-    
-    width: 600px;
-    margin:  0 auto;
+.btn{
+    font-size: 14px;
 }
+
+/*modal ie8*/
+
+//.no-opacity .modal{
+//  
+//  width: 600px;
+//  margin:  0 auto;
+//}
+//html,body{ 
+//scrollbar-3dlight-color:#D4D0C8; /*- 最外左 -*/ 
+//scrollbar-highlight-color:#fff; /*- 左二 -*/ 
+//scrollbar-face-color:#E4E4E4; /*- 面子 -*/ 
+//scrollbar-arrow-color:#666; /*- 箭头 -*/ 
+//scrollbar-shadow-color:#808080; /*- 右二 -*/ 
+//scrollbar-darkshadow-color:#D7DCE0; /*- 右一 -*/ 
+//scrollbar-base-color:#D7DCE0; /*- 基色 -*/ 
+//scrollbar-track-color:#;/*- 滑道 -*/ 
+//}

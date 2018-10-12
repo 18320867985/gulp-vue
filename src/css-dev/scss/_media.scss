@@ -1,22 +1,49 @@
+@media screen and (max-width: (1199px-$nemu)) {
+    html {
+        font-size:  (1200px)/$remSize;
+    }
+}
+
+@media screen and (min-width: (1200px-$nemu)) {
+    html {
+        font-size: (1200px)/$remSize;
+    }
+}
 
 
 
-
-/***小屏 width 0-767 ***/
-
-@media (max-width:767px) {}
-
-
-/***中屏 width 768-991***/
-
-@media (min-width:768px) {}
+@media screen and (min-width: (1280px-$nemu)) {
+    html {
+        font-size: (1280px)/$remSize;
+    }
+}
 
 
-/*** 大屏width 992-1199 ***/
 
-@media (min-width:992px) {}
+@media screen and (min-width:(1440px-$nemu)) {
+    html {
+        font-size: (1440px)/$remSize;
+    }
+}
 
 
-/*** 加大屏width 1200以上 ***/
 
-@media (min-width:1200px) {}
+@media screen and (min-width:(1600px-$nemu)) {
+    html {
+        font-size: (1600px)/$remSize;
+    }
+}
+
+@media screen and (min-width:(1680px-$nemu)) {
+    html {
+        font-size: (1680px)/$remSize;
+    }
+}
+
+
+//
+//@media screen and (min-width:(1920px-$nemu)) {
+//  html {
+//      font-size: (1920px)/$remSize;
+//  }
+//}

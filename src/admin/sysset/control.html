@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<title>音频控制</title>
+
+		<!--check css-->
+		<script src="../../js/modernizr-2.6.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../../css/cstFonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/build.css" />
+
+	</head>
+
+	<body class="no-scroll-bar control-bg">
+		<section class="control">
+			<!--title-->
+			<div class="control-ttl clearfix">
+				<!-- Nav tabs -->
+				<ul class=" clearfix pull-left">
+					<li class=" first-tab  active">
+						<a href="control.html">音频控制</a>
+					</li>
+					<li class="">
+						<a href="control-pm.html">屏幕控制</a>
+					</li>
+					<li>
+						<a href="control-yd.html">运动控制</a>
+					</li>
+					<li>
+						<a href="control-direct.html">组合指令</a>
+					</li>
+				</ul>
+
+				<div class="btn-group pull-right">
+					<button type="button" class="btn btn-primary">
+						<span class="glyphicon glyphicon-plus "></span>
+						添加
+					</button>
+
+					<button type="button" class="btn btn-danger">
+						<span class="glyphicon glyphicon-trash "></span>
+						删除
+					</button>
+					<button type="button" class="btn btn-warning">
+						全选
+					</button>
+
+				</div>
+			</div>
+
+			<div class="control-cont clearfix">
+
+				<!--tab1-->
+				<div class="pattern-tab scroll-bar-box">
+					<!--固定头部-->
+					<table class="pattern-table table  table-bordered  table-fixed ">
+
+						<thead>
+							<tr class="list-item">
+								<th class="col-xs-1 text-center">
+									选择
+								</th>
+								<th class="col-xs-1 text-center">
+									序号
+								</th>
+
+								<th class="col-xs-4 text-center">
+									禁言
+								</th>
+
+								<th class="col-xs-4 text-right">
+									<!-- check-swicth-->
+									<div class="vue-check  active" data-click>
+										<div class="vue-check-handler">
+										</div>
+									</div>
+								</th>
+							</tr>
+						</thead>
+					</table>
+					<div class="pattern-scroll no-scroll-box">
+
+						<!--滚动内容-->
+						<div class="no-scroll-bar">
+							<table class="pattern-table table  table-bordered  table-fixed ">
+								
+								<tbody>
+									<tr>
+										<td class="col-xs-1 text-center" data-click>
+											<img class="ok" src="../../images/pattern/ck-ok.png" alt="" />
+											<img class="df" src="../../images/pattern/ck.png" alt="" />
+										</td>
+										<td class="col-xs-1 text-center">
+											1
+										</td>
+										<td class="col-xs-4 text-center">
+											你们好.......
+
+										</td>
+										<td class="col-xs-4 text-center">
+											<a href="javascript:;" class="btn btn-sm btn-default rd">编辑</a>
+										</td>
+
+									</tr>
+
+								</tbody>
+
+							</table>
+						</div>
+
+					</div>
+
+				</div>
+
+				<!--search box-->
+				<div class="control-search clearfix">
+					<label class="col-xs-3  control-label" for="search">组合指令</label>
+					<div class="input-group col-xs-9">
+						<input type="text" id="search" class="form-control" placeholder="组合指令快捷选择" aria-describedby="basic-addon2">
+						<span class="input-group-btn rd">
+						        <button class="btn btn-primary rd" type="button">编辑</button>
+						      </span>
+					</div>
+				</div>
+				<div class="pattern-submit clearfix">
+					<button class="btn btn-sm  btn-primary  rd" type="button"> 保存修改</button>
+				</div>
+
+			</div>
+
+		</section>
+
+		<!--[if lte IE 9]>
+			<script src="../../js/ie9.js" type="text/javascript" charset="utf-8"></script>
+		<![endif]-->
+		<script data-parent="umd" data-umd="control.init" src="../../js/build.js" type="text/javascript" charset="utf-8"></script>
+
+	</body>
+
+</html>

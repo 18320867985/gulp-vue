@@ -1,0 +1,243 @@
+/*
+   状态管理
+   
+   * */
+
+.status {
+    box-sizing: border-box;
+    width: 790rem/$rem;
+    margin: 0 auto;
+    padding-top: 110rem/$rem;
+}
+
+.status-bg {
+    height: 100%;
+}
+
+.status-item {
+    position: relative;
+    width: 253rem/$rem;
+    height: 160rem/$rem;
+    background: #fff;
+    overflow: hidden;
+    float: left;
+    margin-left: 10rem/$rem;
+    margin-top: 20rem/$rem;
+    transition: all .8s;
+}
+
+.status-ttl {
+    margin: 0;
+    padding: 0;
+    height: 34rem/$rem;
+    line-height: 34rem/$rem;
+    padding-left: 10rem/$rem;
+    background: #f4f4fc;
+    font-size: 13rem/$rem;
+    color: #777;
+}
+
+.status-cont {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 120rem/$rem;
+    padding: 0 15rem/$rem;
+    ._img {
+        transition: all .8s;
+        width: 100rem/$rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            width: 70rem/$rem;
+        }
+    }
+    .no-scroll-box {
+        position: relative;
+        flex: 1 0 130rem/$rem;
+        width: 130rem/$rem;
+        z-index: 99;
+        height: 100%;
+        margin-left: 10rem/$rem;
+        transition: all .8s;
+        margin-top: 10rem/$rem;
+        background: rgba(255, 255, 255, .8);
+        .no-scroll-bar {
+            width: 100%;
+            height: 100%;
+        }
+        .scroll-slide {
+            position: absolute;
+            right: 1rem/$rem;
+            top: 3rem/$rem;
+            z-index: 99;
+            width: 5rem/$rem;
+            height: 110rem/$rem;
+            background: rgba(144, 169, 232, .33);
+            border-radius: 3rem/$rem;
+        }
+        .scroll-bar {
+            position: absolute;
+            right: 0rem/$rem;
+            top: 0;
+            z-index: 99;
+            height: 10rem/$rem;
+            width: 5rem/$rem;
+            background: rgba(#467CC3, 1);
+            border-radius: 5rem/$rem;
+        }
+    }
+    .status-det {
+        width: 100%;
+        li {
+            width: 100%;
+            color: #777;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 11rem/$rem;
+            margin-top: 3rem/$rem;
+            .btn {
+                padding: 1rem/$rem 10rem/$rem;
+                background: #f4f4fc;
+                border: 1rem/$rem solid #dbe3f8;
+                border-radius: 15rem/$rem;
+                font-size: 12rem/$rem;
+                color: #71727E;
+            }
+        }
+        &._t2 {
+            margin-top: 10rem/$rem;
+            margin-left: 20rem/$rem;
+            li+li {
+                margin-top: 10rem/$rem;
+            }
+        }
+    }
+}
+
+.status-item:nth-child(1) .status-cont {
+    ._img img {
+        width: 64rem/$rem;
+    }
+}
+
+.status-item:nth-child(2) .status-cont {
+    ._img {
+        img {
+            width: 90rem/$rem;
+        }
+    }
+}
+
+.status-item:nth-child(3) .status-cont {
+    justify-content: center;
+    ._img img {
+        width: 70rem/$rem;
+    }
+}
+
+.status-item:hover .status-cont {
+    ._img {
+        transform: rotateY(180deg);
+    }
+}
+
+.status-item:hover {
+    box-shadow: 0 5rem/$rem 10rem/$rem rgba(0, 0, 0, .1);
+}
+
+
+
+/*激活机器人 statusdtl-form*/
+
+.statusdtl-form {
+    position: absolute;
+    left: 314px;
+    top: 0px;
+    z-index: 999;
+    width: 500px;
+    padding: 20px;
+    //  background: #ccc;
+    h2 {
+        font-size: 19px;
+        font-family: PingFangSC-Regular;
+        font-weight: 400;
+        color: rgba(122, 122, 122, 1);
+        line-height: 30px;
+    }
+    >._input-gp {
+        margin-top: 30px;
+        height: 35px;
+        label {
+            display: inline-block;
+            line-height: 35px;
+            width: 80px;
+            font-size: 19px;
+            font-family: PingFangSC-Regular;
+            font-weight: 400;
+            color: rgba(128, 132, 141, 1);
+        }
+        input {
+            width: 211px;
+            height: 35px;
+            padding: 6px 12px;
+            border: 1px solid rgba(70, 124, 195, 1);
+            border-radius: 18px;
+            background: transparent;
+            text-indent: 20px;
+            line-height: 20px;
+            
+        }
+        
+        $input-color:#999;
+        input::-webkit-input-placeholder {color:$input-color; font-size: 16px;}
+            /*IE10+*/
+        input:-ms-input-placeholder {color:$input-color;font-size: 16px;}
+            /*Firefox4-18*/
+          input:-moz-placeholder {color:$input-color;font-size: 16px;}
+         /*Firefox19+*/
+        input::-moz-placeholder {color:$input-color;font-size: 16px;}
+    }
+    .btn {
+        
+        width: 211px;
+        height: 35px;
+      
+        border-radius: 18px;
+        margin-left: 81px;
+        margin-top: 30px;
+        font-size: 18px;
+        color:#999;
+        &.active{
+             background: rgba(70, 124, 195, 1);
+             color:#fff;
+             
+           //  box-shadow: 0 5px 0  rgba(70, 124, 195, .5), 0 5px 6px  rgba(70, 124, 195, .5);
+             transition: all .2s;
+             
+             &:hover{
+             background: darken( rgba(70, 124, 195, 1),10%);
+             color:darken(#fff,10%);
+              box-shadow:none;
+        }
+        }
+        
+         
+        
+        
+    }
+    ._tj {
+        margin-top: 50px;
+        font-size: 15px;
+        font-family: PingFangSC-Semibold;
+        font-weight: 600;
+        color: rgba(122, 122, 122, 1);
+        line-height: 23px;
+        strong {}
+        p {
+            font-weight: 400;
+        }
+    }
+}

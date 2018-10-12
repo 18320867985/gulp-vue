@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<title>组合指令</title>
+
+		<!--check css-->
+		<script src="../../js/modernizr-2.6.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="../../css/cstFonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/build.css" />
+
+	</head>
+
+	<body class="no-scroll-bar control-bg">
+		<section class="control-pm">
+			<!--title-->
+			<div class="control-ttl clearfix">
+				<!-- Nav tabs -->
+				<ul class=" clearfix pull-left">
+					<li class=" first-tab ">
+						<a href="control.html">音频控制</a>
+					</li>
+					<li>
+						<a href="control-pm.html">屏幕控制</a>
+					</li>
+					<li>
+						<a href="control-yd.html">运动控制</a>
+					</li>
+					<li class="active">
+						<a href="control-direct.html">组合指令</a>
+					</li>
+
+				</ul>
+
+			</div>
+
+			<div class="control-direct-cont">
+
+				<div class="_direct clearfix ">
+					<div class="col-xs-8">
+						<select class="form-control" name="">
+							<option value="">组合指令快捷选择</option>
+							<option value="1">组合指令快捷1</option>
+							<option value="2">组合指令快捷2</option>
+						</select>
+					</div>
+					<div class="col-xs-4">
+						<button class="btn btn-primary _btn-edit">编辑</button>
+					</div>
+
+				</div>
+
+				<!--编辑框-->
+				<div class="_direct-edit v-hide">
+
+					<div class="btn-toolbar clearfix">
+						<div class="btn-group  pull-left">
+							<button type="button" class="btn btn-primary">
+							<span class="glyphicon glyphicon-plus "></span>
+							添加
+						</button>
+
+							<button type="button" class="btn btn-danger">
+							<span class="glyphicon glyphicon-trash "></span>
+							删除
+						</button>
+							<button type="button" class="btn btn-warning">
+							全选
+						</button>
+
+						</div>
+
+						<div class="btn-group pull-right">
+							<button class="btn btn-default  _btn-back">
+							 	<span class="glyphicon glyphicon-share"></span>
+							 	返回
+							 </button>
+						</div>
+
+					</div>
+					<!--table-->
+					<table class="pattern-table table  table-bordered  table-fixed ">
+						<thead>
+							<tr class="list-item">
+								<th class="col-xs-1 text-center">
+									选择
+								</th>
+								<th class="col-xs-1 text-center">
+									序号
+								</th>
+
+								<th class="col-xs-4 text-center">
+									组合指令名称
+								</th>
+
+								<th class="col-xs-4 text-right">
+									操作
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="col-xs-1 text-center" data-click>
+									<img class="ok" src="../../images/pattern/ck-ok.png" alt="" />
+									<img class="df" src="../../images/pattern/ck.png" alt="" />
+								</td>
+								<td class="col-xs-1 text-center">
+									1
+								</td>
+								<td class="col-xs-4 text-center">
+									摇头光脑
+
+								</td>
+								<td class="col-xs-4 text-center">
+									<a href="javascript:;" class="btn btn-sm btn-primary rd">使用</a>
+									<a href="javascript:;" class="btn btn-sm btn-warning rd">编辑</a>
+									<a href="javascript:;" class="btn btn-sm btn-danger rd">删除</a>
+								</td>
+
+							</tr>
+							<tr>
+								<td class="col-xs-1 text-center" data-click>
+									<img class="ok" src="../../images/pattern/ck-ok.png" alt="" />
+									<img class="df" src="../../images/pattern/ck.png" alt="" />
+								</td>
+								<td class="col-xs-1 text-center">
+									1
+								</td>
+								<td class="col-xs-4 text-center">
+									飞哥传书
+
+								</td>
+								<td class="col-xs-4 text-center">
+									<a href="javascript:;" class="btn btn-sm btn-primary rd">使用</a>
+									<a href="javascript:;" class="btn btn-sm btn-warning rd">编辑</a>
+									<a href="javascript:;" class="btn btn-sm btn-danger rd">删除</a>
+								</td>
+
+							</tr>
+							<tr>
+								<td class="col-xs-1 text-center" data-click>
+									<img class="ok" src="../../images/pattern/ck-ok.png" alt="" />
+									<img class="df" src="../../images/pattern/ck.png" alt="" />
+								</td>
+								<td class="col-xs-1 text-center">
+									1
+								</td>
+								<td class="col-xs-4 text-center">
+									摇头光脑
+
+								</td>
+								<td class="col-xs-4 text-center">
+									<a href="javascript:;" class="btn btn-sm btn-primary rd">使用</a>
+									<a href="javascript:;" class="btn btn-sm btn-warning rd">编辑</a>
+									<a href="javascript:;" class="btn btn-sm btn-danger rd">删除</a>
+								</td>
+
+							</tr>
+
+						</tbody>
+
+					</table>
+
+				</div>
+
+			</div>
+
+		</section>
+
+		<!--[if lte IE 9]>
+			<script src="../../js/ie9.js" type="text/javascript" charset="utf-8"></script>
+		<![endif]-->
+		<script data-parent="umd" data-umd="control.direct" src="../../js/build.js" type="text/javascript" charset="utf-8"></script>
+
+	</body>
+
+</html>

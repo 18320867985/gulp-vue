@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<title>编辑场景</title>
+
+		<!--check css-->
+		<script src="../../js/modernizr-2.6.2.min.js" type="text/javascript" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../css/cstFonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/build.css" />
+
+	</head>
+
+	<body class="scene-point-bg no-scroll-bar">
+
+		<section class="scene-point">
+			<h3>编辑坐标</h3>
+			<div class="scene-edit-form">
+				<div class="form-group">
+					<label for="t1">行走中说话:</label>
+					<textarea class="form-control _take" id="t1" placeholder="输入说话内容..."></textarea>
+
+				</div>
+				<!--添加页面-->
+				<button class="btn btn-primary scene-point-addpage">
+					<span class="glyphicon glyphicon-plus"></span>
+					添加页面
+				</button>
+
+				<div>
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs clearfix" role="tablist">
+						<li role="presentation" class="active">
+							<a href="#page-1" role="tab" data-toggle="tab">
+								<span class="_page-text">页面-1</span>
+								<span class="glyphicon glyphicon-remove text-danger"></span>
+							</a>
+							
+						</li>
+						
+						
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<!--page-->
+						<div role="tabpanel" class="tab-pane active" id="page-1">
+							<p class="_page-ttl">页面-1</p>
+							<form class=" form-horizontal">
+								<div class="form-group clearfix">
+									<label class="col-xs-2 control-label">屏幕显示:</label>
+									<div class="col-xs-6">
+										<select name="" class="form-control">
+											<option value="">图片</option>
+										</select>
+									</div>
+
+								</div>
+								<div class="form-group clearfix">
+
+									<label class="col-xs-2 control-label">上传图片:</label>
+									<div class="col-xs-3">
+										<input class="form-control" type="text" placeholder="" />
+									</div>
+									<div class="col-xs-3">
+										<input class="form-control" type="file" placeholder="" />
+									</div>
+								</div>
+								<div class="form-group clearfix">
+
+									<label class="col-xs-2 control-label">语音文本:</label>
+									<div class="col-xs-6">
+										<textarea class="form-control" placeholder="输入语音文本" name="" rows="" cols=""></textarea>
+									</div>
+
+								</div>
+
+								<div class="form-group clearfix">
+									<label class="col-xs-2 control-label">动作列表:</label>
+									<div class="col-xs-6">
+										<select name="" class="form-control">
+											<option value="">图片</option>
+										</select>
+									</div>
+
+								</div>
+
+								<div class="form-group clearfix">
+
+									<label class="col-xs-2 control-label">角度:</label>
+									<div class="col-xs-6">
+										<input	 class="form-control" placeholder="0" />
+									</div>
+
+								</div>
+								<div class="form-group clearfix " >
+									<div class="col-xs-offset-2" style="padding-left:15px;">
+										<button class="btn btn-primary" type="button"> 提交</button>
+									</div>
+									
+								</div>
+
+							</form>
+
+						</div>
+						
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="scene-point-btn text-right">
+				<!--<button class=" btn btn-primary" type="button">确认</button>
+				<button class=" btn btn-warning" type="button">关闭</button>-->
+			</div>
+
+		</section>
+
+		<!--[if lte IE 9]>
+			<script src="../../js/ie9.js" type="text/javascript" charset="utf-8"></script>
+		<![endif]-->
+		<script data-parent="umd" data-umd="scene_point" src="../../js/build.js" type="text/javascript" charset="utf-8"></script>
+
+	</body>
+
+</html>

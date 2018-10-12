@@ -1,0 +1,197 @@
+/*
+ 弹框
+ * */
+
+.pop-mask {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background: rgba(#61606a, .6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    &.active {
+        display: flex;
+        opacity: 0;
+        animation: pop 0.5s .2s ease forwards;
+    }
+    @keyframes pop {
+        0% {
+            display: flex;
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+}
+
+.pop-box {
+    width: 503px;
+    height: 371px;
+ 
+    background: #dcdce6;
+    border-radius: 10px;
+    .pop-ttl {
+        margin: 0;
+        margin-bottom: 60px;
+        height: 60px;
+        line-height: 60px;
+        font-size: 22px;
+        width: 100%;
+        text-align: center;
+        color: rgba(51, 61, 79, 1);
+        background: #dfdfe8;
+        border-bottom: 1px solid  #0094FF;
+        border-radius: 5px 5px 0 0;
+    }
+    .pop-box-gp {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &+.pop-box-gp {
+            margin-top: 10px;
+        }
+    }
+}
+
+
+/*
+ *  编辑框
+ */
+
+.pop-mask.pop-edit .pop-box {
+    height: 300px;
+ 
+    background: #f4f4fc;
+    
+    ._ttl {
+        margin: 0;
+        margin-bottom: 60px;
+        height: 60px;
+        line-height: 60px;
+        font-size: 22px;
+        width: 100%;
+        text-align: center;
+        color: rgba(51, 61, 79, 1);
+        background: #dfdfe8;
+        border-bottom: 1px solid $text-primary;
+        border-radius: 5px 5px 0 0;
+    }
+    .pop-box-gp {
+        margin: 0 146px;
+        input[type=text] {
+            width: 211px;
+            height: 35px;
+            padding-left: 20px;
+            border: 1px solid rgba(70, 124, 195, 1);
+            border-radius: 18px;
+            &.active {
+                background: $text-primary;
+                color: #fff;
+            }
+        }
+        &._submit {
+            margin-top: 20px !important;
+            .btn {
+                border-radius: 25px;
+                padding: 6px 15px;
+                &+.btn {
+                    margin-left: 20px;
+                }
+            }
+        }
+    }
+}
+
+
+/*
+ *  confirm
+ */
+
+.pop-mask.pop-confirm .pop-box {
+     height: 150px;
+    background: #f4f4fc;
+    ._ttl {
+        margin: 0;
+        margin-bottom: 25px;
+        height: 60px;
+        line-height: 60px;
+        font-size: 22px;
+        width: 100%;
+        text-align: center;
+        color: rgba(51, 61, 79, 1);
+        background: #dfdfe8;
+        border-bottom: 1px solid $text-primary;
+        border-radius: 5px 5px 0 0;
+    }
+    .pop-box-gp {
+        margin: 0 146px;
+        input[type=text] {
+            width: 211px;
+            height: 35px;
+            padding-left: 20px;
+            border: 1px solid rgba(70, 124, 195, 1);
+            border-radius: 18px;
+            &.active {
+                background: $text-primary;
+                color: #fff;
+            }
+        }
+        &._submit {
+            margin-top: 20px !important;
+            .btn {
+                border-radius: 25px;
+                padding: 8px 25px;
+                &+.btn {
+                    margin-left: 20px;
+                }
+            }
+        }
+    }
+}
+
+
+/*系统pop*/
+.pop-mask.sysset {
+    .pop-box {
+        background: #f4f4fc;
+    }
+    .pop-box-gp {
+        position: relative;
+        width: 251px;
+        margin: 0 auto;
+        ._img {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            left: -50px;
+            top: -5px;
+        }
+    }
+    ._cont {
+        width: 251px;
+        height: 76px;
+        font-size: 16px;
+        font-weight: 400;
+        color: rgba(51, 61, 79, 1);
+        line-height: 30px;
+    }
+    
+     ._submit {
+            margin-top: 40px !important;
+            .btn {
+                border-radius: 15px;
+                width: 62px;
+                &+.btn {
+                    margin-left: 20px;
+                }
+            }
+        }
+}

@@ -1,0 +1,104 @@
+/*
+ 状态管理-详情
+ 
+ * */
+
+.statusdtl-bg {
+    height: 100%;
+    background: url(../images/status/detail@3x.png) no-repeat center center;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+}
+
+.statusdtl {
+    height: 100%;
+}
+
+.statusdtl-cont {
+    position: relative;
+    //  height: 800px;
+    //  background: url(../images/status/detail3.png) no-repeat 405px 87px, url(../../../images/status/detail1.png) no-repeat 92px 150px;
+    //background-size: auto, auto;
+}
+
+.statusdtl-img {
+    position: relative;
+    top: 157px;
+    left: 92px;
+    ._img1 {
+        position: absolute;
+        width: 411px;
+    }
+    ._img2 {
+        position: absolute;
+        width: 352px;
+        top: 30px;
+        left: 313px;
+    }
+}
+
+.statusdtl-box {
+    position: absolute;
+    z-index: 99;
+    top: 60px;
+    left: 377px;
+    li {
+        position: relative;
+        margin-bottom: 5px;
+        color: #7371FD;
+        label {
+            font-size: 16px;
+            font-weight: 400;
+        }
+        span {
+            font-size: 14px;
+        }
+        &::before {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            left: -15px;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #7371FD;
+        }
+    }
+}
+
+
+/*按钮组*/
+
+.statusdtl-btns {
+    position: absolute;
+    top: 270px;
+    left: 350px;
+    li {
+        &+li {
+            margin-top: 20px;
+        }
+        .btn {
+            width: 115px;
+            height: 31px;
+            margin-left: 20px;
+            line-height: 31px;
+            padding: 0;
+            text-align: center;
+            background: #F4F4FC;
+            font-size: 15px;
+            font-family: Adobe Heiti Std R;
+            font-weight: normal;
+            color: rgba(113, 114, 126, 1);
+            border-radius: 15px;
+            
+            &:hover{
+                  background: darken(#F4F4FC,5%);
+            }
+            &.active {
+                color: #fff;
+                background: $text-primary;
+            }
+        }
+    }
+}

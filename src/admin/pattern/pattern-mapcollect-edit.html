@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <title>问路指引</title>
+
+    <!--check css-->
+    <script src="../../js/modernizr-2.6.2.min.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../css/cstFonts/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/build.css" />
+
+
+    <style>
+        .uploader {
+            padding: 0.5% 1%;
+            margin: 0px 10px;
+            border: solid 1px;
+        }
+
+            .uploader .progress {
+                border: solid 2px darkblue;
+                border-radius: 5px;
+                height: 25px;
+                margin: 0px;
+            }
+
+                .uploader .progress .bar {
+                    background-color: deepskyblue;
+                    color: white;
+                    text-align: right;
+                    height: 100%;
+                    width: 0%;
+                }
+
+        .uploader-container {
+            display: flex;
+        }
+    </style>
+
+    <script src="/js/upload.js" type="text/javascript"></script>
+    <script type="text/javascript">
+            // alert(1);
+            // var i = 1;
+            // // if (robotId != "") {
+            // $.ajax({
+            //     url: "/BasicMode/MapCollectMaps",
+            //     data: { robotId: "C8W7K7M922", wayguideid: "32" },
+            //     dataType: "json",
+            //     async: true,
+            //     success: function (data) {
+            //         var sel = document.getElementById("selectmap");
+            //         $.each(data.arr, function (i) {                    //绑定下拉框
+            //             var opt = document.createElement("option");
+            //             opt.value = data.arr[i].MapID;
+            //             opt.innerText = data.arr[i].Name;
+            //             sel.appendChild(opt);
+            //         });  
+            //     }
+            // });
+            // //}
+        function startUpload(target) {
+
+            let container = target.parentElement;
+
+            let instance = new uploader(container.querySelector("input[type = file]").files[0], "/upload/");
+            let token = null;
+
+            instance.onerror = function (data) {
+                window.setTimeout(function () { instance.start(); }, 1000);
+            }
+
+            instance.onprogress = function (data) {
+                token = data.token;
+                var element = container.querySelector(".progress .bar");
+                element.style.width = data.progress * 100 + "%"
+                element.innerText = Math.floor(data.progress * 100) + "%";
+            }
+
+            instance.oncomplete = function (data) {
+                container.parentElement.querySelector(".result").value = data.url;
+            }
+
+            container.querySelector(".file").style.display = "none";
+            container.querySelector(".progress").style.display = "block";
+
+            instance.start(token);
+        }
+
+    </script>
+
+
+    <script>
+        page_config = {
+
+            init: async function (page) {
+                var data = await $.get("/BasicMode/MapCollectMaps", { robotId: "C8W7K7M922", wayguideid: "32" }, "JSON");
+                var sel = document.getElementById("selectmap");
+                $.each(data.arr, function (i) {
+                    var opt = document.createElement("option");
+                    opt.value = data.arr[i].MapID;
+                    opt.innerText = data.arr[i].Name;
+                    sel.appendChild(opt);
+                });
+
+                $(".select-update").on("change", function (event) {
+                    $.alert("select:" + event.target.value);
+                    //var data = await $.get("/BasicMode/MapCollectJson_Api", { mapid: event.target.value, basic_wayguideId: "28", textboxval: "" }, "JSON");
+                    //return data;
+                    //   $.get("",no)
+                    //pattern_mapcollect_edit.loadData.$data.list == data;
+                });
+                $(".v-app").show();
+
+                page.list_show({
+                    title: "区域列表",
+                    actions: [
+                        {
+                            name: "checkAll",
+                            display: "全选"
+                        },
+                        {
+                            name: "checkSave",
+                            display: "保存"
+                        },
+                        {
+                            name: "backpage",
+                            display: "返回上一页"
+                        },
+                    ]
+                }, "#list-view");
+                page.list_refresh(await this.loadData());
+            },
+          
+            loadData: async function () {
+                var data = await $.get("/BasicMode/MapCollectJson_Api", { mapid: "e40349a2-aae9-4ba6-9911-83a7f79bd3bc", basic_wayguideId: "28", textboxval: "" }, "JSON");
+                data.checked = "$checked";
+                return data;
+            },  
+            checkAll: async function (page, list) {
+                page.list_selectAll();
+            },
+            backPage: function backPage() {
+                window.history.back();
+            }
+        };
+
+    </script>
+</head>
+
+<body class="pattern-bg no-scroll-bar">
+    <div class="pattern">
+        
+        <div class="pattern-box app v-app">
+            <div class=" pattern-overview-serach">
+                <!--<h3 style="margin-bottom: 0;">模块名称:</h3>-->
+            </div>
+            <div style="width:300px; margin-bottom:10px;">
+                <select id="selectmap" class="form-control select-update">
+                    <option>==请选择==</option>
+                </select>
+            </div>
+
+            <div id="list-hold"></div>
+
+        </div>
+
+    </div>
+
+    <!--[if lte IE 9]>
+        <script src="../../js/ie9.js" type="text/javascript" charset="utf-8"></script>
+    <![endif]-->
+    <script data-parent="umd" data-umd="pattern_list" src="../../js/build.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <script type="text/javascript" charset="utf-8" src="../../editor/kindeditor-min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../../editor/lang/zh_CN.js"></script>
+
+</body>
+
+</html>

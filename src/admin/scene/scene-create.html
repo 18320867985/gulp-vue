@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+		<meta name="Keywords" content="" />
+		<meta name="Description" content="" />
+		<title>创建场景</title>
+
+		<!--check css-->
+		<script src="../../js/modernizr-2.6.2.min.js" type="text/javascript" charset="utf-8"></script>
+
+		<link rel="stylesheet" type="text/css" href="../../css/cstFonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/build.css" />
+
+	</head>
+
+	<body class="scene-create no-scroll-bar">
+		<div class="scene-create-content">
+
+			<form class="form-horizontal clearfix  relative">
+				<div class="form-group">
+					<label for="sceneName" class="col-sm-2 control-label">创建场景：</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control txt" id="sceneName" placeholder="输入场景名称">
+					</div>
+				</div>
+				
+				<a href="#" onclick="javascript:history.back(-1);" class="btn btn-default btn-sm pull-right back-page"><span class="glyphicon glyphicon-share-alt"></span> 返回上一页</a>
+			</form>
+
+			<h5 class="scene-create-ttl">设置场景路径(场景路径中的点可单击修改）</h5>
+
+			<div class="scene-create-add">
+				<!--<div class="_item">
+					<div class="_cont clearfix">
+							<span class="glyphicon glyphicon-remove  text-danger pull-right close-item"></span>
+							<select class=" form-control">
+								<option value="1" selected="selected">阿打发第三方</option>
+								<option value="2">同问同问吧</option>
+								<option value="3">突突</option>
+								<option value="4">突突看见了</option>
+								<option value="5">测试111</option>
+		
+							</select>
+							<button  class="btn btn-primary pull-right btn-save" type="button">保存</button>
+							<div class="_item-mask"></div>
+	
+					</div>
+					<button class="btn btn-primary add-btn btn-save" type="button "> <span class="glyphicon glyphicon-plus"></span></button>
+					
+				</div>-->
+				
+				
+				<button class="btn btn-primary add-btn add-btn-init" type="button"> <span class="glyphicon glyphicon-plus"></span></button>
+				
+			
+			</div>
+			
+			
+			<div class="scene-create-submit">
+				<button class="btn btn-primary btn-sm  btn-block " type="button"> 保存</button>
+			</div>
+
+		</div>
+
+		<!--[if lte IE 9]>
+			<script src="../../js/ie9.js" type="text/javascript" charset="utf-8"></script>
+		<![endif]-->
+		<script src="../../js-dev/libs/jquery-1.11.0.js" type="text/javascript" charset="utf-8"></script>
+		<script data-parent="umd" data-umd="scene_create" src="../../js/build.js" type="text/javascript" charset="utf-8"></script>
+		
+	
+	</body>
+
+</html>

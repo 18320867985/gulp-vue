@@ -10,7 +10,6 @@
 }(this, (function () { 'use strict';
 
 /*  */
-
 // these helpers produces better vm code in JS engines due to their
 // explicitness and function inlining
 function isUndef (v) {

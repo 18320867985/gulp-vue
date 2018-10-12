@@ -1,0 +1,72 @@
+﻿<div id="list-view">
+  <div class="pattern-ttl clearfix">
+    <div class="pattern-ttl1 clearfix pull-left">
+      <a class="_btn-list active" href="javascript:;" v-text="options.title"></a>
+      <!--<a class="_btn-two" href="javascript:;">编辑子页面询问实例子</a>-->
+    </div>
+    <div class="pattern-ttl-new clearfix pull-right">
+      <!--<span v-for="action in options.actions">
+        <a class="_btn1 " v-on:click="invoke_action(action.name, list)" v-text="action.display" ref="addBtn" href="javascript:;"></a>
+      </span>-->
+
+      <div class="btn-group" v-for="action in options.actions">
+        <button type="button" class="btn btn-primary" v-on:click="invoke_action(action.name, list)" v-text="action.display" ref="addBtn" href="javascript:;">添加</button>
+      </div>
+    </div>
+
+  </div>
+  <!--tab1-->
+  <div class="pattern-tab relative">
+    <!--固定头部-->
+    <table class="pattern-table table  table-bordered  table-fixed ">
+
+      <thead>
+        <tr>
+          <th v-if="list.checked" class="table-1 text-center">
+            选择
+          </th>
+          <th v-for="item in list.columns" class="table-2 text-center">
+            <span v-text="item.display"></span>
+          </th>
+          <th class="table-4 text-center">
+            操作
+          </th>
+        </tr>
+
+      </thead>
+    </table>
+    <div class="pattern-scroll no-scroll-box">
+
+      <div class="no-scroll-bar">
+        <!--滚动内容-->
+        <table class="pattern-table table  table-bordered  table-fixed table-hover ">
+          <tbody>
+
+            <tr v-for="item in list.rows">
+
+              <td v-if="list.checked" class="table-1 text-center" v-on:click="item[list.checked]=!item[list.checked]">
+                <img v-if="item[list.checked]" class="active" src="../../images/pattern/ck-ok.png" alt="" />
+                <img v-if="!item[list.checked]" class="default" src="../../images/pattern/ck.png" alt="" />
+              </td>
+
+              <td class="table-2 text-center" v-for="col in list.columns">
+                <span v-text="item[col.field]"></span>
+              </td>
+              <td class="table-4 text-center">
+                <a v-for="action in list.actions" href="javascript:;" v-on:click="invoke_action(action.name, item)" class="btn btn-sm rd btn-primary"><span v-text="action.display"></span></a>
+                <a v-for="action in item.actions" href="javascript:;" v-on:click="invoke_action(action.name, item)" class="btn btn-sm rd btn-primary"><span v-text="action.display"></span></a>
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+      <div class="scroll-slide">
+        <div class="scroll-bar"></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+[
+	{
+		"ID": "99c73610-b773-4cab-93f7-62176551e440",
+		"X": 4276,
+		"Y": 4696,
+		"Angle": 0,
+		"Name": "大门",
+		"Description": ""
+	}, {
+		"ID": "9f8ff1c8-d965-487f-8855-dde4dc7365c2",
+		"X": 5256,
+		"Y": 4412,
+		"Angle": 0,
+		"Name": "前台",
+		"Description": ""
+	}, {
+		"ID": "daf2249f-63c8-42cf-82bb-9973ee557f20",
+		"X": 4320,
+		"Y": 4540,
+		"Angle": 0,
+		"Name": "迎宾点",
+		"Description": ""
+	}, {
+		"ID": "aedeb0a1-6926-4d31-a05e-57444772d310",
+		"X": 4280,
+		"Y": 4360,
+		"Angle": 0,
+		"Name": "介绍艾娃",
+		"Description": ""
+	}, {
+		"ID": "d6872aa1-fefd-4969-9f1b-dd34c7be2296",
+		"X": 4340,
+		"Y": 4080,
+		"Angle": 0,
+		"Name": "介绍清洁",
+		"Description": ""
+	}, {
+		"ID": "f3f4ec3e-6083-4e4e-8d00-6d9b99ac0d92",
+		"X": 5160,
+		"Y": 4520,
+		"Angle": 0,
+		"Name": "介绍巡检",
+		"Description": ""
+	}, {
+		"ID": "e675f31e-941b-4ae7-ba2b-6a9ce92a9029",
+		"X": 5300,
+		"Y": 5140,
+		"Angle": 0,
+		"Name": "介绍发展",
+		"Description": ""
+	}
+]
