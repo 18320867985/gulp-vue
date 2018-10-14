@@ -23848,27 +23848,27 @@ if (typeof jQuery === 'undefined') {
 })();
 
 /*
-  
-<div class="vue-number" >
-   <button class="minus btn" type="button">-</button>
-<input class="num" type="number" value="1" data-min="0" data-max="9999" data-step="1" />
-<button class="plus btn" type="button">+</button>
-  
+	  
+ <div class="vue-number" >
+    <button class="minus btn" type="button">-</button>
+	<input class="num" type="number" value="1" data-min="0" data-max="9999" data-step="1" />
+	<button class="plus btn" type="button">+</button>
+	  
 </div>
+ 
+	 * 数字框组件start
+	 * 事件：vue-number
+	 *
+	 * 点击事件
+		$(document).on("vue-number",function(event,element){			
+			//element 当前点击的元素	
+			var p=$(element).parents(".vue-number");
+			alert($(p).find(".num").val());
+								
+		});
+	 * */
 
- * 数字框组件start
- * 事件：vue-number
- *
- * 点击事件
-	$(document).on("vue-number",function(event,element){			
-		//element 当前点击的元素	
-		var p=$(element).parents(".vue-number");
-		alert($(p).find(".num").val());
-							
-	});
- * */
-
-(function ($) {
+(function () {
 
 			//minus
 			$(document).on("click", ".minus", function (e) {
@@ -23962,9 +23962,22 @@ if (typeof jQuery === 'undefined') {
 						//点击触发自定义事件
 						$(this).trigger("vue-number", [this]);
 			});
-})(window.jQuery);
 
-/*****数字框组件end******/
+			jQuery.fn.extend({
+
+						VueNumber: function VueNumber(v) {
+
+									if (typeof v !== "undefined") {
+												var def = $(this).attr("data-min") || 0;
+												v = isNaN(v) ? def : v;
+												$(".num", $(this)).val(v);
+									} else {
+												return $(".num", $(this)).val();
+									}
+						}
+
+			});
+})();
 
 /*
 	 * h5文件上传插件
@@ -24141,74 +24154,6 @@ var sysset = {
 		//日历插件
 		setDate();
 
-		$(function () {
-
-			$.ajax({
-				type: "GET",
-				url: config.api.root + "RobotManage/GetRobotSettingData",
-				dataType: "json",
-				success: function success(data) {
-					if (data != null && data != undefined) {
-						if (data.robotOptions != null && data.robotOptions != undefined) {
-							if (data.poinst != null && data.poinst != undefined && data.poinst.length > 0) {
-								var htmlOption = "";
-								var htmlOptionCd = "";
-								for (var i = 0; i < data.poinst.length; i++) {
-									if (data.poinst[i].ID == data.robotOptions.autowork_beginWorkPoint) {
-										htmlOption += "<option value=\"" + data.poinst[i].ID + "\" selected=\"selected\">" + data.poinst[i].Name + "</option>";
-									} else {
-										htmlOption += "<option value=\"" + data.poinst[i].ID + "\">" + data.poinst[i].Name + "</option>";
-									}
-
-									if (data.poinst[i].ID == data.robotOptions.autowork_endWorkPoint) {
-										htmlOptionCd += "<option value=\"" + data.poinst[i].ID + "\" selected=\"selected\">" + data.poinst[i].Name + "</option>";
-									} else {
-										htmlOptionCd += "<option value=\"" + data.poinst[i].ID + "\">" + data.poinst[i].Name + "</option>";
-									}
-								}
-
-								$("#autowork_beginWorkPoint").after(htmlOption);
-								$("#autowork_endWorkPoint").after(htmlOptionCd);
-							}
-
-							//模式切换
-							$(".app-modelset .mode_" + data.robotOptions.mode).addClass("active");
-							$(".app-modelset .mode_" + data.robotOptions.mode).siblings().addClass("active");
-
-							//基础设置初始值
-
-							$(".app-basicset .vue-slider").VueSlider(data.robotOptions.base_volume); //设置音量
-
-							$(".base_speedOfSpeech ." + data.robotOptions.base_speedOfSpeech).addClass("active");
-							$(".base_speedOfSpeech ." + data.robotOptions.base_speedOfSpeech).siblings().removeClass("active");
-
-							$(".number .num").VueSlider(data.robotOptions.base_volumeThreshold); //识别音量门限
-
-							$(".base_pronunciation ." + data.robotOptions.base_pronunciation).addClass("active"); //发音人
-							$(".base_pronunciation ." + data.robotOptions.base_pronunciation).siblings().removeClass("active"); //发音人
-
-							$(".base_walkingSpeed ." + data.robotOptions.base_walkingSpeed).addClass("active"); //导航行走速度
-							$(".base_walkingSpeed ." + data.robotOptions.base_walkingSpeed).siblings().removeClass("active"); //导航行走速度
-
-							$(".base_semanticLibrary ." + data.robotOptions.base_semanticLibrary).addClass("active"); //语义库选择
-							$(".base_semanticLibrary ." + data.robotOptions.base_semanticLibrary).siblings().removeClass("active"); //语义库选择
-
-							//上下班设置
-							var appupDownSet = data.robotOptions.autowork_isAutomaticCommute == "true";
-							$(".app-upDownSet .vue-swicth").VueSwicth(appupDownSet);
-							$("#autowork_beginWorkTime").val(data.robotOptions.autowork_beginWorkTime); //上班时间
-							$("#autowork_endWorkTime").val(data.robotOptions.autowork_endWorkTime); //下班时间
-
-							//个性化设置
-						}
-					}
-				},
-				error: function error(data) {
-					//$.alert("获取地图数据失败");
-				}
-			});
-		});
-
 		// swicth 自定事件
 		$(".vue-swicth").on("vue-swicth", function (event, el) {
 
@@ -24222,6 +24167,9 @@ var sysset = {
 		basicset();
 
 		// 上下班设置
+		upDownSet();
+
+		// 个性设置
 		perset();
 
 		// 附属模块设置
@@ -24290,6 +24238,24 @@ function basicset() {
 	//get
 	//var radio_v=$(".base_semanticLibrary.vue-radio").VueRadio();
 	//alert(radio_v);
+}
+
+//app-modelset 上下班设置
+function upDownSet() {
+
+	// 设置自动上下班 swicth 组件
+	//set
+	//$(".app-upDownSet .vue-swicth").VueSwicth(false)
+
+	//get
+	// var bl=$(".app-upDownSet .vue-swicth").VueSwicth()
+	//$.alert("选择："+bl)
+
+	// set
+	$(".vue-number").VueNumber("8");
+	// get
+	var v = $(".vue-number").VueNumber();
+	alert(v);
 }
 
 // 个性设置

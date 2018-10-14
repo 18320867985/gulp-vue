@@ -10,7 +10,7 @@ import  "./vue-slider";
 
 import  "./vue-swicth"; 
 
-import  "./vue-num"; 
+import  "./vue-number"; 
 
 import  "./vue-file"; 
 

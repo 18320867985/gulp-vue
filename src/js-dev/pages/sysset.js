@@ -13,79 +13,6 @@ var sysset = {
 		//日历插件
 		setDate();
 
-		$(function() {
-
-			$.ajax({
-				type: "GET",
-				url: config.api.root + "RobotManage/GetRobotSettingData",
-				dataType: "json",
-				success: function(data) {
-					if(data != null && data != undefined) {
-						if(data.robotOptions != null && data.robotOptions != undefined) {
-							if(data.poinst != null && data.poinst != undefined && data.poinst.length > 0) {
-								var htmlOption = "";
-								var htmlOptionCd = "";
-								for(var i = 0; i < data.poinst.length; i++) {
-									if(data.poinst[i].ID == data.robotOptions.autowork_beginWorkPoint) {
-										htmlOption += "<option value=\"" + data.poinst[i].ID + "\" selected=\"selected\">" + data.poinst[i].Name + "</option>";
-									} else {
-										htmlOption += "<option value=\"" + data.poinst[i].ID + "\">" + data.poinst[i].Name + "</option>";
-									}
-
-									if(data.poinst[i].ID == data.robotOptions.autowork_endWorkPoint) {
-										htmlOptionCd += "<option value=\"" + data.poinst[i].ID + "\" selected=\"selected\">" + data.poinst[i].Name + "</option>";
-									} else {
-										htmlOptionCd += "<option value=\"" + data.poinst[i].ID + "\">" + data.poinst[i].Name + "</option>";
-									}
-								}
-
-								$("#autowork_beginWorkPoint").after(htmlOption);
-								$("#autowork_endWorkPoint").after(htmlOptionCd);
-
-							}
-
-							//模式切换
-							$(".app-modelset .mode_" + data.robotOptions.mode).addClass("active");
-							$(".app-modelset .mode_" + data.robotOptions.mode).siblings().addClass("active");
-
-							//基础设置初始值
-
-							$(".app-basicset .vue-slider").VueSlider(data.robotOptions.base_volume); //设置音量
-
-							$(".base_speedOfSpeech ." + data.robotOptions.base_speedOfSpeech).addClass("active");
-							$(".base_speedOfSpeech ." + data.robotOptions.base_speedOfSpeech).siblings().removeClass("active");
-
-							$(".number .num").VueSlider(data.robotOptions.base_volumeThreshold); //识别音量门限
-
-							$(".base_pronunciation ." + data.robotOptions.base_pronunciation).addClass("active"); //发音人
-							$(".base_pronunciation ." + data.robotOptions.base_pronunciation).siblings().removeClass("active"); //发音人
-
-							$(".base_walkingSpeed ." + data.robotOptions.base_walkingSpeed).addClass("active"); //导航行走速度
-							$(".base_walkingSpeed ." + data.robotOptions.base_walkingSpeed).siblings().removeClass("active"); //导航行走速度
-
-							$(".base_semanticLibrary ." + data.robotOptions.base_semanticLibrary).addClass("active"); //语义库选择
-							$(".base_semanticLibrary ." + data.robotOptions.base_semanticLibrary).siblings().removeClass("active"); //语义库选择
-
-							//上下班设置
-							var appupDownSet = data.robotOptions.autowork_isAutomaticCommute == "true";
-							$(".app-upDownSet .vue-swicth").VueSwicth(appupDownSet)
-							$("#autowork_beginWorkTime").val(data.robotOptions.autowork_beginWorkTime); //上班时间
-							$("#autowork_endWorkTime").val(data.robotOptions.autowork_endWorkTime); //下班时间
-
-							//个性化设置
-
-						}
-
-					}
-
-				},
-				error: function(data) {
-					//$.alert("获取地图数据失败");
-				}
-			});
-
-		});
-
 		// swicth 自定事件
 		$(".vue-swicth").on("vue-swicth", function(event, el) {
 
@@ -187,13 +114,19 @@ function upDownSet() {
 	//get
 	// var bl=$(".app-upDownSet .vue-swicth").VueSwicth()
 	//$.alert("选择："+bl)
-
+	
+	// set
+	$(".vue-number").VueNumber("8");
+	// get
+	var v=$(".vue-number").VueNumber();
+	alert(v);
 }
 
 //app-modelset 附属模块设置
 function attrset() {
 
 }
+
 
 // 个性设置
 function perset() {
