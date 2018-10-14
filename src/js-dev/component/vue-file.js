@@ -5,11 +5,13 @@
 			outTime: 30000,
 			size: 300000 ,    // 大小 m
 			contentType: false,
-			seccess: function(data) {
+			seccess: function(data,el) {
 				$.info("文件上转成功！", "success");
+				//console.log(el);
 			}, 
-			error: function(err) {
+			error: function(err,el) {
 				$.alert("文件上转失败！");
+				//console.log(el);
 			} 
 		});
 
@@ -141,13 +143,13 @@
 					size: option.size * 1000000, //1m=1000000
 					contentType: option.contentType, //false,
 					seccess: function(data) {
-						option.seccess(data);
+						option.seccess(data,p);
 						$propress.hide();
 						$(".vue-file-btn", p).show();
 
 					}, //成功回调
 					error: function(data) {
-						option.error(data);
+						option.error(data,p);
 						$propress.hide();
 						$(".vue-file-btn", p).show();
 
@@ -159,5 +161,6 @@
 
 		}
 	});
+
 
 })();
