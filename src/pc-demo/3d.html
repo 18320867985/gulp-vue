@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+
+		<style type="text/css">
+			
+			html,
+			body {
+				width: 1200px;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+				background: linear-gradient(green 0%, #000 80%);
+				perspective: 1000px;
+			}
+			
+			.wrap {
+				position: relative;
+				width: 1000px;
+				height: 100%;
+				margin: 0 auto;
+			}
+			
+			.cube {
+				position: relative;
+				width: 200px;
+				height: 200px;
+				margin: auto;
+				padding-top: 100px;
+				transform-style: preserve-3d;
+				transform: rotateX(45deg) rotateY(45deg);
+			}
+			
+			.side {
+				position: absolute;
+				width: 100px;
+				height: 100px;
+				background: rgba(255, 99, 71, 0.6);
+				border: 1px solid #fff;
+				text-align: center;
+				line-height: 100px;
+				font-size: 30px;
+				font-weight: bold;
+				color: white;
+				background: rgba(0, 0, 0, .7);
+				display: none;
+			}
+			
+			.w1 {
+				position: absolute;
+				top: 50px;
+				left: 600px;
+				animation: rotate 20s 1s infinite ease-in;
+			}
+			
+			.w1 .side {
+				font-size: 16px;
+				background: rgba(255, 100, 100, .7);
+			}
+			
+			.w2 {
+				position: absolute;
+				top: 200px;
+				left: 400px;
+				animation: rotate 20s 2s infinite ease-in;
+			}
+			
+			.w2 .side {
+				background: rgba(255, 0, 0, .7);
+				/* backface-visibility:  hidden;*/
+			}
+			
+			.w3 {
+				position: absolute;
+				top: 200px;
+				left: 800px;
+				animation: rotate 20s 3s infinite ease-in;
+			}
+			
+			.w3 .side {
+				background: rgba(0, 250, 0, .7);
+			}
+			
+			.w4 {
+				position: absolute;
+				top: 350px;
+				left: 600px;
+				animation: rotate 20s 4s infinite ease-in;
+			}
+			
+			.w4 .side {
+				background: rgba(0, 0, 255, .7);
+			}
+			
+			.front {
+				display: block;
+				transform: translateZ(50px);
+			}
+			
+			.top {
+				display: block;
+				transform: rotateX(90deg) translateZ(50px);
+			}
+			
+			.right {
+				display: block;
+				transform: rotateY(90deg) translateZ(50px);
+			}
+			
+			.left {
+				display: block;
+				transform: rotateY(-90deg) translateZ(50px);
+			}
+			
+			.bottom {
+				display: block;
+				transform: rotateX(-90deg) translateZ(50px);
+			}
+			
+			.back {
+				display: block;
+				transform: rotateY(180deg) translateZ(50px);
+			}
+			
+			@keyframes rotate {
+				0% {
+					transform: rotateX(45deg) rotateY(45deg);
+				}
+				50% {
+					transform: rotateX(360deg) rotateY(360deg);
+				}
+				
+				50% {
+					transform: rotateX(-45deg) rotateY(-45deg);
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="wrap">
+			<div class="cube w1">
+
+				<div class="side front">html</div>
+				<div class="side back">css</div>
+				<div class="side right">js</div>
+				<div class="side left">jquery</div>
+				<div class="side top">vuejs</div>
+				<div class="side bottom">nodjs</div>
+
+			</div>
+
+			<div class="cube w2">
+
+				<div class="side front">1</div>
+				<div class="side back">6</div>
+				<div class="side right">4</div>
+				<div class="side left">3</div>
+				<div class="side top">5</div>
+				<div class="side bottom">2</div>
+
+			</div>
+
+			<div class="cube w3">
+
+				<div class="side front">1</div>
+				<div class="side back">6</div>
+				<div class="side right">4</div>
+				<div class="side left">3</div>
+				<div class="side top">5</div>
+				<div class="side bottom">2</div>
+
+			</div>
+
+			<div class="cube w4">
+
+				<div class="side front">1</div>
+				<div class="side back">6</div>
+				<div class="side right">4</div>
+				<div class="side left">3</div>
+				<div class="side top">5</div>
+				<div class="side bottom">2</div>
+
+			</div>
+
+		</div>
+
+	</body>
+
+</html>

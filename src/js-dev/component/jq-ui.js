@@ -1,19 +1,18 @@
-import from "message"; 
+import "./message"; 
 
-import from "pop"; 
+import  "./pop"; 
 
-import from "loading"; 
+import "./vue-radio"; 
 
-import from "num"; 
+import "./vue-range"; 
 
-import from "vue-radio"; 
+import  "./vue-slider"; 
 
-import from "vue-range"; 
+import  "./vue-swicth"; 
 
-import from "vue-slider"; 
+import  "./vue-num"; 
 
-import from "vue-swicth"; 
+import  "./vue-file"; 
 
-import from "vue-num"; 
 
 

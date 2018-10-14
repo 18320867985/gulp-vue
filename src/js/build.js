@@ -11080,18 +11080,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return plugin;
 });
 
-/*Vue 过滤器*/
-
-//		Vue.filter('date', function(value) {
-//			
-//
-//				return value+"9999";
-//			
-//	});
-
-
-//enterprise
-
 /*!
  * jQuery JavaScript Library v1.11.0
  * http://jquery.com/
@@ -23224,309 +23212,6 @@ if (typeof jQuery === 'undefined') {
   });
 }(jQuery);
 
-/*弹框模块
- * 
- * <div class="pop-mask">
-		<div class="pop-box">
-			<h5>pop</h5>
-		</div>
-		
-		<div class="_submit-btn">
-			<button class="btn btn-warning cancel" type="button">取消</button>
-			<button class="btn btn-primary" type="button">确认</button>
-		</div>
-	</div>
- 
- * */
-
-(function () {
-
-	$(".pop-mask").click(function () {
-		$(this).toggleClass("active");
-	});
-	$(".pop-mask .pop-box").click(function (event) {
-		event.stopPropagation();
-	});
-	// cancel
-	$(".pop-mask .cancel").on("click", function () {
-
-		$(this).parents(".pop-mask").removeClass("active");
-	});
-})();
-
-/*公共模块*/
-
-var common = function () {
-
-	$(function () {
-
-		// 工具提示
-		$('[data-toggle="tooltip"]').tooltip();
-
-		/****************************jq组件********************************************/
-
-		/*
-   	单击div选择的全局样式  [data-click]
-   	swicth 自定事件
-  	$(".vue-check").on("data-click",function(event,el){
-  		//$.alert("选择为:"+$(el).hasClass("active"));
-  	});
-  */
-
-		$(document).on("click", "[data-click]", function (event) {
-			event.preventDefault();
-			var isHasClass = $(this).hasClass("active");
-			if (isHasClass) {
-				$(this).removeClass("active");
-			} else {
-				$(this).addClass("active");
-			}
-
-			// 触发自定义的事件
-			$(this).trigger("data-click", [this]);
-		});
-		$(document).on("focus", "[data-focus]", function (event) {
-			event.preventDefault();
-			$(this).parent().addClass("active");
-			$(this).parents(".form-gp").addClass("active");
-		});
-
-		$(document).on("blur", "[data-blur]", function (event) {
-			event.preventDefault();
-			$(this).parent().removeClass("active");
-			$(this).parents(".form-gp").removeClass("active");
-		});
-
-		/*****  单击按钮 选择的全局样式  [data-btn-click]************/
-		$(document).on("click", "[data-btn-click]", function (event) {
-
-			event.preventDefault();
-
-			var isHasClass = $(this).hasClass("active");
-			if (isHasClass) {
-				$(this).removeClass("active");
-			} else {
-				$(this).addClass("active");
-			}
-
-			var primary = $(this).hasClass("btn-primary");
-			if (isHasClass) {
-				$(this).removeClass("btn-primary").addClass("btn-default");
-			} else {
-				$(this).removeClass("btn-default").addClass("btn-primary");
-			}
-			// 触发自定义的事件
-			$(this).trigger("data-btn-click", [this]);
-		});
-
-		/*
-   * vue-radio 组件
-   * */
-		$(document).on("click", ".vue-radio-item", function () {
-
-			var p = $(this).parents(".vue-radio");
-			p.find(".vue-radio-item").removeClass("active");
-			$(this).addClass("active");
-
-			// 触发自定义的事件
-			$(this).trigger("vue-radio", [this]);
-		});
-
-		jQuery.fn.extend({
-
-			VueRadio: function VueRadio(index, v) {
-				if (arguments.length === 2) {
-					if (typeof index === "number") {
-						index = index - 1;
-						$(this).find(".vue-radio-item").removeClass("active");
-						$(this).find(".vue-radio-item").eq(index).attr("data-val", v);
-						$(this).find(".vue-radio-item").eq(index).addClass("active");
-					}
-				} else {
-
-					return $(this).find(".vue-radio-item.active").attr("data-val");
-				}
-			}
-		});
-
-		/****swicth组件*****/
-		$(document).on("click", ".vue-swicth", function (event) {
-			event.preventDefault();
-			var isHasClass = $(this).hasClass("active");
-			if (isHasClass) {
-				$(this).removeClass("active");
-			} else {
-				$(this).addClass("active");
-			}
-
-			// 触发自定义的事件
-			$(this).trigger("vue-swicth", [this]);
-		});
-		//vue-switch 
-		jQuery.fn.extend({
-
-			VueSwicth: function VueSwicth(bl) {
-				if (typeof bl != "undefined") {
-					if (bl == true) {
-						$(this).addClass("active");
-					} else {
-						$(this).removeClass("active");
-					}
-				} else {
-					var v = $(this).hasClass("active");
-
-					return v;
-				}
-			}
-		});
-
-		/***** 滑块组件***********/
-		$(document).on("mousedown", ".vue-slider-handler", function (e) {
-			e.preventDefault();
-			var p = $(this).parents(".vue-slider");
-			var src_x = e.clientX;
-			var obj = $(this);
-			var _left = obj.css("left");
-			var _w = obj.width();
-			var _slider_w = $(".vue-slider-bar", p).width();
-			$(".vue-slider-bg", p).width(_left);
-			var _move_w = _slider_w - _w;
-			$(document).mousemove(function (event) {
-				event.preventDefault();
-				var new_x = event.clientX - src_x;
-				new_x = parseFloat(_left) + parseFloat(new_x);
-
-				if (new_x >= _move_w) {
-					new_x = _move_w;
-				}
-				if (new_x <= 0) {
-					new_x = 0;
-				}
-
-				obj.css({
-					left: new_x
-				});
-				$(".vue-slider-bg", p).width(new_x + _w);
-				var _per = (new_x / _move_w * 100).toFixed(0);
-				$(".vue-slider-percent", p).html(_per + "%");
-				p.attr("data-val", _per);
-
-				// 触发自定义的事件
-				$(this).trigger("vue-slider", [_per]);
-			});
-			$(document).on("mouseup", function () {
-				$(document).off("mousemove");
-				$(document).off("mouseup");
-			});
-		});
-
-		$(".vue-slider").each(function () {
-			var _v = $(this).attr("data-val");
-			var _w = $(this).find(".vue-slider-bar").width();
-			$(".vue-slider-bg", $(this)).width(_w * (_v / 100));
-			var _per = (_w * (_v / 100)).toFixed(0);
-			$(".vue-slider-percent", $(this)).html(_per + "%");
-			var _handler = $(".vue-slider-handler", $(this));
-			var _handler_w = _w * (_v / 100) - _handler.width();
-			_handler.css({
-				left: _handler_w
-			});
-		});
-
-		//vue-slider 
-		jQuery.fn.extend({
-
-			VueSlider: function VueSlider(val) {
-				if (val) {
-					var _v = typeof val === "number" ? val : 0; //$(this).attr("data-val");
-					var _w = $(this).find(".vue-slider-bar").width();
-					$(".vue-slider-bg", $(this)).width(_w * (_v / 100));
-					var _per = (_w * (_v / 100)).toFixed(0);
-					$(this).attr("data-val", _per);
-					$(".vue-slider-percent", $(this)).html(_per + "%");
-					var _handler = $(".vue-slider-handler", $(this));
-					var _handler_w = _w * (_v / 100) - _handler.width();
-					_handler.css({
-						left: _handler_w
-					});
-				} else {
-					return parseFloat($(this).attr("data-val"));
-				}
-			}
-		});
-
-		/*****vue-range滑块组件***********/
-
-		$(document).on("change", ".vue-range [type=range]", function () {
-			var p = $(this).parents(".vue-range");
-			$("span", p).html(this.value);
-
-			// 触发事件
-			$(this).trigger("vue-range", [this.value]);
-		});
-
-		jQuery.fn.extend({
-
-			VueRange: function VueRange(val) {
-				var p = $(this);
-				if (val) {
-
-					var v = isNaN(val) ? 0 : val;
-					$("[type=range]", p).val(v);
-					$("span", p).text(v);
-				} else {
-					return parseFloat($("[type=range]", p).val());
-				}
-			}
-		});
-
-		//获取url参数
-		$.request = function (name) {
-			var search = location.search.slice(1);
-			var arr = search.split("&");
-			for (var i = 0; i < arr.length; i++) {
-				var ar = arr[i].split("=");
-				if (ar[0] == name) {
-					if (unescape(ar[1]) == 'undefined') {
-						return "";
-					} else {
-						return unescape(ar[1]);
-					}
-				}
-			}
-			return "";
-		};
-	});
-}();
-
-/*loading 插件*/
-window._loading = window.loading;
-
-window.loading = function () {
-	var _loadingText = "正在加载数据...";
-
-	var addLoading = function addLoading(el, loadingText) {
-
-		if (loadingText) {
-			_loadingText = loadingText;
-		}
-		var text = " <div class=\"loading-box\">\n               <div class=\"loading-content\">\n                    <span  class=\"iconfont icon-loading spin\"></span>\n                    <span class=\"loading-text\">" + _loadingText + "</span>\n                  </div>\n                                        \n    \t</div>";
-
-		$(el).append(text);
-	};
-
-	var removeLoading = function removeLoading(el) {
-
-		$(".loading-box", el).remove();
-	};
-
-	return {
-		//text: text,
-		addLoading: addLoading,
-		removeLoading: removeLoading
-	};
-}();
-
 /*
  * 消息框
   
@@ -23867,9 +23552,304 @@ window.loading = function () {
 	});
 })();
 
+/*弹框模块
+ * 
+ * <!--选择图片库   加上data-mask=不許点击pop-mask隐藏-->
+	<div class="pop-mask">
+
+		<div class="pop-box">
+			<h5 class="pop-ttl">选择图片</h5>
+			<div class="pop-content">
+				
+			</div>
+			<div class="pop-footer text-center">
+					<button class="btn btn-warning cancel" type="button">取消</button>
+					<button class="btn btn-primary" type="button">确认</button>
+			</div>
+
+		</div>
+
+	</div>
+ 
+ * */
+
+(function () {
+
+	$(".pop-mask").click(function () {
+
+		if (!$(this)[0].hasAttribute("data-mask")) {
+			$(this).removeClass("active");
+		}
+	});
+	$(".pop-mask .pop-box").click(function (event) {
+
+		event.stopPropagation();
+	});
+	// cancel
+	$(".pop-mask .cancel").on("click", function (event) {
+		event.stopPropagation();
+		$(this).parents(".pop-mask").removeClass("active");
+	});
+})();
+
+/*
+ * vue-radio 组件
+ * <div class="vue-radio">
+		<div class="vue-radio-item" data-val="lingju">灵聚</div>
+		<div class="vue-radio-item" data-val="tengxun">腾讯</div>
+		<div class="vue-radio-item" data-val="xunfei">科大讯飞</div>
+	</div>
+	
+	set
+	$(".base_semanticLibrary.vue-radio").VueRadio(1,"lingju");
+	get
+	var radio_v=$(".base_semanticLibrary.vue-radio").VueRadio();
+	
+	 单选 vue-radio 自定事件
+	$(".app-modelset .vue-radio").on("vue-radio", function(event, el) {
+		$.alert("选择为:" + $(el).attr("data-val"));
+	});
+	
+ * */
+
+(function () {
+	$(document).on("click", ".vue-radio-item", function () {
+
+		var p = $(this).parents(".vue-radio");
+		p.find(".vue-radio-item").removeClass("active");
+		$(this).addClass("active");
+
+		// 触发自定义的事件
+		$(this).trigger("vue-radio", [this]);
+	});
+
+	jQuery.fn.extend({
+
+		VueRadio: function VueRadio(index, v) {
+			if (arguments.length === 2) {
+				if (typeof index === "number") {
+					index = index - 1;
+					$(this).find(".vue-radio-item").removeClass("active");
+					$(this).find(".vue-radio-item").eq(index).attr("data-val", v);
+					$(this).find(".vue-radio-item").eq(index).addClass("active");
+				}
+			} else {
+
+				return $(this).find(".vue-radio-item.active").attr("data-val");
+			}
+		}
+	});
+})();
+
+/*
+ * vue-range滑块组件
+ * <div class="vue-range _yingling">
+		<input type="range" name="" step="1" min="1" max="10" value="8" />
+		<span>5</span>
+	</div>
+	
+	// vue-range設置音量
+	//set
+	//$(".vue-range._yingling").VueRange(3);
+
+	// vue-range獲取音量
+	//get
+	//var v=$(".app-basicset .vue-slider").VueRnge();
+	//alert(v)
+
+	// vue-range音量滑动触发事件
+	$(document).on("vue-range", function(event, v) {
+		console.log("音量：" + v);
+	})
+
+ * */
+
+(function () {
+
+	$(document).on("change", ".vue-range [type=range]", function () {
+		var p = $(this).parents(".vue-range");
+		$("span", p).html(this.value);
+
+		// 触发事件
+		$(this).trigger("vue-range", [this.value]);
+	});
+
+	jQuery.fn.extend({
+
+		VueRange: function VueRange(val) {
+			var p = $(this);
+			if (val) {
+
+				var v = isNaN(val) ? 0 : val;
+				$("[type=range]", p).val(v);
+				$("span", p).text(v);
+			} else {
+				return parseFloat($("[type=range]", p).val());
+			}
+		}
+	});
+})();
+
+/*滑块组件
+ * <div class="vue-slider" data-val="70">
+	        <div class="vue-slider-bar">
+	            <div class="vue-slider-bg">
+	                <div class="vue-slider-handler">
+	                </div>
+	            </div>
+	            <div class="vue-slider-percent">0%</div>
+	        </div>
+	    </div>
+	    
+	// vue-slider音量滑动触发事件
+	//		$(document).on("vue-slider",function(event,v){
+	//			console.log("音量："+v);
+	//		});
+
+	//  vue-slider設置音量
+	//$(".app-basicset .vue-slider").VueSlider(90);
+
+	//  vue-slider獲取音量
+	//var v=$(".app-basicset .vue-slider").VueSlider();
+	//alert(v)
+	    
+ * */
+
+(function () {
+
+	$(document).on("mousedown", ".vue-slider-handler", function (e) {
+		e.preventDefault();
+		var p = $(this).parents(".vue-slider");
+		var src_x = e.clientX;
+		var obj = $(this);
+		var _left = obj.css("left");
+		var _w = obj.width();
+		var _slider_w = $(".vue-slider-bar", p).width();
+		$(".vue-slider-bg", p).width(_left);
+		var _move_w = _slider_w - _w;
+		$(document).mousemove(function (event) {
+			event.preventDefault();
+			var new_x = event.clientX - src_x;
+			new_x = parseFloat(_left) + parseFloat(new_x);
+
+			if (new_x >= _move_w) {
+				new_x = _move_w;
+			}
+			if (new_x <= 0) {
+				new_x = 0;
+			}
+
+			obj.css({
+				left: new_x
+			});
+			$(".vue-slider-bg", p).width(new_x + _w);
+			var _per = (new_x / _move_w * 100).toFixed(0);
+			$(".vue-slider-percent", p).html(_per + "%");
+			p.attr("data-val", _per);
+
+			// 触发自定义的事件
+			$(this).trigger("vue-slider", [_per]);
+		});
+		$(document).on("mouseup", function () {
+			$(document).off("mousemove");
+			$(document).off("mouseup");
+		});
+	});
+
+	$(".vue-slider").each(function () {
+		var _v = $(this).attr("data-val");
+		var _w = $(this).find(".vue-slider-bar").width();
+		$(".vue-slider-bg", $(this)).width(_w * (_v / 100));
+		var _per = (_w * (_v / 100)).toFixed(0);
+		$(".vue-slider-percent", $(this)).html(_per + "%");
+		var _handler = $(".vue-slider-handler", $(this));
+		var _handler_w = _w * (_v / 100) - _handler.width();
+		_handler.css({
+			left: _handler_w
+		});
+	});
+
+	//vue-slider 
+	jQuery.fn.extend({
+
+		VueSlider: function VueSlider(val) {
+			if (val) {
+				var _v = typeof val === "number" ? val : 0; //$(this).attr("data-val");
+				var _w = $(this).find(".vue-slider-bar").width();
+				$(".vue-slider-bg", $(this)).width(_w * (_v / 100));
+				var _per = (_w * (_v / 100)).toFixed(0);
+				$(this).attr("data-val", _per);
+				$(".vue-slider-percent", $(this)).html(_per + "%");
+				var _handler = $(".vue-slider-handler", $(this));
+				var _handler_w = _w * (_v / 100) - _handler.width();
+				_handler.css({
+					left: _handler_w
+				});
+			} else {
+				return parseFloat($(this).attr("data-val"));
+			}
+		}
+	});
+})();
+
+/*swicth组件
+ * <div class="vue-swicth ">
+		<div class="vue-swicth-handler">
+		</div>
+	</div>
+	
+	 设置 swicth 组件
+	//set
+	//$(".app-upDownSet .vue-swicth").VueSwicth(false)
+
+	//get
+	// var bl=$(".app-upDownSet .vue-swicth").VueSwicth()
+	//$.alert("选择："+bl)
+	
+	// swicth 自定事件
+		$(".vue-swicth").on("vue-swicth", function(event, el) {
+
+			//$.alert("选择为:"+$(el).hasClass("active"));
+		});
+
+ * */
+
+(function () {
+
+	$(document).on("click", ".vue-swicth", function (event) {
+		event.preventDefault();
+		var isHasClass = $(this).hasClass("active");
+		if (isHasClass) {
+			$(this).removeClass("active");
+		} else {
+			$(this).addClass("active");
+		}
+
+		// 触发自定义的事件
+		$(this).trigger("vue-swicth", [this]);
+	});
+	//vue-switch 
+	jQuery.fn.extend({
+
+		VueSwicth: function VueSwicth(bl) {
+			if (typeof bl != "undefined") {
+				if (bl == true) {
+					$(this).addClass("active");
+				} else {
+					$(this).removeClass("active");
+				}
+			} else {
+				var v = $(this).hasClass("active");
+
+				return v;
+			}
+		}
+	});
+})();
+
 /*
   
-<div class="number" >
+<div class="vue-number" >
    <button class="minus btn" type="button">-</button>
 <input class="num" type="number" value="1" data-min="0" data-max="9999" data-step="1" />
 <button class="plus btn" type="button">+</button>
@@ -23877,12 +23857,12 @@ window.loading = function () {
 </div>
 
  * 数字框组件start
- * 事件：number_click
+ * 事件：vue-number
  *
  * 点击事件
-	$(document).on("number_click",function(event,element){			
+	$(document).on("vue-number",function(event,element){			
 		//element 当前点击的元素	
-		var p=$(element).parents(".number");
+		var p=$(element).parents(".vue-number");
 		alert($(p).find(".num").val());
 							
 	});
@@ -23896,7 +23876,7 @@ window.loading = function () {
 						e.stopPropagation();
 						e.preventDefault();
 
-						var p = $(this).parents(".number");
+						var p = $(this).parents(".vue-number");
 
 						//步长
 						var step = Number($(".num", p).attr("data-step"));
@@ -23922,14 +23902,14 @@ window.loading = function () {
 						$(".num", p).val(v);
 
 						//点击触发自定义事件
-						$(this).trigger("number_click", [this]);
+						$(this).trigger("vue-number", [this]);
 			});
 
 			//plus
 			$(document).on("click", ".plus", function (e) {
 						e.stopPropagation();
 						e.preventDefault();
-						var p = $(this).parents(".number");
+						var p = $(this).parents(".vue-number");
 
 						//步长
 						var step = Number($(".num", p).attr("data-step"));
@@ -23954,12 +23934,12 @@ window.loading = function () {
 
 						$(".num", p).val(v);
 						//点击触发自定义事件
-						$(this).trigger("number_click", [this]);
+						$(this).trigger("vue-number", [this]);
 			});
 
 			// value
 			$(document).on("blur", ".num", function (e) {
-						var p = $(this).parents(".number");
+						var p = $(this).parents(".vue-number");
 						//最大值
 						var max = Number($(".num", p).attr("data-max"));
 						max = window.isNaN(max) ? 9999 : max;
@@ -23980,2962 +23960,171 @@ window.loading = function () {
 
 						$(".num", p).val(v);
 						//点击触发自定义事件
-						$(this).trigger("number_click", [this]);
+						$(this).trigger("vue-number", [this]);
 			});
 })(window.jQuery);
 
 /*****数字框组件end******/
 
-/*登陆模块*/
-
-var login = {
-	init: function init() {
-
-		var vm = new Vue({
-			el: ".app",
-			data: {
-				user: "",
-				pwd: "",
-				ck: false,
-				error: false,
-				errorText: "用户名与密码不匹配！",
-				firstLogin: true
-			},
-			methods: {
-				input_1: function input_1() {
-					if (this.$refs.txt.value !== "") {
-						this.$refs.pwd.focus();
-						return;
-					}
-				},
-				input_2: function input_2() {
-					console.log("input_2" + this.$refs.txt);
-					if (this.$refs.txt.value === "") {
-						console.log(this.$refs.txt);
-						this.$refs.txt.focus();
-						return;
-					}
-				},
-
-				login: function login(event) {
-					var _this = this;
-
-					var o = event.target;
-					this.error = false;
-					if (this.user.length > 0 && this.pwd.length > 0 && this.firstLogin) {
-						this.firstLogin = false;
-						this.$refs.btn.innerHTML = "正在登录中...";
-						$(this.$refs.btn).parents("form").find("input").attr("disabled", "disabled"); // 阻住重复提交
-						this.$http.post("Login/CheckLogin", { username: this.user, password: this.pwd }).then(function (response) {
-							var data = response.body;
-							if (data.state === "success") {
-								window.location.href = "index.html";
-							} else if (data.state === "error") {
-								_this.$refs.btn.innerHTML = "登录";
-								_this.errorText = data.message;
-								$(_this.$refs.btn).parents("form").find("input").removeAttr("disabled");
-								_this.error = true;
-							}
-							_this.firstLogin = true;
-						}, function (error) {
-							_this.error = true;
-							_this.firstLogin = true;
-							_this.errorText = "数据加载失败！";
-						});
-					}
-				}
-			},
-
-			mounted: function mounted() {
-				this.$refs.txt.focus();
-			}
+/*
+	 * h5文件上传插件
+	 * $(".vue-file").VueFile({
+			url:"./index.html", //上传网址
+			outTime: 30000,
+			size: 300000 ,    // 大小 m
+			contentType: false,
+			seccess: function(data,el) {
+				$.info("文件上转成功！", "success");
+				//console.log(el);
+			}, 
+			error: function(err,el) {
+				$.alert("文件上转失败！");
+				//console.log(el);
+			} 
 		});
-	}
 
-};
+		<div class="vue-file">
+				<a class="vue-file-btn btn  btn-warning" name="up" href="javascript:">
+					<span class="glyphicon glyphicon-file"></span>上传图片
+				</a>
+				<input class=" fileUp v-hide-text-index" type="file" name="" id="fileUp" value="" />
+				<!--进度条-->
+				<div class="progress-all v-hide">
+					<div class="progress-now"></div>
+					<div class="progress-num">0%</div>
+				</div>
+		</div>
+	 * 
+	 * 
+	 * */
 
-function setScroll(bl) {
-
-  $(".no-scroll-box").each(function () {
-    var p = $(this);
-    divScroll(p);
-    if (!bl) {
-
-      $(".no-scroll-bar", p).scroll(function () {
-        divScroll(p);
-      });
-    }
-  });
-
-  function divScroll(p) {
-    var obj = $(".no-scroll-bar", p)[0];
-    var h = obj.clientHeight;
-    var scroll_h = obj.scrollHeight;
-    var scroll_t = obj.scrollTop;
-    //	console.log(h)
-    if (scroll_h <= h) {
-      $(".scroll-slide", p).hide();
-      return;
-    } else {
-      $(".scroll-slide", p).show();
-    }
-
-    var sp = h / scroll_h;
-    var scroll_slide = $(".scroll-slide", p).height();
-    $(".scroll-bar", p).height(sp * scroll_slide);
-
-    var slide_h = scroll_h - h;
-    var slide_sp = scroll_t / slide_h;
-    var scroll_el_h = scroll_slide - $(".scroll-bar", p).height();
-    $(".scroll-bar", p).css("top", scroll_el_h * slide_sp);
-  }
-}
-
-/*index模块*/
-// set scroll 
-var index = {
-		init: function init() {
-
-				// 添加菜单
-				addMenu();
-
-				// 刷新子页面
-				$(".index-refrech").click(function () {
-
-						try {
-								$(".iframe-box")[0].contentWindow.location.reload();
-						} catch (e) {
-								//TODO handle the exception
-						}
-
-						$(this).blur();
-				});
-
-				// 菜单height
-				resetWindowHeight();
-				$(window).resize(function () {
-						resetWindowHeight();
-				});
-
-				function resetWindowHeight() {
-
-						var window_h = $(window).height();
-						var logo = $(".index-aside-logo").outerHeight();
-						var nemu = $(".index-aside-nemu,.index-aside-nemu ._nemu-2 ").outerHeight(window_h - logo);
-						//console.log(window_h);
-
-						var con_top = $(".index-cont-top").outerHeight();
-						var cont_nav = $(".index-nav").outerHeight();
-						var iframe_h = window_h - (con_top + cont_nav);
-						$(".index-cont-iframe").height(iframe_h);
-						//console.log(con_top+cont_nav);
-				}
-
-				// 一级菜单点击
-				$(document).on("click", ".index-aside-nemu ._nemu-1 ._nemu-item", function (event) {
-
-						event.preventDefault();
-						$(this).siblings().removeClass("active").find("img").attr("src", "images/nemu-1-df.png");
-						$(this).addClass("active").find("img").attr("src", "images/nemu-1-1.png");
-				});
-
-				$(".index-aside-nemu ._nemu-1 ._nemu-item").on('shown.bs.tab', function (e) {
-						setScroll(true);
-				});
-
-				// 二级菜单点击
-				$(document).on("click", ".index-aside-nemu ._nemu-2  ._nemu-item", function (event) {
-
-						event.preventDefault();
-						if ($(this).hasClass("active")) {
-								$(this).siblings().removeClass("active");
-								$(this).removeClass("active");
-						} else {
-								$(this).siblings().removeClass("active");
-								$(this).addClass("active");
-						}
-
-						//			var src = $(this).find(" dt a").attr("href");
-						//			if(src && src != "javascript:;") {
-						//				$(".iframe-box").attr("src", src);
-						//				$(this).parents("._nemu-2").find("dd").removeClass("active");
-						//
-						//			}
-						setScroll(true);
-				});
-
-				// 三级菜单点击
-				$(document).on("click", ".index-aside-nemu ._nemu-2 dd", function (event) {
-						event.preventDefault();
-						event.stopPropagation();
-
-						$(this).parents("._nemu-2").find("dd").removeClass("active");
-						$(this).addClass("active");
-						var src = $(this).find("a").attr("href") || "javascript:";
-						var iframeSrc = $(".iframe-box").attr("src");
-						//console.log(iframeSrc)
-						//			if(src != iframeSrc) {
-						//				document.getElementById("loading-box").style.display = "block";
-						//				$(".iframe-box").attr("src", src);
-						//			}
-
-						document.getElementById("loading-box").style.display = "block";
-						$(".iframe-box").attr("src", src);
-				});
-
-				// 退出登录
-				$(".logout").on("click", function () {
-						window.location.href = "login.html";
-				});
-
-				/*滚动条*/
-				setScroll();
-				$(window).resize(function () {
-						setScroll(true);
-				});
-
-				// 添加菜单
-				function addMenu() {
-						$("#select1").html('<span  class="_menu-lading"><span class="iconfont icon-loading spin"></span>loading...</span>');
-						$.get(config.api.root + "Site/SiteNavigation", function (data) {
-								//console.log(data);
-								var _html = "";
-								for (var i = 0; i < data.length; i++) {
-										var item = data[i];
-										var _item = "\n\t\t\t\t\t<!--\u4E8C\u7EA7\u83DC\u5355-->\n\t\t\t\t\t<div class=\"_nemu-item clearfix \">\n\t\t\t\t\t\t\t<dl>\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t<dt>\n\t\t\t\t\t\t\t\t<a href=\"javascript:;\">" + item.Name + "</a>\n\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t</dt>\n\n\t\t\t\t\t";
-										_html += _item;
-
-										item.Items.forEach(function (item2) {
-												var _item2 = "\n\t\t\t\t\t\t<!--\u4E09\u7EA7\u83DC\u5355-->\n\t\t\t\t\t\t\t\t<dd class=\"\">\n\t\t\t\t\t\t\t\t\t<a href=\"" + item2.Url + "\" title=\"" + item2.Name + "\">" + item2.Name + "</a>\n\t\t\t\t\t\t\t\t</dd>";
-												_html += _item2;
-										});
-
-										_html += '</dl></div>';
-								}
-
-								$("#select1").html(_html);
-								setScroll(true);
-						});
-				}
+(function () {
+	var upload = function upload(option) {
+		var p = $(option.el).parents(".vue-file");
+		if ((typeof option === "undefined" ? "undefined" : _typeof(option)) !== 'object') {
+			$(".vue-file-btn").show();
+			$.alert("参数有误！");
+			return;
 		}
-};
 
-function setScroll$1(bl) {
-
-  $(".no-scroll-box").each(function () {
-    var p = $(this);
-    divScroll(p);
-
-    if (!bl) {
-      $(".no-scroll-bar", p).scroll(function () {
-        divScroll(p);
-      });
-    }
-  });
-
-  function divScroll(p) {
-    var obj = $(".no-scroll-bar", p)[0];
-    var h = obj.clientHeight;
-    var scroll_h = obj.scrollHeight;
-    var scroll_t = obj.scrollTop;
-    var table_h = $(".pattern-table", p).height();
-    //				console.log(scroll_h)
-    //					console.log(h)
-    if (table_h < h) {
-      $(".scroll-slide", p).hide();
-
-      return;
-    } else {
-      $(".scroll-slide", p).show();
-    }
-
-    var sp = h / scroll_h;
-    $(".scroll-slide", p).height();
-    var scroll_slide = $(".scroll-slide", p).height();
-    $(".scroll-bar", p).height(sp * scroll_slide);
-
-    var slide_h = scroll_h - h;
-    var slide_sp = scroll_t / slide_h;
-    var scroll_el_h = scroll_slide - $(".scroll-bar", p).height();
-    $(".scroll-bar", p).css("top", scroll_el_h * slide_sp);
-  }
-}
-
-/*status模块*/
-
-// set scroll 
-var status = {
-	init: function init() {
-
-		/*滚动条*/
-		setScroll$1();
-		$(window).resize(function () {
-			_moz_.resetScroll();
-			setScroll$1();
-		});
-	}
-
-};
-
-/*pattren模块*/
-
-// set scroll
-
-/*pattren模块*/
-
-// set scroll 
-var pattern_list = {
-
-  // 主界面
-  init: async function init() {
-
-    var dialogs = {};
-    var template = await $.get("/admin/pattern/dialog-input-template.html", null, "text");
-    dialogs.input = new Vue({
-      template: template,
-      data: {
-        visible: false,
-        value: null,
-        callback: null
-      },
-
-      methods: {
-
-        cancel: function cancel() {
-          this.visible = false;
-          this.callback(null);
-        },
-
-        ok: function ok() {
-          this.visible = false;
-          this.callback(this.value);
-        },
-
-        run: function run(options, value) {
-          this.options = options;
-          this.value = value;
-          this.visible = true;
-
-          var that = this;
-
-          return new Promise(function (resolve, reject) {
-
-            console.info(that);
-            that.callback = function (value) {
-              resolve(value);
-            };
-          });
-        }
-
-      }
-    });
-
-    element = $("<div id='dialog-input' />");
-    $("#list-hold").append(element);
-    dialogs.input.$mount(element[0]);
-
-    template = await $.get("/admin/pattern/dialog-confirm-template.html", null, "text");
-    dialogs.confirm = new Vue({
-      template: template,
-      data: {
-        visible: false,
-        callback: null
-      },
-
-      methods: {
-
-        cancel: function cancel() {
-          this.visible = false;
-          this.callback(false);
-        },
-
-        ok: function ok() {
-          this.visible = false;
-          this.callback(true);
-        },
-
-        run: function run(options) {
-          this.options = options;
-          this.visible = true;
-
-          var that = this;
-          return new Promise(function (resolve, reject) {
-
-            console.info(that);
-            that.callback = function (result) {
-              resolve(result);
-            };
-          });
-        }
-
-      }
-    });
-
-    element = $("<div id='dialog-confirm' />");
-    $("#list-hold").append(element);
-    dialogs.confirm.$mount(element[0]);
-
-    template = await $.get("/admin/pattern/dialog-edit-template.html", null, "text");
-    dialogs.edit = new Vue({
-      template: template,
-      data: {
-        visible: false,
-        callback: null,
-        options: {},
-        metadata: [],
-        model: {}
-      },
-
-      methods: {
-
-        cancel: function cancel() {
-          this.visible = false;
-          this.callback(null);
-        },
-
-        ok: function ok() {
-          this.visible = false;
-          this.callback(this.model);
-        },
-
-        run: function run(options, metadata, model) {
-          this.options = options;
-          this.metadata = metadata;
-          this.model = model;
-          this.visible = true;
-
-          Vue.nextTick(function () {
-            dialogs.edit.initRichtext();
-          });
-
-          var that = this;
-          return new Promise(function (resolve, reject) {
-
-            console.info(that);
-            that.callback = function (result) {
-              resolve(result);
-            };
-          });
-        },
-
-        initRichtext: function initRichtext() {
-          console.info(document.querySelector("#dialog-edit .richtext"));
-          var richText = KindEditor.create("#dialog-edit .richtext", {
-            width: '85%',
-            height: '400px',
-            resizeType: 1,
-            uploadJson: '/Files/UploadImage',
-            items: ['source', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'image', 'link', 'fullscreen']
-          });
-
-          console.info("initRichtext");
-          console.info(richText);
-        }
-
-      }
-    });
-
-    element = $("<div id='dialog-edit' />");
-    $("#list-hold").append(element);
-    dialogs.edit.$mount(element[0]);
-
-    pattern_list.dialog_input = async function (options, value) {
-
-      console.info("dialog_input");
-      return await dialogs.input.run(options, value);
-    };
-
-    pattern_list.dialog_confirm = async function (options) {
-
-      console.info("dialog_confirm");
-      return await dialogs.confirm.run(options);
-    };
-
-    pattern_list.dialog_edit = async function (options, metadata, model) {
-
-      console.info("dialog_edit");
-      return await dialogs.edit.run(options, metadata, model);
-    };
-
-    pattern_list.list_refresh = async function (listData) {
-
-      if (listData.checked) {
-        listData.rows.forEach(function (item) {
-          return item[listData.checked] = !!item[listData.checked];
-        });
-      }
-
-      this.listView.list = listData;
-    };
-
-    pattern_list.list_show = function (options) {
-
-      this.listView.options = options;
-    };
-
-    pattern_list.list_selectAll = function () {
-      var _this = this;
-
-      if (this.listView.list.checked) {
-        this.listView.list.rows.forEach(function (item) {
-          return item[_this.listView.list.checked] = true;
-        });
-      }
-    };
-
-    template = await $.get("/admin/pattern/list-template.html", null, "text");
-    pattern_list.listView = new Vue({
-      template: template,
-      data: {
-        options: {},
-        list: {}
-      },
-
-      updated: function updated() {
-        setScroll$1(true);
-      },
-
-      methods: {
-        invoke_action: function invoke_action(action, item) {
-
-          page_config[action](pattern_list, item);
-        }
-      }
-    });
-
-    element = $("<div id='list-view' />");
-    $("#list-hold").append(element);
-    pattern_list.listView.$mount(element[0]);
-
-    console.info(element[0]);
-
-    console.info("page initialized");
-
-    page_config.init(pattern_list);
-
-    /*滚动条*/
-    setScroll$1();
-    $(window).resize(function () {
-      setScroll$1();
-    });
-  }
-};
-
-/*pattren模块*/
-
-// set scroll 
-var pattern_consult = {
-
-	// 常见咨询
-	init: function init() {
-
-		var vm = new Vue({
-			el: ".app",
-			data: {
-				list: [],
-				isShowPop: false,
-				editObj: {},
-				tempShowName: "", // 临时记录
-				firstSubmit: true, //  一次提交
-				isShowConfirm: false, // 顯示confirm 框
-				isCheckAll: false,
-				isShowDelBox: false,
-				isDelete: false,
-				// 添加分类
-				isShowAddBox: false,
-				isAdd: false,
-
-				//添加分类对象
-				addObj: {
-					questionClass: ""
-				}
-
-			},
-			mounted: function mounted() {
-				var _this = this;
-
-				$(".v-app").show();
-				loading.addLoading("#pattern-table");
-				this.$http.get('BasicMode/GetCommonConsultationJson?rows=1000&page=1&sidx=CreatorTime  desc').then(function (response) {
-					loading.removeLoading("#pattern-table");
-					var data = response.body;
-					//error
-					if (data.state === "error") {
-						$.alert(data.message);
-						return;
-					}
-					// get body data
-					_this.list = data.rows.map(function (item) {
-						item.isRename = false;
-						item.ck = false;
-						return item;
-					});
-					//console.log(this.list)
-				}, function (response) {
-					// error callback
-					$.alert("网络连接失败...");
-				}).catch();
-			},
-			updated: function updated() {
-				setScroll$1(true);
-			},
-			watch: {},
-
-			methods: {
-				// 重命名模块名称
-				rename: function rename(item) {
-					item.isRename = !item.isRename;
-					this.isShowPop = true;
-					this.editObj = item;
-					this.tempShowName = item.QuestionClass;
-				},
-
-				// 取消重命名
-				cancel: function cancel() {
-					this.isShowPop = false;
-					this.editObj.isRename = false;
-					this.editObj.QuestionClass = this.tempShowName;
-				},
-
-				// 保存重名
-				submit: function submit() {
-					var _this2 = this;
-
-					if (this.editObj.QuestionClass.length === 0) {
-						return;
-					}
-
-					if (this.firstSubmit) {
-						this.firstSubmit = false;
-						this.$refs.saveShowName.innerHTML = "正在提交中...";
-						var props = "keyValue=" + this.editObj.Id + "&&questionClass=" + this.editObj.QuestionClass;
-						this.$http.post('BasicMode/SubmitRenameQuestionClass?' + props).then(function (response) {
-							// success callback
-							var data = response.body;
-							//error
-							if (data.state === "error") {
-								$.alert(data.message);
-								return;
-							}
-							_this2.firstSubmit = true;
-							_this2.$refs.saveShowName.innerHTML = "确认";
-							_this2.isShowPop = false;
-							_this2.editObj.isRename = false;
-						}, function (response) {
-							_this2.$refs.saveShowName.innerHTML = "确认";
-							// error callback
-
-							$.alert("网络连接失败...");
-						}).catch();
-					}
-				},
-
-				// 是否禁用模塊
-				enMobule: function enMobule(item) {
-					//item.LookSate=!item.LookSate;
-					this.isShowConfirm = true;
-					this.editObj = item;
-				},
-				confirm: function confirm(item) {
-					var _this3 = this;
-
-					if (this.firstSubmit) {
-						this.$refs.saveShowName2.innerHTML = "正在提交中...";
-
-						// 禁用
-						if (item.LookSate === 1) {
-
-							this.firstSubmit = false;
-
-							var props = "keyValue=" + item.Id;
-							this.$http.post('BasicMode/DisabledModule?' + props).then(function (response) {
-								var data = response.body;
-								//error
-								if (data.state === "error") {
-									$.alert(data.message);
-									return;
-								}
-								_this3.firstSubmit = true;
-								_this3.$refs.saveShowName2.innerHTML = "确认";
-								_this3.isShowConfirm = false;
-								_this3.editObj.LookSate = 0;
-							}, function (response) {
-
-								// error callback
-								_this3.$refs.saveShowName2.innerHTML = "确认";
-								$.alert("网络连接失败...");
-							}).catch();
-						}
-
-						// 启用
-						if (item.LookSate === 0) {
-
-							this.firstSubmit = false;
-
-							var props = "keyValue=" + item.Id;
-							this.$http.post('BasicMode/EnabledModule?' + props).then(function (response) {
-								var data = response.body;
-								//error
-								if (data.state === "error") {
-									$.alert(data.message);
-									return;
-								}
-								_this3.firstSubmit = true;
-								_this3.$refs.saveShowName2.innerHTML = "确认";
-								_this3.isShowConfirm = false;
-								_this3.editObj.LookSate = 1;
-							}, function (response) {
-								_this3.$refs.saveShowName2.innerHTML = "确认";
-								$.alert("网络连接失败...");
-								// error callback
-							}).catch();
-						}
-					}
-				},
-
-
-				// 全选
-				checkAll: function checkAll(event) {
-					this.isCheckAll = !this.isCheckAll;
-					//					$(event.target).siblings().removeClass("active");
-					this.selectBtnStyle(this.$refs.ckBtn);
-					this.isDelete = false;
-					if (this.isCheckAll) {
-						$(event.target).addClass("active");
-						this.list.filter(function (item) {
-							return item.ck = true;
-						});
-					} else {
-						$(event.target).removeClass("active");
-						this.list.filter(function (item) {
-							return item.ck = false;
-						});
-					}
-				},
-
-
-				// 删除
-				delAll: function delAll(event) {
-
-					if (this.ischeckCount === 0) {
-						return;
-					}
-
-					this.isShowDelBox = true;
-
-					this.isDelete = !this.isDelete;
-					this.isCheckAll = false;
-					if (this.isDelete) {
-						this.selectBtnStyle(this.$refs.delBtn);
-					} else {
-						this.selectBtnStyle(this.$refs.delBt, true);
-					}
-				},
-
-
-				// 添加数据
-				addAll: function addAll(event) {
-					this.selectBtnStyle(this.$refs.addBtn);
-					this.isDelete = false;
-					this.isCheckAll = false;
-					this.isShowAddBox = !this.isShowAddBox;
-				},
-
-				// 删除
-				delBtn: function delBtn(event) {
-					var _this4 = this;
-
-					var arrs = this.getcheckItems.map(function (item) {
-						return item.Id;
-					});
-
-					if (this.firstSubmit) {
-						this.firstSubmit = false;
-						this.$refs.saveShowName2.innerHTML = "正在提交中...";
-						var props = "keyValue=" + arrs.join(",");
-						//alert(props)
-						//return ;
-						this.$http.post('BasicMode/DeleteQuestionClass?' + props).then(function (response) {
-							// success callback
-							var data = response.body;
-							//error
-							if (data.state === "error") {
-								$.alert(data.message);
-								return;
-							}
-
-							_this4.firstSubmit = true;
-							_this4.$refs.saveShowName2.innerHTML = "确认";
-							_this4.isShowDelBox = false;
-							//this.editObj.isRename = false;
-							//this.list.filter(item=>);
-							_this4.getData();
-						}, function (response) {
-							_this4.$refs.saveShowName2.innerHTML = "确认";
-							$.alert("网络连接失败...");
-							// error callback
-						}).catch();
-					}
-				},
-
-
-				// 提交添加的数据
-				addSubmit: function addSubmit() {
-					var _this5 = this;
-
-					if (this.addObj.questionClass.length === 0) {
-						return;
-					}
-					this.$refs.saveShowName3.innerHTML = "正在提交中...";
-					var props = "questionClass=" + this.addObj.questionClass;
-					this.$http.post('BasicMode/SubmitQuestionClass?' + props).then(function (response) {
-						// success callback
-						var data = response.body;
-						//error
-						if (data.state === "error") {
-							$.alert(data.message);
-							return;
-						}
-						_this5.addObj.questionClass = "";
-						_this5.firstSubmit = true;
-						_this5.$refs.saveShowName3.innerHTML = "添加";
-						_this5.isShowAddBox = false;
-						//this.editObj.isRename = false;
-						//this.list.filter(item=>);
-						_this5.getData();
-					}, function (response) {
-						_this5.$refs.saveShowName3.innerHTML = "添加";
-						$.alert("网络连接失败...");
-						// error callback
-					}).catch();
-				},
-
-				getData: function getData(cd) {
-					var _this6 = this;
-
-					this.$http.get('BasicMode/GetCommonConsultationJson?rows=1000&page=1&sidx=CreatorTime  desc').then(function (response) {
-						//loading.removeLoading("#pattern-table");
-
-						var data = response.body;
-						//error
-						if (data.state === "error") {
-							$.alert(data.message);
-							return;
-						}
-						// get body data
-						_this6.list = data.rows.map(function (item) {
-							item.isRename = false;
-							item.ck = false;
-							return item;
-						});
-
-						if (typeof cd === "function") {
-							cd();
-						}
-						//console.log(this.list)
-					}, function (response) {
-						// error callback
-						$.alert("网络连接失败...");
-					}).catch();
-				},
-				// 选择按钮的样式
-				selectBtnStyle: function selectBtnStyle(el, bl) {
-
-					$(el).siblings().removeClass("active");
-					$(el).addClass("active");
-					if (bl) {
-						$(el).removeClass("active");
-					}
-				}
-
-			},
-
-			computed: {
-				ischeckCount: function ischeckCount() {
-
-					return this.list.filter(function (item) {
-						return item.ck === true;
-					}).length;
-				},
-				getcheckItems: function getcheckItems() {
-
-					return this.list.filter(function (item) {
-						return item.ck === true;
-					});
-				}
-
+		if (option.size) {
+			if (option.data.size > option.size) {
+				$.alert("文件大于" + option.size / 1000000 + "M");
+				$(".vue-file-btn").show();
+				return;
 			}
+		} else {
+			$.alert("参数没有设置文件大小值[size]");
+			$(".vue-file-btn", p).show();
+			return;
+		}
 
+		var data = new FormData();
+
+		data.append('file-' + new Date().getTime().toString(), option.data);
+
+		$.ajax({
+			url: option.url,
+			data: data,
+			type: "post",
+			timeout: option.outTime,
+			cache: false,
+			processData: false,
+			contentType: option.contentType || false,
+			xhrFields: {
+				withCredentials: true
+			},
+			xhr: function xhr() {
+				//获取ajaxSettings中的xhr对象，为它的upload属性绑定progress事件的处理函数
+				var myXhr = $.ajaxSettings.xhr();
+				if (myXhr.upload) {
+					//检查upload属性是否存在
+					//绑定progress事件的回调函数
+					myXhr.upload.onprogress = progressFunction;
+				}
+				return myXhr; //xhr对象返回给jQuery或zepto使用
+			},
+			success: option.seccess,
+			error: option.error
 		});
 
-		/*btn click style*/
-		$(function () {
+		//progress事件的回调函数
+		function progressFunction(evt) {
 
-			// pattern-ttll
-			$(".pattern-ttl1 a").on("click", function () {
+			//var p = $(option.el).parents(".vue-file");
+			var widthAll = $(".progress-all", p).width();
+			var progressBar = $(".progress-all", p);
+			var percentageDiv = $(".progress-now", p);
+			var percentageNum = $(".progress-num", p);
 
-				var p = $(this).parents(".pattern-ttl1");
-				p.find("a").removeClass("active");
-				$(this).addClass("active");
-			});
-
-			$(".pattern-ttl1 a").on('shown.bs.tab', function (e) {
-				_moz_.resetScroll();
-				setScroll$1();
-			});
-
-			// pattern-ttl2
-			//			$(".pattern-ttl2 a").on("click", function() {
-			//				var p = $(this).parents(".pattern-ttl2");
-			//				//p.find("a").removeClass("active");
-			//				var a = p.find("a");
-			//				a.eq(0).css("z-index", 3);
-			//				a.eq(1).css("z-index", 2);
-			//				a.eq(2).css("z-index", 1);
-			//
-			//				//$(this).addClass("active");
-			//				$(this).css("z-index", 9);
-			//
-			//			});
-		});
-
-		/*场景总览*/
-		$(".pattern-overview .pattern-ttl3 ._ck").click(function (event) {
-			//	event.stopPropagation()
-			if (!$(this).hasClass("active")) {
-				$(this).addClass("active");
-			} else {
-				$(this).removeClass("active");
+			if (evt.lengthComputable) {
+				progressBar.max = evt.total;
+				progressBar.value = evt.loaded;
+				$(percentageDiv).css("width", Math.round(evt.loaded / evt.total * widthAll) + "px");
+				$(percentageNum).text(Math.ceil(evt.loaded / evt.total * 100) + "%");
+				//          if (evt.loaded == evt.total) {
+				//            //  console.log("上传完成100%");
+				//          }
 			}
-		});
-
-		/*滚动条*/
-		setScroll$1();
-		$(window).resize(function () {
-			setScroll$1();
-		});
-	}
-
-};
-
-/* 页面路径 api*/
-
-//window._url=window.url
-//window.url= {
-//			//采用正则表达式获取地址栏参数：（ 强烈推荐，既实用又方便！）
-//			getQueryString: function(name) {
-//				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-//				var r = window.location.search.substr(1).match(reg);
-//				if(r != null) return decodeURIComponent(r[2]);
-//				return null;
-//			},
-//
-//			//从WebAPI获取日期json数据 转换成日期时间戳
-//			jsonToDate: function(apidate) {
-//				var txts = apidate.replace("/Date(", "").replace(")/", "");
-//				return parseInt(Common.trim(txts));
-//
-//			},
-//
-//			// 取当前页面名称(不带后缀名)
-//			getPageName: function() {
-//				var a = location.href;
-//				var b = a.split("/");
-//				var c = b.slice(b.length - 1, b.length).toString(String).split(".");
-//				return c.slice(0, 1);
-//			},
-//
-//			//取当前页面名称(带后缀名)
-//			getPageNameExention: function() {
-//				var strUrl = location.href;
-//				var arrUrl = strUrl.split("/");
-//				var strPage = arrUrl[arrUrl.length - 1];
-//				return strPage;
-//			}
-//
-//	};
-
-
-var url = {
-	//采用正则表达式获取地址栏参数：（ 强烈推荐，既实用又方便！）
-	getQueryString: function getQueryString(name) {
-		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-		var r = window.location.search.substr(1).match(reg);
-		if (r != null) return decodeURIComponent(r[2]);
-		return null;
-	},
-
-	//从WebAPI获取日期json数据 转换成日期时间戳
-	jsonToDate: function jsonToDate(apidate) {
-		var txts = apidate.replace("/Date(", "").replace(")/", "");
-		return parseInt(Common.trim(txts));
-	},
-
-	// 取当前页面名称(不带后缀名)
-	getPageName: function getPageName() {
-		var a = location.href;
-		var b = a.split("/");
-		var c = b.slice(b.length - 1, b.length).toString(String).split(".");
-		return c.slice(0, 1);
-	},
-
-	//取当前页面名称(带后缀名)
-	getPageNameExention: function getPageNameExention() {
-		var strUrl = location.href;
-		var arrUrl = strUrl.split("/");
-		var strPage = arrUrl[arrUrl.length - 1];
-		return strPage;
-	}
-
-};
-
-/*pattren模块*/
-
-// set scroll 
-var pattern_edit = {
-
-	// 编辑场景
-	init: function init() {
-
-		var _id = url.getQueryString("Id");
-		var _className = url.getQueryString("className");
-		_className = "\u7F16\u8F91\u201C" + _className + "\u201D\u5E38\u89C1\u95EE\u9898\"";
-
-		var vm = new Vue({
-			el: ".app",
-			data: {
-				id: _id,
-				className: _className,
-				sreachText: "",
-				list: [],
-				isShowPop: false,
-				editObj: {},
-				tempShowName: "", // 临时记录
-				firstSubmit: true, //  一次提交
-
-				isShowConfirm: false, // 顯示confirm 
-				isShowDelBox: false,
-
-				isCheckAll: false, // 按钮点击
-				isDelete: false, // 按钮点击
-
-				// 添加分类
-				isShowAddBox: false,
-				isAdd: false,
-
-				//添加分类对象
-				addType: 1, // 1问修改 2添加
-				addObj: {
-					Question: "",
-					Answer: "",
-					questionClass: _id
-
-				},
-				editor: ""
-
-			},
-			mounted: function mounted() {
-				$(".v-app").show();
-				loading.addLoading("#pattern-table");
-				this.getData(function () {
-					loading.removeLoading("#pattern-table");
-				});
-			},
-			updated: function updated() {
-				setScroll$1(true);
-			},
-			watch: {},
-
-			methods: {
-				// 修改文本
-				rename: function rename(item) {
-					var _this = this;
-
-					this.addType = 1;
-					this.isShowPop = true;
-					this.editObj = item;
-
-					this.$http.get('BasicMode/AddOrEditBasicQuestion_interface?keyValue=' + item.Id).then(function (response) {
-						// success callback
-						var data = response.body;
-						//error
-						if (data.state === "error") {
-							$.alert(data.message);
-							return;
-						}
-						_this.editObj = response.body;
-						_this.firstSubmit = true;
-
-						editorMini.html(_this.editObj.Answer);
-						//this.isShowPop = false;
-						console.log(_this.editObj);
-					}, function (response) {
-
-						// error callback
-						$.alert("网络连接失败...");
-					}).catch();
-				},
-
-				// 取消重命名
-				cancel: function cancel() {
-					this.isShowPop = false;
-					this.editObj.isRename = false;
-					this.editObj = {};
-				},
-
-
-				// 保存重名
-				submit: function submit() {
-					var _this2 = this;
-
-					// 答案
-					this.editObj.Answer = editorMini.html();
-					if (this.editObj.Question.length == 0 || this.editObj.Answer.length == 0) {
-						return;
-					}
-					//修还
-					if (this.addType === 1) {
-						if (this.firstSubmit) {
-							this.firstSubmit = false;
-							this.$refs.saveShowName.innerHTML = "正在提交中...";
-							var props = {
-								basicConsultid: this.editObj.BasicConsultid,
-								question: this.editObj.Question,
-								answer: this.editObj.Answer
-							};
-
-							this.$http.post('BasicMode/SubmitBasicQuestion', props, {
-								emulateJSON: true
-							}).then(function (response) {
-
-								// success callback
-								var data = response.body;
-								//error
-								if (data.state === "error") {
-									$.alert(data.message);
-									return;
-								}
-
-								_this2.getData();
-								_this2.firstSubmit = true;
-								_this2.$refs.saveShowName.innerHTML = "确认";
-								_this2.isShowPop = false;
-								_this2.editObj.isRename = false;
-								_this2.editObj = {};
-							}, function (response) {
-
-								// error callback
-								_this2.firstSubmit = true;
-								_this2.$refs.saveShowName.innerHTML = "确认";
-								$.alert("网络连接失败...");
-							}).catch();
-						}
-					}
-
-					// 添加
-					else if (this.addType === 2) {
-
-							if (this.firstSubmit) {
-								this.firstSubmit = false;
-								this.$refs.saveShowName.innerHTML = "正在提交中...";
-								var props = {
-									basicConsultid: this.id,
-									question: this.editObj.Question,
-									answer: this.editObj.Answer
-
-								};
-
-								this.$http.post('BasicMode/SubmitBasicQuestion', props, {
-									emulateJSON: true
-								}).then(function (response) {
-
-									// success callback
-									var data = response.body;
-									//error
-									if (data.state === "error") {
-										$.alert(data.message);
-										return;
-									}
-									_this2.firstSubmit = true;
-									_this2.$refs.saveShowName.innerHTML = "确认";
-									_this2.isShowPop = false;
-									_this2.editObj.isRename = false;
-									_this2.addObj.Question = "";
-									_this2.addObj.Answer = "";
-									_this2.getData();
-								}, function (response) {
-
-									// error callback
-									_this2.firstSubmit = true;
-									_this2.$refs.saveShowName.innerHTML = "确认";
-									$.alert("网络连接失败...");
-								}).catch();
-							}
-						}
-				},
-				search: function search(event) {
-					var _this3 = this;
-
-					// 不能为空
-					//					if(this.sreachText.length === 0) {
-					//						return;
-					//					}
-					if (this.firstSubmit) {
-						this.$refs.search.innerHTML = "正在提交中...";
-						var props = "basicConsultid=" + this.id + "&rows=100&page=1&sidx=CreatorTime desc&records=100&keyword=" + this.sreachText;
-						this.$http.get('BasicMode/GetBasicQuestionJson?' + props).then(function (response) {
-							var data = response.body;
-							//error
-							if (data.state === "error") {
-								$.alert(data.message);
-								return;
-							}
-							// get body data
-							_this3.$refs.search.innerHTML = "搜索";
-							_this3.list = data.rows.map(function (item) {
-								item.isRename = false;
-								item.ck = false;
-								return item;
-							});
-							//console.log(this.list)
-						}, function (response) {
-							// error callback
-							$.alert("网络连接失败...");
-						}).catch();
-					}
-				},
-				confirm: function confirm(item) {
-					var _this4 = this;
-
-					if (this.firstSubmit) {
-						this.$refs.saveShowName2.innerHTML = "正在提交中...";
-
-						// 禁用
-						if (item.LookSate === 1) {
-
-							this.firstSubmit = false;
-
-							var props = "keyValue=" + item.Id;
-							this.$http.post('BasicMode/DisabledModule?' + props).then(function (response) {
-								var data = response.body;
-								//error
-								if (data.state === "error") {
-									$.alert(data.message);
-									return;
-								}
-								_this4.firstSubmit = true;
-								_this4.$refs.saveShowName2.innerHTML = "确认";
-								_this4.isShowConfirm = false;
-								_this4.editObj.LookSate = 0;
-							}, function (response) {
-								_this4.$refs.saveShowName2.innerHTML = "确认";
-								// error callback
-								$.alert("网络连接失败...");
-							}).catch();
-						}
-
-						// 启用
-						if (item.LookSate === 0) {
-
-							this.firstSubmit = false;
-
-							var props = "keyValue=" + item.Id;
-							this.$http.post('BasicMode/EnabledModule?' + props).then(function (response) {
-								var data = response.body;
-								//error
-								if (data.state === "error") {
-									$.alert(data.message);
-									return;
-								}
-								_this4.firstSubmit = true;
-								_this4.$refs.saveShowName2.innerHTML = "确认";
-								_this4.isShowConfirm = false;
-								_this4.editObj.LookSate = 1;
-							}, function (response) {
-								_this4.$refs.saveShowName2.innerHTML = "确认";
-								// error callback
-							}).catch();
-						}
-					}
-				},
-
-
-				// 添加数据
-				addAll: function addAll(event) {
-					this.addType = 2;
-					this.isShowPop = true;
-					this.editObj = this.addObj;
-					editorMini.html("");
-
-					//					$(event.target).siblings().removeClass("active");
-					//					$(event.target).addClass("active");
-					this.selectBtnStyle(this.$refs.addBtn);
-					this.isDelete = false;
-					this.isCheckAll = false;
-					this.isShowAddBox = !this.isShowAddBox;
-				},
-
-				// 全选
-				checkAll: function checkAll(event) {
-
-					this.isCheckAll = !this.isCheckAll;
-
-					this.selectBtnStyle(this.$refs.ckBtn);
-					this.isDelete = false;
-					if (this.isCheckAll) {
-						this.selectBtnStyle(this.$refs.ckBtn);
-						this.list.filter(function (item) {
-							return item.ck = true;
-						});
-					} else {
-						this.selectBtnStyle(this.$refs.ckBtn, true);
-						this.list.filter(function (item) {
-							return item.ck = false;
-						});
-					}
-				},
-
-
-				// 删除
-				delAll: function delAll(event) {
-
-					if (this.ischeckCount === 0) {
-						return;
-					}
-
-					this.isShowDelBox = true;
-
-					this.selectBtnStyle(this.$refs.delBtn);
-					this.isCheckAll = false;
-					this.isDelete = true;
-
-					if (this.isDelete) {
-						$(event.target).addClass("active");
-					} else {
-						$(event.target).removeClass("active");
-					}
-				},
-
-				// 删除
-				delBtn: function delBtn(event) {
-					var _this5 = this;
-
-					var arrs = this.getcheckItems.map(function (item) {
-						return item.Id;
-					});
-
-					if (this.firstSubmit) {
-						this.firstSubmit = false;
-						this.$refs.saveShowName2.innerHTML = "正在提交中...";
-						var props = "keyValue=" + arrs.join(",");
-						//return;
-						this.$http.post('BasicMode/DeleteBasicQuestion?' + props).then(function (response) {
-							// success callback
-							var data = response.body;
-							//error
-							if (data.state === "error") {
-								$.alert(data.message);
-								return;
-							}
-							_this5.firstSubmit = true;
-							_this5.$refs.saveShowName2.innerHTML = "确认";
-							_this5.isShowDelBox = false;
-							//this.editObj.isRename = false;
-							//this.list.filter(item=>);
-							_this5.getData();
-						}, function (response) {
-							_this5.$refs.saveShowName2.innerHTML = "确认";
-							$.alert("网络连接失败...");
-							// error callback
-						}).catch();
-					}
-				},
-
-
-				getData: function getData(cd) {
-					var _this6 = this;
-
-					var props = "basicConsultid=" + this.id + "&rows=100&page=1&sidx=CreatorTime desc";
-					this.$http.get('BasicMode/GetBasicQuestionJson?' + props).then(function (response) {
-						var data = response.body;
-						//error
-						if (data.state === "error") {
-							$.alert(data.message);
-							return;
-						}
-						if (typeof cd === "function") {
-							cd();
-						}
-
-						// get body data
-						_this6.list = response.body.rows.map(function (item) {
-							item.isRename = false;
-							item.ck = false;
-							return item;
-						});
-						//console.log(this.list)
-					}, function (response) {
-						// error callback
-						$.alert("网络连接失败...");
-					}).catch();
-				},
-				cancelConfirm: function cancelConfirm() {
-					this.isShowDelBox = false;
-					this.isDelete = false;
-				},
-
-
-				// 返回上一页
-				backPage: function backPage() {
-
-					window.history.back();
-				},
-
-				// 选择按钮的样式
-				selectBtnStyle: function selectBtnStyle(el, bl) {
-
-					$(el).siblings().removeClass("active");
-					$(el).addClass("active");
-					if (bl) {
-						$(el).removeClass("active");
-					}
+		}
+	};
+
+	jQuery.fn.extend({
+
+		VueFile: function VueFile(option) {
+
+			$(document).on("click", ".vue-file-btn", function (e) {
+				e.stopPropagation();
+				e.preventDefault();
+				var p = $(this).parents(".vue-file");
+				// 点击文件上传框
+				$(".fileUp", p).click();
+			});
+
+			// 文件上传框值变化
+			$(document).on("change", ".fileUp", function () {
+				fileupff(this);
+			});
+
+			var fileupff = function fileupff(obj) {
+				var p = $(obj).parents(".vue-file");
+				$(".vue-file-btn", p).hide();
+				var $img = $(obj).closest(".vue-file").find(".img");
+				var $propress = $(obj).closest(".vue-file").find(".progress-all");
+				$propress.show();
+
+				// 是否支持html5 文件上传
+				if (typeof obj.files === "undefined") {
+					$(".vue-file-btn", p).show();
+					alert("不支持html5 文件上传,请升级你的浏览器  \n not support html5 ");
+					return;
 				}
 
-			},
-
-			computed: {
-				ischeckCount: function ischeckCount() {
-
-					return this.list.filter(function (item) {
-						return item.ck === true;
-					}).length;
-				},
-				getcheckItems: function getcheckItems() {
-
-					return this.list.filter(function (item) {
-						return item.ck === true;
-					});
-				}
-
-			},
-			created: function created() {}
-
-		});
-
-		/*btn click style*/
-		$(function () {
-
-			// pattern-ttll
-			$(".pattern-ttl1 a").on("click", function () {
-
-				var p = $(this).parents(".pattern-ttl1");
-				p.find("a").removeClass("active");
-				$(this).addClass("active");
-			});
-
-			$(".pattern-ttl1 a").on('shown.bs.tab', function (e) {
-				_moz_.resetScroll();
-				setScroll$1();
-			});
-
-			// pattern-ttl2
-			//			$(".pattern-ttl2 a").on("click", function() {
-			//				var p = $(this).parents(".pattern-ttl2");
-			//				//p.find("a").removeClass("active");
-			//				var a = p.find("a");
-			//				a.eq(0).css("z-index", 3);
-			//				a.eq(1).css("z-index", 2);
-			//				a.eq(2).css("z-index", 1);
-			//
-			//				//$(this).addClass("active");
-			//				$(this).css("z-index", 9);
-			//
-			//			});
-		});
-
-		/*场景总览*/
-		$(".pattern-overview .pattern-ttl3 ._ck").click(function (event) {
-			//	event.stopPropagation()
-			if (!$(this).hasClass("active")) {
-				$(this).addClass("active");
-			} else {
-				$(this).removeClass("active");
-			}
-		});
-
-		// 文本编辑器
-		window.editorMini = KindEditor.create('#answer', {
-			width: '85%',
-			height: '400px',
-			resizeType: 1,
-			uploadJson: '/Files/UploadImage',
-			items: ['source', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'image', 'link', 'fullscreen']
-		});
-
-		/*滚动条*/
-		setScroll$1();
-		$(window).resize(function () {
-			setScroll$1();
-		});
-	}
-
-};
-
-/*pattren模块*/
-
-// set scroll 
-var pattern_company = {
-
-	// 常见咨询
-	init: function init() {
-
-		var vm = new Vue({
-			el: ".app",
-			data: {
-				list: [],
-				isShowPop: false,
-				editObj: {}, // 编辑临时对象
-				tempShowName: "", // 临时记录
-				firstSubmit: true, //  一次提交
-
-				isShowConfirm: false, // 顯示confirm 框
-				isCheckAll: false,
-				isShowDelBox: false,
-				isDelete: false,
-
-				// 添加分类
-				isShowAddBox: false,
-				isAdd: false,
-
-				//添加分类对象
-				addObj: {
-					ModuleName: ""
-				}
-
-			},
-			mounted: function mounted() {
-				$(".v-app").show();
-				loading.addLoading("#pattern-table");
-				this.getData(function () {
-					loading.removeLoading("#pattern-table");
-				});
-			},
-			updated: function updated() {
-				setScroll$1(true);
-			},
-			watch: {},
-
-			methods: {
-				// 重命名模块名称
-				rename: function rename(item) {
-					item.isRename = !item.isRename;
-					this.isShowPop = true;
-					this.editObj = item;
-					this.tempShowName = item.ModuleName;
-				},
-
-				// 取消重命名
-				cancel: function cancel() {
-					this.isShowPop = false;
-					this.editObj.isRename = false;
-					this.editObj.ModuleName = this.tempShowName;
-				},
-
-
-				// 保存重名
-				submit: function submit() {
-					var _this = this;
-
-					if (this.editObj.ModuleName.length === 0) {
-						return;
-					}
-
-					if (this.firstSubmit) {
-						this.firstSubmit = false;
-						this.$refs.saveShowName.innerHTML = "正在提交中...";
-						var props = {
-							keyValue: this.editObj.Id,
-							moduleName: this.editObj.ModuleName
-						};
-
-						this.$http.post('BasicMode/CompanyIntroDuctionSubmit', props, {
-							emulateJSON: true
-						}).then(function (response) {
-							// success callback
-							var data = response.body;
-							//error
-							if (data.state === "error") {
-								$.alert(data.message);
-								return;
-							}
-							_this.firstSubmit = true;
-							_this.$refs.saveShowName.innerHTML = "确认";
-							_this.isShowPop = false;
-							_this.editObj.isRename = false;
-						}, function (response) {
-							_this.$refs.saveShowName.innerHTML = "确认";
-							// error callback
-						});
-					}
-				},
-
-				// 是否禁用模塊
-				enMobule: function enMobule(item) {
-					//item.LookSate=!item.LookSate;
-					this.isShowConfirm = true;
-					this.editObj = item;
-				},
-				confirm: function confirm(item) {
-					var _this2 = this;
-
-					if (this.firstSubmit) {
-						this.$refs.saveShowName2.innerHTML = "正在提交中...";
-
-						// 禁用
-						if (item.LookSate === 1) {
-
-							this.firstSubmit = false;
-
-							var props = "keyValue=" + item.Id;
-							this.$http.post('BasicMode/DisabledModule?' + props).then(function (response) {
-								var data = response.body;
-								//error
-								if (data.state === "error") {
-									$.alert(data.message);
-									return;
-								}
-								_this2.firstSubmit = true;
-								_this2.$refs.saveShowName2.innerHTML = "确认";
-								_this2.isShowConfirm = false;
-								_this2.editObj.LookSate = 0;
-							}, function (response) {
-								_this2.$refs.saveShowName2.innerHTML = "确认";
-								$.alert("网络连接失败...");
-								// error callback
-							}).catch();
-						}
-
-						// 启用
-						if (item.LookSate === 0) {
-
-							this.firstSubmit = false;
-
-							var props = "keyValue=" + item.Id;
-							this.$http.post('BasicMode/EnabledModule?' + props).then(function (response) {
-								var data = response.body;
-								//error
-								if (data.state === "error") {
-									$.alert(data.message);
-									return;
-								}
-								_this2.firstSubmit = true;
-								_this2.$refs.saveShowName2.innerHTML = "确认";
-								_this2.isShowConfirm = false;
-								_this2.editObj.LookSate = 1;
-							}, function (response) {
-								_this2.$refs.saveShowName2.innerHTML = "确认";
-								$.alert("网络连接失败...");
-								// error callback
-							}).catch();
-						}
-					}
-				},
-
-
-				// 全选
-				checkAll: function checkAll(event) {
-					this.isCheckAll = !this.isCheckAll;
-					//					$(event.target).siblings().removeClass("active");
-					this.selectBtnStyle(this.$refs.ckBtn);
-					this.isDelete = false;
-					if (this.isCheckAll) {
-						$(event.target).addClass("active");
-						this.list.filter(function (item) {
-							return item.ck = true;
-						});
-					} else {
-						$(event.target).removeClass("active");
-						this.list.filter(function (item) {
-							return item.ck = false;
-						});
-					}
-				},
-
-
-				// 删除
-				delAll: function delAll(event) {
-
-					if (this.ischeckCount === 0) {
-						return;
-					}
-
-					this.isShowDelBox = true;
-
-					this.isDelete = !this.isDelete;
-					this.isCheckAll = false;
-					if (this.isDelete) {
-						this.selectBtnStyle(this.$refs.delBtn);
-					} else {
-						this.selectBtnStyle(this.$refs.delBt, true);
-					}
-				},
-
-
-				// 添加数据
-				addAll: function addAll(event) {
-					this.selectBtnStyle(this.$refs.addBtn);
-					this.isDelete = false;
-					this.isCheckAll = false;
-					this.isShowAddBox = !this.isShowAddBox;
-				},
-
-				// 删除
-				delBtn: function delBtn(event) {
-					var _this3 = this;
-
-					var arrs = this.getcheckItems.map(function (item) {
-						return item.Id;
-					});
-
-					if (this.firstSubmit) {
-						this.firstSubmit = false;
-						this.$refs.saveShowName2.innerHTML = "正在提交中...";
-						var props = "keyValue=" + arrs.join(",");
-						//alert(props)
-						//return ;
-						this.$http.post('BasicMode/CompanyIntroDuctionDelete?' + props).then(function (response) {
-							// success callback
-							var data = response.body;
-							//error
-							if (data.state === "error") {
-								$.alert(data.message);
-								return;
-							}
-							_this3.firstSubmit = true;
-							_this3.$refs.saveShowName2.innerHTML = "确认";
-							_this3.isShowDelBox = false;
-							//this.editObj.isRename = false;
-							//this.list.filter(item=>);
-							_this3.getData();
-						}, function (response) {
-							_this3.$refs.saveShowName2.innerHTML = "确认";
-							$.alert("网络连接失败...");
-							// error callback
-						}).catch();
-					}
-				},
-
-
-				// 提交添加的数据
-				addSubmit: function addSubmit() {
-					var _this4 = this;
-
-					if (this.addObj.ModuleName.length === 0) {
-						return;
-					}
-
-					this.$refs.saveShowName3.innerHTML = "正在提交中...";
-					var props = {
-						ModuleName: this.addObj.ModuleName
-					};
-
-					this.$http.post('BasicMode/CompanyIntroDuctionSubmit', props, {
-						emulateJSON: true
-					}).then(function (response) {
-						// success callback
-						var data = response.body;
-						$.alert(data);
-						//error
-						if (data.state === "error") {
-							$.alert(data.message);
-							return;
-						}
-						_this4.addObj.ModuleName = "";
-						_this4.firstSubmit = true;
-						_this4.$refs.saveShowName3.innerHTML = "添加";
-						_this4.isShowAddBox = false;
-						//this.editObj.isRename = false;
-						//this.list.filter(item=>);
-						_this4.getData();
-					}, function (response) {
-						_this4.$refs.saveShowName3.innerHTML = "添加";
-						$.alert("网络连接失败...");
-						// error callback
-					}).catch();
-				},
-
-				getData: function getData(cd) {
-					var _this5 = this;
-
-					this.$http.get('BasicMode/CompanyIntroDuctionShow?rows=100&page=1&sidx=CreatorTime desc&records=100').then(function (response) {
-						//loading.removeLoading("#pattern-table");
-						var data = response.body;
-						//error
-						if (data.state === "error") {
-							$.alert(data.message);
-							return;
-						}
-						// get body data
-						_this5.list = data.rows.map(function (item) {
-							item.isRename = false;
-							item.ck = false;
-							return item;
-						});
-
-						if (typeof cd === "function") {
-							cd();
-						}
-						//console.log(this.list)
-					}, function (response) {
-						// error callback
-						$.alert("网络连接失败...");
-					}).catch();
-				},
-				// 选择按钮的样式
-				selectBtnStyle: function selectBtnStyle(el, bl) {
-
-					$(el).siblings().removeClass("active");
-					$(el).addClass("active");
-					if (bl) {
-						$(el).removeClass("active");
-					}
-				}
-
-			},
-
-			computed: {
-				ischeckCount: function ischeckCount() {
-
-					return this.list.filter(function (item) {
-						return item.ck === true;
-					}).length;
-				},
-				getcheckItems: function getcheckItems() {
-
-					return this.list.filter(function (item) {
-						return item.ck === true;
-					});
-				}
-
-			}
-
-		});
-
-		/*btn click style*/
-		$(function () {
-
-			// pattern-ttll
-			$(".pattern-ttl1 a").on("click", function () {
-
-				var p = $(this).parents(".pattern-ttl1");
-				p.find("a").removeClass("active");
-				$(this).addClass("active");
-			});
-
-			$(".pattern-ttl1 a").on('shown.bs.tab', function (e) {
-				_moz_.resetScroll();
-				setScroll$1();
-			});
-
-			// pattern-ttl2
-			//			$(".pattern-ttl2 a").on("click", function() {
-			//				var p = $(this).parents(".pattern-ttl2");
-			//				//p.find("a").removeClass("active");
-			//				var a = p.find("a");
-			//				a.eq(0).css("z-index", 3);
-			//				a.eq(1).css("z-index", 2);
-			//				a.eq(2).css("z-index", 1);
-			//
-			//				//$(this).addClass("active");
-			//				$(this).css("z-index", 9);
-			//
-			//			});
-		});
-
-		/*场景总览*/
-		$(".pattern-overview .pattern-ttl3 ._ck").click(function (event) {
-			//	event.stopPropagation()
-			if (!$(this).hasClass("active")) {
-				$(this).addClass("active");
-			} else {
-				$(this).removeClass("active");
-			}
-		});
-
-		/*滚动条*/
-		setScroll$1();
-		$(window).resize(function () {
-			setScroll$1();
-		});
-	}
-
-};
-
-/*pattren模块*/
-var pattern_company_edit = {
-
-	// 编辑场景
-	init: function init() {
-
-		var _id = url.getQueryString("Id");
-		var _moduleName = url.getQueryString("moduleName");
-		_moduleName = "\u7F16\u8F91\u201C" + _moduleName + "\u201D\u4F01\u4E1A\u4ECB\u7ECD\"";
-
-		var vm = new Vue({
-			el: ".app",
-			data: {
-				id: _id,
-				moduleName: _moduleName,
-				sreachText: "",
-				list: [],
-				isShowPop: false,
-				editObj: {},
-				tempShowName: "", // 临时记录
-				firstSubmit: true, //  一次提交
-
-				isShowConfirm: false, // 顯示confirm 
-				isShowDelBox: false,
-
-				isCheckAll: false, // 按钮点击
-				isDelete: false, // 按钮点击
-
-				// 添加分类
-				isShowAddBox: false,
-				isAdd: false,
-
-				//添加分类对象
-				addType: 1, // 1问修改 2添加
-				addObj: {
-					documentClass: "",
-					documenttitle: "",
-					article: "",
-					keyValue: "",
-					introid: _id
-
-				},
-				editor: ""
-
-			},
-			mounted: function mounted() {
-				$(".v-app").show();
-				loading.addLoading("#pattern-table");
-				this.getData(function () {
-					loading.removeLoading("#pattern-table");
-				});
-			},
-			updated: function updated() {
-				setScroll$1(true);
-			},
-			watch: {},
-
-			methods: {
-				// 修改文本
-				edit: function edit(item) {
-					var _this = this;
-
-					this.addType = 1;
-					this.isShowPop = true;
-					this.editObj = item;
-
-					this.$http.get('BasicMode/IntroduceCompileAddForWebHtml?keyValue=' + item.Id).then(function (response) {
-						// success callback
-						var data = response.body;
-						//error
-						if (data.state === "error") {
-							$.alert(data.message);
-							return;
-						}
-						_this.editObj = response.body;
-						_this.firstSubmit = true;
-
-						editorMini.html(_this.editObj.Article);
-						//this.isShowPop = false;
-						console.log(_this.editObj);
-					}, function (response) {
-						$.alert("网络连接失败...");
-						// error callback
-					}).catch();
-				},
-
-				// 取消编辑
-				cancelEdit: function cancelEdit() {
-					this.isShowPop = false;
-					this.editObj.isEdit = false;
-					this.editObj = {};
-				},
-
-
-				// 保存编辑
-				submitEdit: function submitEdit() {
-					var _this2 = this;
-
-					// 答案
-					this.editObj.Article = editorMini.html();
-					if (this.editObj.DocumentClass.length == 0 || this.editObj.Documenttitle.length == 0 || this.editObj.Article.length == 0) {
-						return;
-					}
-					//修改
-					if (this.addType === 1) {
-						if (this.firstSubmit) {
-							this.firstSubmit = false;
-							this.$refs.saveShowName.innerHTML = "正在提交中...";
-							var props = {
-								documentClass: this.editObj.DocumentClass,
-								documenttitle: this.editObj.Documenttitle,
-								article: this.editObj.Article,
-								keyValue: this.editObj.Id,
-								introid: this.id
-							};
-
-							this.$http.post('BasicMode/IntroDuceCompileSubmit', props, {
-								emulateJSON: true
-							}).then(function (response) {
-
-								// success callback
-								var data = response.body;
-								//error
-								if (data.state === "error") {
-									$.alert(data.message);
-									return;
-								}
-
-								_this2.getData();
-								_this2.firstSubmit = true;
-								_this2.$refs.saveShowName.innerHTML = "确认";
-								_this2.isShowPop = false;
-								_this2.editObj.isEdit = false;
-								_this2.editObj = {};
-							}, function (response) {
-
-								// error callback
-								_this2.firstSubmit = true;
-								_this2.$refs.saveShowName.innerHTML = "确认";
-								$.alert("网络连接失败...");
-							}).catch();
-						}
-					}
-
-					// 添加
-					else if (this.addType === 2) {
-
-							if (this.firstSubmit) {
-								this.firstSubmit = false;
-								this.$refs.saveShowName.innerHTML = "正在提交中...";
-								var props = {
-									documentClass: this.editObj.DocumentClass,
-									documenttitle: this.editObj.Documenttitle,
-									article: this.editObj.Article,
-									introid: this.id
-
-								};
-
-								this.$http.post('BasicMode/IntroDuceCompileSubmit', props, {
-									emulateJSON: true
-								}).then(function (response) {
-
-									// success callback
-									var data = response.body;
-									//error
-									if (data.state === "error") {
-										$.alert(data.message);
-										return;
-									}
-									_this2.firstSubmit = true;
-									_this2.$refs.saveShowName.innerHTML = "确认";
-									_this2.isShowPop = false;
-									_this2.editObj.isEdit = false;
-									_this2.addObj.DocumentClass = "";
-									_this2.addObj.Documenttitle = "";
-									_this2.addObj.Article = "";
-									_this2.getData();
-								}, function (response) {
-
-									// error callback
-									_this2.firstSubmit = true;
-									_this2.$refs.saveShowName.innerHTML = "确认";
-									$.alert("网络连接失败...");
-								}).catch();
-							}
-						}
-				},
-				search: function search(event) {
-					var _this3 = this;
-
-					// 不能为空
-					//					if(this.sreachText.length === 0) {
-					//						return;
-					//					}
-					if (this.firstSubmit) {
-						this.$refs.search.innerHTML = "正在提交中...";
-						var props = "introid=" + this.id + "&rows=100&page=1&sidx=CreatorTime desc&records=100&introname=" + this.sreachText;
-						this.$http.get('BasicMode/IntroDuceCompileShow?' + props).then(function (response) {
-
-							// get body data
-							var data = response.body;
-							//error
-							if (data.state === "error") {
-								$.alert(data.message);
-								return;
-							}
-							_this3.$refs.search.innerHTML = "搜索";
-							_this3.list = data.rows.map(function (item) {
-								item.isEdit = false;
-								item.ck = false;
-								return item;
-							});
-							//console.log(this.list)
-						}, function (response) {
-							// error callback
-							$.alert("网络连接失败...");
-						}).catch();
-					}
-				},
-
-
-				// 添加数据 
-				addAll: function addAll(event) {
-					this.addType = 2;
-					this.isShowPop = true;
-					this.editObj = this.addObj;
-					editorMini.html("");
-
-					//					$(event.target).siblings().removeClass("active");
-					//					$(event.target).addClass("active");
-					this.selectBtnStyle(this.$refs.addBtn);
-					this.isDelete = false;
-					this.isCheckAll = false;
-					this.isShowAddBox = !this.isShowAddBox;
-				},
-
-				// 全选
-				checkAll: function checkAll(event) {
-
-					this.isCheckAll = !this.isCheckAll;
-
-					this.selectBtnStyle(this.$refs.ckBtn);
-					this.isDelete = false;
-					if (this.isCheckAll) {
-						this.selectBtnStyle(this.$refs.ckBtn);
-						this.list.filter(function (item) {
-							return item.ck = true;
-						});
-					} else {
-						this.selectBtnStyle(this.$refs.ckBtn, true);
-						this.list.filter(function (item) {
-							return item.ck = false;
-						});
-					}
-				},
-
-
-				// 删除
-				delAll: function delAll(event) {
-
-					if (this.ischeckCount === 0) {
-						return;
-					}
-
-					this.isShowDelBox = true;
-
-					this.selectBtnStyle(this.$refs.delBtn);
-					this.isCheckAll = false;
-					this.isDelete = true;
-
-					if (this.isDelete) {
-						$(event.target).addClass("active");
-					} else {
-						$(event.target).removeClass("active");
-					}
-				},
-
-				// 删除
-				delBtn: function delBtn(event) {
-					var _this4 = this;
-
-					var arrs = this.getcheckItems.map(function (item) {
-						return item.Id;
-					});
-
-					if (this.firstSubmit) {
-						this.firstSubmit = false;
-						this.$refs.saveShowName2.innerHTML = "正在提交中...";
-						var props = "keyValue=" + arrs.join(",");
-						//return;
-						this.$http.post('BasicMode/IntroDuceCompileDelete?' + props).then(function (response) {
-							// success callback
-							var data = response.body;
-							//error
-							if (data.state === "error") {
-								$.alert(data.message);
-								return;
-							}
-							_this4.firstSubmit = true;
-							_this4.$refs.saveShowName2.innerHTML = "确认";
-							_this4.isShowDelBox = false;
-							_this4.getData();
-						}, function (response) {
-							_this4.$refs.saveShowName2.innerHTML = "确认";
-							$.alert("网络连接失败...");
-							// error callback
-						}).catch();
-					}
-				},
-
-
-				getData: function getData(cd) {
-					var _this5 = this;
-
-					var props = "introid=" + this.id + "&rows=100&page=1&sidx=CreatorTime desc&records=100";
-					this.$http.get('BasicMode/IntroDuceCompileShow?' + props).then(function (response) {
-
-						var data = response.body;
-						//error
-						if (data.state === "error") {
-							$.alert(data.message);
-							return;
-						}
-						if (typeof cd === "function") {
-							cd();
-						}
-
-						// get body data
-						_this5.list = data.rows.map(function (item) {
-							item.isEdit = false;
-							item.ck = false;
-							return item;
-						});
-						//console.log(this.list)
-					}, function (response) {
-						// error callback
-						$.alert("网络连接失败...");
-					}).catch();
-				},
-				cancelConfirm: function cancelConfirm() {
-					this.isShowDelBox = false;
-					this.isDelete = false;
-				},
-
-
-				// 返回上一页
-				backPage: function backPage() {
-
-					window.history.back();
-				},
-
-				// 选择按钮的样式
-				selectBtnStyle: function selectBtnStyle(el, bl) {
-
-					$(el).siblings().removeClass("active");
-					$(el).addClass("active");
-					if (bl) {
-						$(el).removeClass("active");
-					}
-				}
-
-			},
-
-			computed: {
-				ischeckCount: function ischeckCount() {
-
-					return this.list.filter(function (item) {
-						return item.ck === true;
-					}).length;
-				},
-				getcheckItems: function getcheckItems() {
-
-					return this.list.filter(function (item) {
-						return item.ck === true;
-					});
-				}
-
-			},
-			created: function created() {}
-
-		});
-
-		/*btn click style*/
-		$(function () {
-
-			// pattern-ttll
-			$(".pattern-ttl1 a").on("click", function () {
-
-				var p = $(this).parents(".pattern-ttl1");
-				p.find("a").removeClass("active");
-				$(this).addClass("active");
-			});
-
-			$(".pattern-ttl1 a").on('shown.bs.tab', function (e) {
-				_moz_.resetScroll();
-				setScroll$1();
-			});
-
-			// pattern-ttl2
-			//			$(".pattern-ttl2 a").on("click", function() {
-			//				var p = $(this).parents(".pattern-ttl2");
-			//				//p.find("a").removeClass("active");
-			//				var a = p.find("a");
-			//				a.eq(0).css("z-index", 3);
-			//				a.eq(1).css("z-index", 2);
-			//				a.eq(2).css("z-index", 1);
-			//
-			//				//$(this).addClass("active");
-			//				$(this).css("z-index", 9);
-			//
-			//			});
-		});
-
-		/*场景总览*/
-		$(".pattern-overview .pattern-ttl3 ._ck").click(function (event) {
-			//	event.stopPropagation()
-			if (!$(this).hasClass("active")) {
-				$(this).addClass("active");
-			} else {
-				$(this).removeClass("active");
-			}
-		});
-
-		// 文本编辑器
-		window.editorMini = KindEditor.create('#Article', {
-			width: '85%',
-			height: '400px',
-			resizeType: 1,
-			uploadJson: '/Files/UploadImage',
-			items: ['source', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 'insertunorderedlist', '|', 'image', 'link', 'fullscreen']
-		});
-
-		/*滚动条*/
-		setScroll$1();
-		$(window).resize(function () {
-			setScroll$1();
-		});
-	}
-
-};
-
-/*pattren模块*/
-
-// set scroll 
-var pattern_publicIty = {
-
-	// 企业宣传
-	init: function init() {
-
-		var vm = new Vue({
-			el: ".app",
-			data: {
-				list: [],
-				isShowPop: false,
-				editObj: {
-					Videoname: "",
-					Id: "",
-					isRename: false
-				},
-				tempShowName: "", // 临时记录
-				firstSubmit: true, //  一次提交
-				isShowConfirm: false, // 顯示confirm 框
-				isShowDelBox: false,
-				isShowAddBox: false,
-				isCheckAll: false,
-				isDelete: false
-			},
-			mounted: function mounted() {
-				$(".v-app").show();
-				loading.addLoading("#pattern-table");
-
-				this.getData(function () {
-					loading.removeLoading("#pattern-table");
-				});
-			},
-
-			updated: function updated() {
-				setScroll$1(true);
-			},
-			watch: {},
-			methods: {
-				getData: function getData(cd) {
-					var _this = this;
-
-					this.$http.get('BasicMode/BasicPublicItyShow?rows=100&page=1&sidx=CreatorTime desc&record=1000').then(function (response) {
-						var data = response.body;
-						//error
-						if (data.state === "error") {
-							$.alert(data.message);
-							return;
-						}
-						// get body data
-						_this.list = data.rows.map(function (item) {
-							item.isRename = false;
-							item.ck = false;
-							return item;
-						});
-
-						if (typeof cd === "function") {
-							cd();
-						}
-						//console.log(this.list)
-					}, function (response) {
-						// error callback
-						$.alert("网络连接失败...");
-					}).catch();
-				},
-				// 重命名
-				rename: function rename(item) {
-					this.editObj.isRename = true;
-					this.isShowPop = true;
-					this.editObj = item;
-					this.Videoname = item.Videoname;
-				},
-
-
-				// 取消重命名
-				cancel: function cancel() {
-					this.isShowPop = false;
-					this.editObj.isRename = false;
-					this.editObj.Videoname = this.Videoname;
-				},
-
-				// 保存重名
-				submit: function submit() {
-					var _this2 = this;
-
-					if (this.editObj.Videoname.length === 0) {
-						return;
-					}
-
-					if (this.firstSubmit) {
-						this.firstSubmit = false;
-						this.$refs.saveShowName.innerHTML = "正在提交中...";
-						var props = "keyValue=" + this.editObj.Id + "&videoName=" + this.editObj.Videoname;
-						this.$http.post('BasicMode/BasicPublicItySubmit?' + props).then(function (response) {
-							// success callback
-							var data = response.body;
-							//error
-							if (data.state === "error") {
-								$.alert(data.message);
-								return;
-							}
-
-							_this2.firstSubmit = true;
-							_this2.$refs.saveShowName.innerHTML = "确认";
-							_this2.isShowPop = false;
-							_this2.editObj.isRename = false;
-						}, function (response) {
-							_this2.$refs.saveShowName.innerHTML = "确认";
-							$.alert("网络连接失败...");
-							// error callback
-						}).catch();
-					}
-				},
-
-				// 添加
-				addVideo: function addVideo() {
-					this.isShowAddBox = true;
-				},
-				cancelAdd: function cancelAdd() {
-					this.isShowAddBox = false;
-				},
-
-				// 保存编辑
-				submitAdd: function submitAdd() {
-					var _this3 = this;
-
-					if (this.firstSubmit) {
-						this.firstSubmit = false;
-						this.$refs.saveShowName.innerHTML = "正在提交中...";
-						var props = "";
-
-						props = "videoname=" + $("#Videoname").val();
-
-						this.$http.post('BasicMode/UploadVideo?' + props).then(function (response) {
-							// success callback
-							var data = response.body;
-							//error
-							if (data.state === "error") {
-								$.alert(data.message);
-							}
-
-							_this3.firstSubmit = true;
-							_this3.$refs.saveShowName.innerHTML = "确认";
-							_this3.isShowAddBox = false;
-							_this3.getData();
-						}, function (response) {
-							_this3.$refs.saveShowName.innerHTML = "确认";
-							$.alert("网络连接失败...");
-							// error callback
-						}).catch();
-					}
-				},
-
-				// 全选
-				checkAll: function checkAll(event) {
-
-					this.isCheckAll = !this.isCheckAll;
-					//					$(event.target).siblings().removeClass("active");
-					this.selectBtnStyle(this.$refs.ckBtn);
-					this.isDelete = false;
-					if (this.isCheckAll) {
-						$(event.target).addClass("active");
-						this.list.filter(function (item) {
-							return item.ck = true;
-						});
-					} else {
-						$(event.target).removeClass("active");
-						this.list.filter(function (item) {
-							return item.ck = false;
-						});
-					}
-				},
-
-				// 删除
-				delAll: function delAll(event) {
-
-					if (this.ischeckCount === 0) {
-						return;
-					}
-
-					this.isShowDelBox = true;
-
-					this.isDelete = !this.isDelete;
-					this.isCheckAll = false;
-					if (this.isDelete) {
-						this.selectBtnStyle(this.$refs.delBtn);
-					} else {
-						this.selectBtnStyle(this.$refs.delBt, true);
-					}
-				}
-			}
-		});
-
-		/*btn click style*/
-		$(function () {
-
-			// pattern-ttll
-			$(".pattern-ttl1 a").on("click", function () {
-
-				var p = $(this).parents(".pattern-ttl1");
-				p.find("a").removeClass("active");
-				$(this).addClass("active");
-			});
-
-			$(".pattern-ttl1 a").on('shown.bs.tab', function (e) {
-				_moz_.resetScroll();
-				setScroll$1();
-			});
-
-			// pattern-ttl2
-			$(".pattern-ttl2 a").on("click", function () {
-				var p = $(this).parents(".pattern-ttl2");
-				p.find("a").removeClass("active");
-				var a = p.find("a");
-				a.eq(0).css("z-index", 3);
-				a.eq(1).css("z-index", 2);
-				a.eq(2).css("z-index", 1);
-
-				$(this).addClass("active");
-				$(this).css("z-index", 9);
-			});
-		});
-
-		/*场景总览*/
-		$(".pattern-overview .pattern-ttl3 ._ck").click(function () {
-			if (!$(this).hasClass("active")) {
-				$(this).addClass("active");
-			} else {
-				$(this).removeClass("active");
-			}
-		});
-
-		/*滚动条*/
-		setScroll$1();
-		$(window).resize(function () {
-			setScroll$1();
-		});
-	}
-
-};
-
-/*导航地图*/
-var scene_map = {
-
-    init: function init() {
-        //坐标点
-        var x;
-        var y;
-        var iscoordinate = false;
-
-        var robotX = 201;
-        var robotY = 100;
-        var robotAngel = 70;
-
-        var width = 0; //服务端提供
-        var height = 0; //服务端提供
-        var pointsMultiple = 0; //服务端提供
-
-        var mapIdFromUrl = url.getQueryString("mapId");
-        if (mapIdFromUrl == null) {
-            mapIdFromUrl = "";
-        }
-
-        $(function () {
-
-            if (mapIdFromUrl != "" && mapIdFromUrl != null && mapIdFromUrl != undefined) {
-                $(".CannotShowInUrl").css("display", "none");
-                $("#showImg").attr("src", "/Navigation/GetCurrentImage?mapId=" + mapIdFromUrl);
-            }
-
-            SetRobotLocation(robotX, robotY, robotAngel);
-
-            $.ajax({
-                type: "GET",
-                url: config.api.root + "Navigation/GetMapDataJson",
-                dataType: "json",
-                success: function success(data) {
-                    if (data != null && data != undefined) {
-                        width = data.width;
-                        height = data.height;
-                        pointsMultiple = data.pointsMultiple;
-
-                        if (width == 0) {
-                            $(".pointDiv").css("display", "none");
-                        }
-                    }
-                },
-                error: function error(data) {
-                    $.alert("获取地图数据失败");
-                }
-            });
-
-            $.ajax({
-                url: config.api.root + "Navigation/GetMapPointsJson?mapId=" + mapIdFromUrl,
-                dataType: "json",
-                async: true,
-                success: function success(data) {
-                    if (data != null && data != undefined && data.length > 0) {
-                        var htmlStr = "";
-                        $.each(data, function (i) {
-
-                            htmlStr += "<li class=\"list-group-item\">";
-                            htmlStr += "<div class=\"checkbox\" >";
-                            htmlStr += "<label><input type=\"checkbox\" id=\"" + data[i].Name + "\">" + data[i].Name + "</label>";
-                            htmlStr += "</div></li>";
-
-                            $("#deleteCollection").before(htmlStr);
-                        });
-                    }
-                }
-            });
-        });
-
-        function SetRobotLocation(robotX, robotY, robotAngel) {
-            $("#currentX").html(robotX);
-            $("#currentY").html(robotY);
-            $("#currentAngle").html(robotAngel + "°");
-        }
-
-        // 点击收藏按钮
-        $(document).on("click", ".btn-save-ck", function () {
-            if (!iscoordinate) {
-
-                $.alert("请选择定位坐标");
-                return;
-            }
-            $(".pop-mask").addClass("active");
-            $("._save-x").text(x);
-            $("._save-y").text(y);
-            $("._save-name").val("");
-        });
-
-        // 弹框的保存
-        $(document).on("click", ".btn-save", function () {
-
-            if ($("._save-name").val() == "") {
-                $.alert("请输入收藏点名称");
-                return;
-            }
-
-            var dataSubmit = {
-                pointX: x,
-                pointY: y,
-                pointName: $("._save-name").val(),
-                pointBz: $("._remark").val(),
-                mapId: mapIdFromUrl
-            };
-
-            $.ajax({
-                type: "POST",
-                url: "/Navigation/AddCollectionPoint",
-                data: dataSubmit,
-                dataType: "json",
-                success: function success(data) {
-                    if (data.state == "error") {
-                        $.alert(data.message);
-                    } else {
-
-                        var htmlStr = "";
-                        htmlStr += "<li class=\"list-group-item\">";
-                        htmlStr += "<div class=\"checkbox\" value=\"" + $("._save-name").val() + "\">";
-                        htmlStr += "<label><input type=\"checkbox\" id=\"" + $("._save-name").val() + "\">" + $("._save-name").val() + "</label>";
-                        htmlStr += "</div></li>";
-                        $("#deleteCollection").before(htmlStr);
-
-                        $(".pop-mask").removeClass("active");
-
-                        $.info("添加收藏点成功", "success");
-                    }
-                },
-                error: function error(data) {
-                    $.alert("保存失败");
-                }
-            });
-
-            //$.alert("弹框的保存");
-            //			$.ajax({
-            //				type: "post",
-            //				url: "", //int pageIndex,int pageSize
-            //				data: o,
-            //				success: function(data) {
-            //					$.info("数据保存成功！", "success");
-            //					$(".pop-mask").removeClass("active");
-            //		
-            //				},
-            //
-            //				timeout: 10000,
-            //
-            //				error: function(data) {
-            //					$.alert(data.message);
-            //				}
-            //
-            //			});
-
-        });
-
-        // 弹框的取消
-        $(document).on("click", ".btn-close", function () {
-
-            $(this).parents(".pop-mask").removeClass("active");
-            //$.info("弹框的取消");
-        });
-
-        // 获取鼠标的定位坐标
-        $(".scene-map-img").on("click", function (e) {
-            //var big_w=$(this).outerWidth();
-            //var big_h=$(this).outerHeight();
-            //iscoordinate = true;
-            //x = event.clientX;
-            //y = event.clientY;
-            //var icon_w=$(".coordinate-icon").outerWidth();
-            //var icon_h=$(".coordinate-icon").outerHeight();
-            //if(x>=(big_w-icon_w)){
-            //	x=big_w-icon_w;
-            //}
-            //if(y>=(big_h-icon_h)){
-            //	y=big_h-icon_h;
-            //}
-            //y=y-(icon_h/2);
-            //x=x-(icon_w/2);
-
-            var currentWidth = $(this).outerWidth();
-            var currentHeight = $(this).outerHeight();
-            x = e.pageX - $(this).offset().left;
-            y = e.pageY - $(this).offset().top;
-
-            $(".coordinate-icon").show().css({
-                "left": x - 20, "top": y - 40
-            });
-            //SetAimLocation();
-            x = Math.round(width / currentWidth * x);
-
-            x = pointsMultiple * x;
-
-            y = Math.round(height / currentHeight * y);
-            y = (height - y) * pointsMultiple;
-            iscoordinate = true;
-            //$("#aimX").html(offsetX);
-            //$("#aimY").html(offsetY);
-        });
-
-        // 删除收藏点
-        $(document).on("click", ".btn-delete", function () {
-
-            $('input[name="pronunciation"]:checked').val();
-
-            var pointNames = "";
-            //$("#collectionPoint input[type='checkbox']").each(function () {
-            $("#collectionPoint input:checkbox:checked").each(function () {
-                if ($(this).is(':checked')) {
-                    pointNames += $(this).attr("id") + ",";
-                }
-            });
-            alert(pointNames);
-
-            $.ajax({
-                type: "POST",
-                url: "/Navigation/DeleteCollectionPointArr",
-                data: { pointNames: pointNames, mapId: mapIdFromUrl },
-                dataType: "json",
-                success: function success(data) {
-                    if (data.state == "error") {
-                        $.alert(data.message);
-                    } else {
-
-                        $("#collectionPoint input:checkbox:checked").each(function () {
-                            $(this).parent().parent().remove();
-                        });
-
-                        $.info("删除收藏点成功", "success");
-                    }
-                },
-                error: function error(data) {
-                    $.alert("保存失败");
-                }
-            });
-        });
-
-        // 导出地图
-        $(document).on("click", ".btn-map", function () {
-            $.alert("导出地图");
-        });
-    }
-
-};
-
-/*场景模块*/
-
-var scene_create = {
-
-			init: function init() {
-
-						var _select = '';
-						$.get("/Navigation/GetScenePoints", function (data) {
-									if (data == undefined) {
-												return;
-									}
-									_select = '<select class="form-control SceneSelect">';
-									for (var i = 0; i < data.length; i++) {
-												var item = data[i];
-												var _option = '<option value="' + item.ID + '" >' + item.Name + '</option>';
-												_select += _option;
-									}
-									_select += '</select>';
-						});
-
-						$(".scene-create-add").on("click", ".add-btn", function () {
-
-									var createEl = '<div class="_item">\n\t\t\t\t\t<div class="_cont clearfix">\n\t\t\t\t\t\t\t<span class="glyphicon glyphicon-remove  text-danger pull-right close-item"></span>\n                            ' + _select + '\n\t\t\t\t\t\t\t<button  class="btn btn-primary pull-right btn-save" type="button">\u4FDD\u5B58</button>\n\t\t\t\t\t\t\t<div class="_item-mask"></div>\n\t\n\t\t\t\t\t</div>\n\t\t\t\t\t<button class="btn btn-primary add-btn" type="button "> <span class="glyphicon glyphicon-plus"></span></button>\n\t\t\t\t</div>';
-
-									var item_length = $("._item").length;
-
-									if (item_length === 0) {
-
-												$(".scene-create-add").prepend(createEl);
-									} else {
-
-												$(".scene-create-add").append(createEl);
-									}
-
-									item_length = $("._item").length;
-
-									if (item_length >= 1) {
-												$(".add-btn-init.add-btn").hide();
-									} else {
-												$(".add-btn-init.add-btn").show();
-									}
-						});
-
-						$(".scene-create-add").on("click", ".close-item", function (event) {
-
-									$(this).parents("._item").remove();
-									var item_length = $("._item").length;
-
-									if (item_length === 0) {
-												$(".add-btn-init.add-btn").show();
-									} else {
-												$(".add-btn-init.add-btn").hide();
-									}
-						});
-
-						//		// 每一项保存
-						$(".scene-create-add").on("click", ".btn-save", function () {
-
-									var p = $(this).parents("._cont");
-									var mask = p.find("._item-mask");
-									var v = p.find("select option:selected").text();
-
-									mask.html(v);
-									mask.show();
-						});
-
-						$(".scene-create-add").on("click", "._item-mask", function () {
-
-									$(this).hide();
-						});
-
-						// 保存提交
-						$(".scene-create-submit .btn").on("click", function () {
-
-									if ($("#sceneName").val() == "") {
-												$.alert("请输入场景名称");
-												return;
-									}
-
-									if ($(".scene-create-add .SceneSelect").length <= 0) {
-												$.alert("场景至少要有一个点，请点击加号添加");
-												return;
-									}
-									var vals = "";
-									$(".scene-create-add .SceneSelect").each(function () {
-												vals += $(this).val() + ",";
-									});
-									vals = vals.substr(0, vals.length - 1);
-
-									$.ajax({
-												type: "POST",
-												url: "/Navigation/SubmitCreateScene",
-												data: { sceneName: $("#sceneName").val(), scenePointIds: vals },
-												dataType: "json",
-												success: function success(data) {
-															if (data.state == "error") {
-																		$.alert(data.message);
-															} else {
-																		$.info("保存成功", "success");
-															}
-												},
-												error: function error(data) {
-															$.alert("保存失败");
-												}
-									});
-
-									//$.post(
-									//    '/Navigation/SubmitCreateScene',
-									//    { sceneName: $("#sceneName").val(), scenePointIds: vals },
-									//    function (data) {
-									//        $.info("保存成功", "success");
-									//        //alert(data);
-									//    }, 'json');
-
-
-									//var postData = $("#form1").formSerialize();
-									//postData["sceneName"] = $("#sceneName").val();
-									//postData["scenePointIds"] = vals;
-									//$.submitForm({
-									//	url: "/Navigation/SubmitCreateScene",
-									//	param: postData,
-									//	success: function() {
-									//		$.info("保存成功", "success");
-									//	},
-									//	error: function() {
-									//		$.info("保存失败", "danger");
-									//	}
-									//});
-
-									//			$.info("保存提交","warning");
-									//			$.info("保存提交","info");
-									//$.info("保存提交","danger");
-									//			$.info("保存提交");
-						});
-			}
-
-};
+				var file = obj.files[0];
+
+				upload({
+					data: file, //选择的文件
+					url: option.url, //"./index.html", //上传网址
+					outTime: 30000,
+					el: $(obj), //当前element
+					size: option.size * 1000000, //1m=1000000
+					contentType: option.contentType, //false,
+					seccess: function seccess(data) {
+						option.seccess(data, p);
+						$propress.hide();
+						$(".vue-file-btn", p).show();
+					}, //成功回调
+					error: function error(data) {
+						option.error(data, p);
+						$propress.hide();
+						$(".vue-file-btn", p).show();
+					} //错误回调
+
+				}); //调用上传接口
+			};
+		}
+	});
+})();
 
 /*sysset模块*/
 
@@ -27170,365 +24359,12 @@ var setDate = function setDate() {
 	});
 };
 
-/*control模块*/
-
-var control = {
-
-	//  音频控制
-	init: function init() {},
-
-
-	// 屏幕控制
-	pm: function pm() {},
-
-
-	// yd 运动控制
-	yd: function yd() {},
-
-
-	// 组合指令
-	direct: function direct() {
-
-		// 编辑btn
-		$("._btn-edit").on("click", function () {
-			$("._direct-edit").fadeIn(600);
-			$("._direct").hide();
-		});
-
-		// 返回btn
-		$("._btn-back").on("click", function () {
-
-			$("._direct").fadeIn(600);
-			$("._direct-edit").hide();
-		});
-	}
-};
-
-/*scene_point模块*/
-
-var scene_point = {
-
-	// 主界面
-	init: function init() {
-
-		// 添加页面
-		var pages = [{
-			id: "page-1",
-			tag: 1
-		}];
-
-		// 添加tab
-		$(".scene-point-addpage").click(function () {
-
-			if (pages.length === 20) {
-				$.alert("最多能添加20项！");
-				return;
-			}
-			var _index = pages.length;
-
-			pages.push({
-				id: "page-" + (_index + 1),
-				tag: _index + 1
-			});
-			var _li_html = addLi(_index);
-			//alert(_index);
-
-			$(".nav-tabs").append(_li_html);
-			var _tab_html = addTab(_index);
-			$(".tab-content").append(_tab_html);
-
-			console.log(JSON.stringify(pages));
-		});
-
-		// 删除tab
-		$(".nav-tabs").on("click", ".glyphicon", function () {
-
-			if (pages.length === 1) {
-				$.alert("最后一项，不能删除！");
-				return;
-			}
-			var _li = $(this).parents("li");
-			var _id = $(_li).find("a").attr("href");
-			var _index = $(".nav-tabs li").index(_li);
-			_li.remove();
-			var $li = $(".nav-tabs li");
-			if ($(".nav-tabs li.active").length === 0) {
-				$(".nav-tabs li").eq($li.length - 1).addClass("active");
-			}
-
-			// content
-			$(".tab-content").find(_id).remove();
-			var $tab = $(".tab-content .tab-pane");
-			if ($(".tab-content .tab-pane.active").length === 0) {
-				$(".tab-content .tab-pane").eq($tab.length - 1).addClass("active");
-			}
-			//alert($tab.length)
-			//del array
-			pages.splice(_index, 1);
-		});
-	}
-
-};
-
-function addLi(index) {
-
-	var _li_temp = "<li role=\"presentation\" class=\"active\">\n\t\t\t\t\t\t\t<a href=\"#page-" + (index + 1) + "\" role=\"tab\" data-toggle=\"tab\">\n\t\t\t\t\t\t\t\t<span class=\"_page-text\">\u9875\u9762-" + (index + 1) + "</span>\n\t\t\t\t\t\t\t\t<span class=\"glyphicon glyphicon-remove text-danger\"></span>\n\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t</li>";
-	$(".nav-tabs").find("li").removeClass("active");
-
-	return _li_temp;
-}
-
-function addTab(index) {
-
-	var _temp = "<div role=\"tabpanel\" class=\"tab-pane active\" id=\"page-" + (index + 1) + "\">\n\t\t\t\t\t\t\t<p class=\"_page-ttl\">\u9875\u9762-" + (index + 1) + "</p>\n\t\t\t\t\t\t\t<form class=\" form-horizontal\">\n\t\t\t\t\t\t\t\t<div class=\"form-group clearfix\">\n\t\t\t\t\t\t\t\t\t<label class=\"col-xs-2 control-label\">\u5C4F\u5E55\u663E\u793A:</label>\n\t\t\t\t\t\t\t\t\t<div class=\"col-xs-6\">\n\t\t\t\t\t\t\t\t\t\t<select name=\"\" class=\"form-control\">\n\t\t\t\t\t\t\t\t\t\t\t<option value=\"\">\u56FE\u7247</option>\n\t\t\t\t\t\t\t\t\t\t</select>\n\t\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<div class=\"form-group clearfix\">\n\n\t\t\t\t\t\t\t\t\t<label class=\"col-xs-2 control-label\">\u4E0A\u4F20\u56FE\u7247:</label>\n\t\t\t\t\t\t\t\t\t<div class=\"col-xs-3\">\n\t\t\t\t\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" placeholder=\"\" />\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t<div class=\"col-xs-3\">\n\t\t\t\t\t\t\t\t\t\t<input class=\"form-control\" type=\"file\" placeholder=\"\" />\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<div class=\"form-group clearfix\">\n\n\t\t\t\t\t\t\t\t\t<label class=\"col-xs-2 control-label\">\u8BED\u97F3\u6587\u672C:</label>\n\t\t\t\t\t\t\t\t\t<div class=\"col-xs-6\">\n\t\t\t\t\t\t\t\t\t\t<textarea class=\"form-control\" placeholder=\"\u8F93\u5165\u8BED\u97F3\u6587\u672C\" name=\"\" rows=\"\" cols=\"\"></textarea>\n\t\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t<div class=\"form-group clearfix\">\n\t\t\t\t\t\t\t\t\t<label class=\"col-xs-2 control-label\">\u52A8\u4F5C\u5217\u8868:</label>\n\t\t\t\t\t\t\t\t\t<div class=\"col-xs-6\">\n\t\t\t\t\t\t\t\t\t\t<select name=\"\" class=\"form-control\">\n\t\t\t\t\t\t\t\t\t\t\t<option value=\"\">\u56FE\u7247</option>\n\t\t\t\t\t\t\t\t\t\t</select>\n\t\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t<div class=\"form-group clearfix\">\n\n\t\t\t\t\t\t\t\t\t<label class=\"col-xs-2 control-label\">\u89D2\u5EA6:</label>\n\t\t\t\t\t\t\t\t\t<div class=\"col-xs-6\">\n\t\t\t\t\t\t\t\t\t\t<input\t class=\"form-control\" placeholder=\"0\" />\n\t\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t<div class=\"form-group clearfix \" >\n\t\t\t\t\t\t\t\t\t<div class=\"col-xs-offset-2\" style=\"padding-left:15px;\">\n\t\t\t\t\t\t\t\t\t\t<button class=\"btn btn-primary\" type=\"button\"> \u63D0\u4EA4</button>\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t</div>\n\n\t\t\t\t\t\t\t</form>\n\n\t\t\t\t\t\t</div>\n\t\t\t\t\t\t";
-	$(".tab-content").find(".tab-pane").removeClass("active");
-
-	return _temp;
-}
-
-/*
-   	<slot>
- 	 <template slot="list">
-		<tr v-for=" item in list">
-			<td class="table-2 text-center">
-				<span v-html="item.Id"></span>
-			</td>
-			<td class=" table-2 text-center">
-				<span v-html="item.ModuleName"></span>
-			</td>
-			<td class=" table-2 text-center">
-				<span v-html="item.ShowName"></span>
-			</td>
-			<td class="table-4 text-center">
-				<a href="javascript:;" class="btn btn-sm  btn-default rd" v-on:click="editBtn(item)">模块重命名</a>
-				<a href="javascript:;" class="btn btn-sm  rd"  :class="{'btn-primary':item.LookSate,'btn-default':!item.LookSate}" v-text="item.LookSate?'启用':'禁用'"></a>
-			</td>
-		</tr>
-		</template>
-	<slot>
-*/
-var template = "\n\t<table class=\"pattern-table table  table-bordered  table-fixed table-hover \">\n\t\t<tbody>\n\t\t\t<slot name=\"list\" ></slot>\n\t\t</tbody>\n\t</table>\n";
-
-var vueList = {
-	props: ["list"],
-	data: function data() {
-		return {};
-	},
-
-	template: template
-
-};
-
-/*
-  <slot>
-	 <div class="pop-box-gp">
-	<div class="pop-box-gp">
-		<input :class="{'active':editObj.ShowName}" type="text" name="" id="" value=""  v-model="editObj.ShowName" placeholder="输入新模块名称" />
-	</div>
-</div>
-<slot>
-*/
-var template$1 = "\n\t<div class=\"pop-mask  pop-edit  \"  :class=\"{'active':isShow}\">\n\t\t<div class=\"pop-box\">\n\t\t\t<h2 class=\"_ttl\">{{ttl}}</h2>\n\t\t\t<slot></slot>\n\t\t\t<div class=\"pop-box-gp _submit\">\n\t\t\t\t<button  @click=\"cancel\" class=\"btn btn-default\" type=\"button\">\u53D6\u6D88</button>\n\t\t\t\t<button  @click=\"ok()\" class=\"btn btn-primary\" type=\"button\">\u786E\u8BA4</button>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n";
-
-var vueEdit = {
-	props: {
-		ttl: { type: String,
-			default: "标题"
-		},
-		isShow: {
-			type: Boolean,
-			default: false
-		},
-		ok: {
-			type: Function
-
-		}
-
-	},
-	data: function data() {
-		return {};
-	},
-
-
-	template: template$1,
-
-	methods: {
-		cancel: function cancel() {
-			this.$emit("cancel", false);
-		}
-	}
-
-};
-
-/*
- <slot> 
- 	 <div class="pop-box-gp">
-		<label for="">业务名称：</label>
-		<input type="text" placeholder="业务名称" v-model="addObj.questionClass" :class="{active:addObj.questionClass.length>0} "/>
-	</div>
-<slot>
- */
-var template$2 = "\n\t<div class=\"pop-mask  pop-edit\" :class=\"{'active':isShow}\">\n\t\t\t<div class=\"pop-box\">\n\t\t\t\t<h2 class=\"_ttl\">{{ttl}}</h2>\n\t\t\t\t<slot></slot>\n\t\t\t\t<div class=\"pop-box-gp text-center submit-add\" >\n\t\t\t\t\t<button  @click=\"cancel\" class=\"btn btn-default\" type=\"button\">\u53D6\u6D88</button>\n\t\t\t\t\t<button  @click=\"ok()\" class=\"btn btn-primary\" type=\"button\">\u6DFB\u52A0</button>\n\t\t\t\t</div>\n\t\t\t</div>\n\t</div>\n\n";
-
-var vueAdd = {
-	props: {
-		ttl: { type: String,
-			default: "标题"
-		},
-		isShow: {
-			type: Boolean,
-			default: false
-		},
-		ok: {
-			type: Function
-
-		}
-
-	},
-	data: function data() {
-		return {};
-	},
-
-	template: template$2,
-	methods: {
-		cancel: function cancel() {
-			this.$emit("cancel", false);
-		}
-	}
-
-};
-
 /*test模块*/
 
-// set scroll 
-var list_url = "json/test.json";
 var test = {
 
 	// 主界面
-	init: function init() {
-
-		var vm = new Vue({
-			el: ".app",
-			data: {
-				list: [],
-				isShowEditPop: false,
-				isShowAddPop: false,
-				editObj: {},
-				firstSubmit: true //  一次提交
-
-
-			},
-			mounted: function mounted() {
-				var _this = this;
-
-				$(".v-app").show();
-				$.loadingAdd("#pattern-table");
-				this.$http.get(list_url).then(function (response) {
-
-					$.loadingRemove("#pattern-table");
-					var data = response.body;
-
-					//console.log(data)
-					//error
-					if (data.state === "error") {
-						$.alert(data.message);
-						return;
-					}
-
-					// get body data
-					_this.list = data.map(function (item) {
-						item.isRename = false;
-						return item;
-					});
-
-					//console.log(this.list)
-				}, function (response) {
-					// error callback
-					$.loadingRemove("#pattern-table");
-					$.alert("网络连接失败...");
-					return;
-				}).catch();
-			},
-			updated: function updated() {
-				setScroll$1(true);
-			},
-			watch: {},
-
-			components: {
-				vueList: vueList,
-				vueEdit: vueEdit,
-				vueAdd: vueAdd
-			},
-			methods: {
-
-				// 编辑按钮
-				editBtn: function editBtn() {
-					this.isShowEditPop = true;
-				},
-
-				// 添加按钮
-				addBtn: function addBtn() {
-					this.isShowAddPop = true;
-				},
-
-
-				// 编辑保存
-				editSave: function editSave() {
-					$.confirm("是否确认保存数据", function () {
-						$.info("保存成功", "success");
-					}, function () {});
-				},
-
-				// 添加保存
-				addSave: function addSave() {}
-			}
-		});
-
-		/*btn click style*/
-		$(function () {
-
-			// pattern-ttll
-			$(".pattern-ttl1 a").on("click", function () {
-
-				var p = $(this).parents(".pattern-ttl1");
-				p.find("a").removeClass("active");
-				$(this).addClass("active");
-			});
-
-			$(".pattern-ttl1 a").on('shown.bs.tab', function (e) {
-				_moz_.resetScroll();
-				setScroll$1();
-			});
-
-			// pattern-ttl2
-			$(".pattern-ttl2 a").on("click", function () {
-				var p = $(this).parents(".pattern-ttl2");
-				p.find("a").removeClass("active");
-				var a = p.find("a");
-				a.eq(0).css("z-index", 3);
-				a.eq(1).css("z-index", 2);
-				a.eq(2).css("z-index", 1);
-
-				$(this).addClass("active");
-				$(this).css("z-index", 9);
-			});
-		});
-
-		/*场景总览*/
-		$(".pattern-overview .pattern-ttl3 ._ck").click(function () {
-			if (!$(this).hasClass("active")) {
-				$(this).addClass("active");
-			} else {
-				$(this).removeClass("active");
-			}
-		});
-
-		/*滚动条*/
-		setScroll$1();
-		$(window).resize(function () {
-			setScroll$1();
-		});
-	}
+	init: function init() {}
 
 };
 
@@ -27544,30 +24380,11 @@ $(function () {
 // vue 
 Vue.http.options.root = config.api.root;
 Vue.http.options.emulateJSON = true;
-// vue组件引用
-//import {vue_select} from "./vue-component/vue-select.js";
-
 
 // jquery
-// common
-
 // iframe 加载完成的loading动画   必须放在最后
 
-exports.common = common;
-exports.login = login;
-exports.index = index;
-exports.status = status;
-exports.pattern_list = pattern_list;
-exports.pattern_consult = pattern_consult;
-exports.pattern_edit = pattern_edit;
-exports.pattern_company = pattern_company;
-exports.pattern_company_edit = pattern_company_edit;
-exports.pattern_publicIty = pattern_publicIty;
-exports.scene_map = scene_map;
-exports.scene_create = scene_create;
 exports.sysset = sysset;
-exports.control = control;
-exports.scene_point = scene_point;
 exports.test = test;
 
 Object.defineProperty(exports, '__esModule', { value: true });

@@ -69,9 +69,20 @@ gulp.task('release', ['concat'], function() {
 	gulp.src(['./src/**/*.html']).pipe(gulp.dest('./dist/')); //复制html
 	gulp.src('./src/css/**/*.css').pipe(minCss()).pipe(gulp.dest('./dist/css')); //复制css
 	gulp.src('./src/js/**/*.js').pipe(minJs()).pipe(gulp.dest('./dist/js/')); //复制js
+	gulp.src('./src/js/**/*.js').pipe(minJs()).pipe(gulp.dest('./dist/js/')); //复制js
+
 	gulp.src('./src/images/**/*.*')
-		//.pipe(img())                     // 压缩图片
+		.pipe(img())                     // 压缩图片
 		.pipe(gulp.dest('./dist/images/')); //复制img
+		
+	/*編輯器*/	
+	gulp.src('./src/uploads/**/*.*').pipe(gulp.dest('./dist/uploads/')); //复制uploads
+	gulp.src('./src/editor/**/*.*').pipe(gulp.dest('./dist/editor/')); //复制editor
+	
+	gulp.src('./src/json/**/*.*').pipe(gulp.dest('./dist/json/')); //复制json
+	
+
+
 
 });
 
