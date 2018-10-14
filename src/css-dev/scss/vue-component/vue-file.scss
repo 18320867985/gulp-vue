@@ -1,0 +1,46 @@
+/*h5上传组件*/
+
+.vue-file {
+    position: relative;
+    width: 100%;
+    height: 34px;
+    display: inline-block;
+    vertical-align: middle;
+    .fileUp {
+        position: absolute;
+    }
+    
+    .progress-all {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    margin-top: -2.5px;
+    background: #ddd;
+    border-radius: 5px;
+    box-shadow: inset 0 1px #ccc 2px;
+}
+
+.progress-now {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 4px;
+    padding: 0;
+    background: $text-danger;
+    border-radius: 5px;
+}
+
+.progress-num {
+    position: absolute;
+    top: -7px;
+    left: 0;
+    width: 100%;
+    color: #333;
+    text-align: center;
+    font-size: 12px;
+}
+}
+
