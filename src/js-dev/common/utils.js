@@ -1,5 +1,5 @@
  // array
- let uitl_list = {
+ let utils_list = {
 
  	// min value
  	min: function(data) {
@@ -351,7 +351,7 @@
  };
 
  // url
- let  uitl_url = {
+ let  utils_url = {
  	//采用正则表达式获取地址栏参数：（ 强烈推荐，既实用又方便！）
  	getQueryString: function(name) {
  		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -386,7 +386,7 @@
  };
 
  // cookie
- let  uitl_cookie ={
+ let  utils_cookie ={
 
  	setCookie: function(cookieName, cookieValue, expiresDate) {
  		cookieName = cookieName || "";
@@ -444,7 +444,7 @@
  }
  
  // localStorage
- let  uitl_localStorage={
+ let  utils_localStorage={
 
  		// localStorage存值永久有效
  		setItem: function(item, value) {
@@ -491,7 +491,7 @@
  	}
 
 // sessionStorage
- let  uitl_sessionStorage={
+ let  utils_sessionStorage={
 
  		// sessionStorage 
  		setItem: function(item, value) {
@@ -541,10 +541,10 @@
 
 
  export {
- 	 uitl_list,
- 	 uitl_url,
- 	 uitl_cookie,
- 	 uitl_localStorage,
- 	 uitl_sessionStorage
+ 	 utils_list,
+ 	 utils_url,
+ 	 utils_cookie,
+ 	 utils_localStorage,
+ 	 utils_sessionStorage
  }
  

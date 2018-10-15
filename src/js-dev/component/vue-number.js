@@ -17,6 +17,10 @@
 				alert($(p).find(".num").val());
 									
 			});
+			
+			//	$(".vue-number").VueNumber("8");
+			// get
+			//var v=$(".vue-number").VueNumber();
 		 * */
 
 	(function() {

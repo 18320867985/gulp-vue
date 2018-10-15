@@ -112,6 +112,7 @@ var paging = (function() {
 			var id = 1;
 			var v = $(page.selector).find(".skip-txt").val();
 			v = v == "" ? 1 : v;
+			
 			if(!isNaN(Number(v))) {
 				id = v;
 			} else {
@@ -119,6 +120,7 @@ var paging = (function() {
 			}
 			// 检查最大值
 			id = id > page.allPage ? page.allPage : id;
+			id = id <=0?1 : id;
 
 			$(page.selector).find(".skip-txt").val(id)
 			//点击触发自定义事件
