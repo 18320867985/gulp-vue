@@ -23697,7 +23697,7 @@ if (typeof jQuery === 'undefined') {
 	                <div class="vue-slider-handler">
 	                </div>
 	            </div>
-	            <div class="vue-slider-percent">0%</div>
+	            <div class="vue-slider-percent">0</div>
 	        </div>
 	    </div>
 	    
@@ -23745,7 +23745,7 @@ if (typeof jQuery === 'undefined') {
 			});
 			$(".vue-slider-bg", p).width(new_x + _w);
 			var _per = (new_x / _move_w * 100).toFixed(0);
-			$(".vue-slider-percent", p).html(_per + "%");
+			$(".vue-slider-percent", p).html(_per);
 			p.attr("data-val", _per);
 
 			// 触发自定义的事件
@@ -23769,10 +23769,10 @@ if (typeof jQuery === 'undefined') {
 			_v = max;
 		}
 
-		var _w = $(this).find(".vue-slider-bar").width();
+		var _w = $(this).width();
 		var pv = _v / max;
 
-		$(".vue-slider-percent", $(this)).html((pv * 100).toFixed(0) + "%");
+		$(".vue-slider-percent", $(this)).html((pv * 100).toFixed(0));
 
 		var _handler = $(".vue-slider-handler", $(this));
 		$(".vue-slider-bg", $(this)).width(_w * pv + _handler.width());
@@ -23799,12 +23799,13 @@ if (typeof jQuery === 'undefined') {
 				}
 				_v = parseFloat(_v);
 
-				var _w = $(".vue-slider-bar", this).width();
+				var _w = $(this).width();
 
 				var pv = _v / max;
-				$(".vue-slider-bg", $(this)).width(_w * pv);
+				var _handler = $(".vue-slider-handler", $(this));
+				$(".vue-slider-bg", $(this)).width(_w * pv + _handler.width());
 				$(this).attr("data-val", (pv * 100).toFixed(0));
-				$(".vue-slider-percent", $(this)).html((pv * 100).toFixed(0) + "%");
+				$(".vue-slider-percent", $(this)).html((pv * 100).toFixed(0));
 				var _handler = $(".vue-slider-handler", $(this));
 				var _handler_w = _w * pv;
 				_handler.css({
@@ -24341,10 +24342,10 @@ var sysset = {
 	});
 
 	// set
-	$(".vue-slider").VueSlider(90);
+	$(".vue-slider").VueSlider("90");
 	// get
-	var v = $(".vue-slider").VueSlider();
-	alert(v);
+	//	var v=$(".vue-slider").VueSlider()
+	//alert(v)
 }
 
 //app-modelset 基础设置

@@ -48,10 +48,10 @@ function modelset() {
 	
 	
 	// set
-$(".vue-slider").VueSlider(90);
+$(".vue-slider").VueSlider("90");
 // get
-	var v=$(".vue-slider").VueSlider()
-	alert(v)
+//	var v=$(".vue-slider").VueSlider()
+	//alert(v)
 }
 
 //app-modelset 基础设置
