@@ -145,12 +145,14 @@
 					seccess: function(data) {
 						option.seccess(data,p);
 						$propress.hide();
+						obj.value=null;
 						$(".vue-file-btn", p).show();
 
 					}, //成功回调
 					error: function(data) {
 						option.error(data,p);
 						$propress.hide();
+						obj.value=null;
 						$(".vue-file-btn", p).show();
 
 					} //错误回调

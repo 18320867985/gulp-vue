@@ -32,7 +32,8 @@
 	jQuery.fn.extend({
 
 		VueRadio: function(index, v) {
-			if(arguments.length === 2) {
+			v=v||"";
+			if(arguments.length>=1) {
 				if(typeof index === "number") {
 					index = index - 1;
 					$(this).find(".vue-radio-item").removeClass("active");
