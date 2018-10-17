@@ -1,19 +1,19 @@
 /*滑块组件*/
 
-.vue-radio {
+.vue-radiobtn {
     display: inline-block;
     vertical-align: middle;
     margin-left: 20px;
 }
 
-.vue-radio-item {
+.vue-radiobtn-item {
     float: left;
     padding: 10px 15px;
     color: #666;
     background: #f0f0f0;
     border-radius: 10px;
     cursor: pointer;
-    &.vue-radio-item {
+    &.vue-radiobtn-item {
         margin-left: 10px;
     }
     &.active {

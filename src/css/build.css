@@ -6225,7 +6225,6 @@ select.form-control {
 .btn {
   font-size: 14px; }
 
-/*modal ie8*/
 /* 隐藏滚动条*/
 /*webkit内核*/
 .no-scroll-bar::-webkit-scrollbar {
@@ -6703,21 +6702,21 @@ select.form-control {
     overflow: hidden; }
 
 /*滑块组件*/
-.vue-radio {
+.vue-radiobtn {
   display: inline-block;
   vertical-align: middle;
   margin-left: 20px; }
 
-.vue-radio-item {
+.vue-radiobtn-item {
   float: left;
   padding: 10px 15px;
   color: #666;
   background: #f0f0f0;
   border-radius: 10px;
   cursor: pointer; }
-  .vue-radio-item.vue-radio-item {
+  .vue-radiobtn-item.vue-radiobtn-item {
     margin-left: 10px; }
-  .vue-radio-item.active {
+  .vue-radiobtn-item.active {
     background: #467CC3;
     color: #fff; }
 
@@ -6869,29 +6868,29 @@ select.form-control {
     text-align: center;
     font-size: 12px; }
 
-.vue-check {
+.vue-checkbtn {
   position: relative;
   display: inline-block;
   vertical-align: middle;
   margin-left: 15px;
   cursor: pointer; }
-  .vue-check .vue-check-item {
+  .vue-checkbtn .vue-checkbtn-item {
     padding: 5px 10px;
     color: #666;
     background: #f0f0f0;
     border-radius: 10px;
     cursor: pointer; }
-    .vue-check .vue-check-item.active {
+    .vue-checkbtn .vue-checkbtn-item.active {
       background: #467CC3;
       color: #fff; }
 
-.vue-check-group {
+.vue-checkbtn-group {
   position: relative;
   display: inline-block;
   margin-left: 15px;
   vertical-align: middle;
   cursor: pointer; }
-  .vue-check-group .vue-check-item {
+  .vue-checkbtn-group .vue-checkbtn-item {
     display: inline-block;
     vertical-align: middle;
     padding: 5px 10px;
@@ -6899,9 +6898,9 @@ select.form-control {
     background: #f0f0f0;
     border-radius: 10px;
     cursor: pointer; }
-    .vue-check-group .vue-check-item + .vue-check-item {
+    .vue-checkbtn-group .vue-checkbtn-item + .vue-checkbtn-item {
       margin-left: 15px; }
-    .vue-check-group .vue-check-item.active {
+    .vue-checkbtn-group .vue-checkbtn-item.active {
       background: #467CC3;
       color: #fff; }
 

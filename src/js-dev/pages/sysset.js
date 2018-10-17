@@ -48,7 +48,7 @@ function modelset() {
 	
 	
 	// set
-$(".vue-slider").VueSlider("90");
+	$(".vue-slider").VueSlider("50");
 // get
 //	var v=$(".vue-slider").VueSlider()
 	//alert(v)
@@ -56,18 +56,18 @@ $(".vue-slider").VueSlider("90");
 
 //app-modelset 基础设置
 function basicset() {
-	// 单选 vue-radio 自定事件
-	$(".app-basicset .vue-radio").on("vue-radio", function(event, el) {
+	// 单选 vue-radiobtn 自定事件
+	$(" .vue-radiobtn").on("vue-radiobtn", function(event, el) {
 
 		$.alert("选择为:" + $(el).text());
 	});
 
 	//发音人
-	$(".app-basicset .vue-radio._fayin").on("vue-radio", function(event, el) {
+	$(".vue-radiobtn._fayin").on("vue-radiobtn", function(event, el) {
 
 		$.alert("选择为:" + $(el).find("h5").text().trim());
 	});
-
+$(".vue-radiobtn.base_semanticLibrary").VueRadiobtn(2)
 	// 数字框
 	$(document).on("number_click", function(event, element) {
 		//element 当前点击的元素	
@@ -102,11 +102,11 @@ function basicset() {
 		console.log("音量：" + v);
 	});
 	
-	// 单选 vue-radio
+	// 单选 vue-radiobtn
 	//set
-	//$(".base_semanticLibrary.vue-radio").VueRadio(1,"lingju");
+	//$(".base_semanticLibrary.vue-radiobtn").VueRadio(1,"lingju");
 	//get
-	//var radio_v=$(".base_semanticLibrary.vue-radio").VueRadio();
+	//var radio_v=$(".base_semanticLibrary.vue-radiobtn").VueRadio();
 	//alert(radio_v);
 	
 }
@@ -140,30 +140,30 @@ function perset() {
 
 
 	// 自定义事件
-	$(".vue-check").on("vue-check", function(event, el,bl) {
+	$(".vue-checkbtn").on("vue-checkbtnbtn", function(event, el,bl) {
 
 		$.alert("选择的值为:"+bl);
 	});
 	
 	// set 
-	$(".vue-check.a1").VueCheck(true);
+	$(".vue-checkbtn.a1").VueCheck(true);
 	// get
-	 var v=$(".vue-check.a1").VueCheck();
+	 var v=$(".vue-checkbtn.a1").VueCheck();
 //	 alert(v)
 //	
 
 
-// vue-check-group自定义事件
-	$(".vue-check-group").on("vue-check-group", function(event, el,bl,arrs) {
+// vue-checkbtn-group自定义事件
+	$(".vue-checkbtn-group").on("vue-checkbtn-group", function(event, el,bl,arrs) {
 		
 		$.alert("选择的值为:"+arrs);
 	});
 	
 	//set 
-	$(".vue-check-group").VueCheckGroup([2,4]);
+	$(".vue-checkbtn-group").VueCheckGroup([2,4]);
 	
 	// get
-	var v=$(".vue-check-group").VueCheckGroup();
+	var v=$(".vue-checkbtn-group").VueCheckGroup();
 	//alert(v)
 
 // 添加壁纸背景

@@ -2,7 +2,7 @@ import "./message";
 
 import  "./pop"; 
 
-import "./vue-radio"; 
+import "./vue-radiobtn"; 
 
 import "./vue-range"; 
 
@@ -14,7 +14,7 @@ import  "./vue-number";
 
 import  "./vue-file"; 
 
-import  "./vue-check"; 
+import  "./vue-checkbtn"; 
 
 
 

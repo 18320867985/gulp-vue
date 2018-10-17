@@ -1,10 +1,10 @@
- .vue-check {
+ .vue-checkbtn {
      position: relative;
      display: inline-block;
      vertical-align: middle;
       margin-left: 15px;
      cursor: pointer;
-     .vue-check-item {
+     .vue-checkbtn-item {
          padding: 5px 10px;
          color: #666;
          background: #f0f0f0;
@@ -17,13 +17,13 @@
      }
  }
  
- .vue-check-group {
+ .vue-checkbtn-group {
      position: relative;
      display: inline-block;
      margin-left: 15px;
      vertical-align: middle;
      cursor: pointer;
-     .vue-check-item {
+     .vue-checkbtn-item {
          display: inline-block;
          vertical-align: middle;
          padding: 5px 10px;
@@ -31,7 +31,7 @@
          background: #f0f0f0;
          border-radius: 10px;
          cursor: pointer;
-         &+.vue-check-item{
+         &+.vue-checkbtn-item{
              margin-left: 15px;
          }
          &.active {
@@ -40,3 +40,4 @@
          }
      }
  }
+ 
