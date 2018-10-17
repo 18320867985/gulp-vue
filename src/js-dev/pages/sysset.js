@@ -41,10 +41,17 @@ var sysset = {
 //app-modelset 模式切换
 function modelset() {
 
-	// 单选 vue-radio 自定事件
-	$(".app-modelset .vue-radio").on("vue-radio", function(event, el) {
+	// 单选 vue-slider 自定事件
+	$(".app-modelset .vue-slider").on("vue-slider", function(event, el) {
 		//$.alert("选择为:" + $(el).attr("data-val"));
 	});
+	
+	
+	// set
+$(".vue-slider").VueSlider("90");
+// get
+//	var v=$(".vue-slider").VueSlider()
+	//alert(v)
 }
 
 //app-modelset 基础设置
@@ -116,10 +123,10 @@ function upDownSet() {
 	//$.alert("选择："+bl)
 	
 	// set
-	$(".vue-number").VueNumber("8");
-	// get
-	var v=$(".vue-number").VueNumber();
-	alert(v);
+//	$(".vue-number").VueNumber("8");
+//	// get
+//	var v=$(".vue-number").VueNumber();
+//	alert(v);
 }
 
 //app-modelset 附属模块设置
@@ -131,19 +138,33 @@ function attrset() {
 // 个性设置
 function perset() {
 
-	//个性设置-选择速度
-//	$(document).on("click", ".vue-check-big .btn", function() {
-//		var p = $(this).parents(".vue-check-big");
-//		p.find(".btn").removeClass("active");
-//		$(this).addClass("active");
-//		$(this).trigger("vue-check-big", [this]);
-//
-//	});
-//	// 个性设置-选择速度的自定义事件
-//	$(".vue-check-big").on("vue-check-big", function(event, el) {
-//
-//		//$.alert("选择的速度为:"+$(el).text());
-//	});
+
+	// 自定义事件
+	$(".vue-check").on("vue-check", function(event, el,bl) {
+
+		$.alert("选择的值为:"+bl);
+	});
+	
+	// set 
+	$(".vue-check.a1").VueCheck(true);
+	// get
+	 var v=$(".vue-check.a1").VueCheck();
+//	 alert(v)
+//	
+
+
+// vue-check-group自定义事件
+	$(".vue-check-group").on("vue-check-group", function(event, el,bl,arrs) {
+		
+		$.alert("选择的值为:"+arrs);
+	});
+	
+	//set 
+	$(".vue-check-group").VueCheckGroup([2,4]);
+	
+	// get
+	var v=$(".vue-check-group").VueCheckGroup();
+	//alert(v)
 
 // 添加壁纸背景
 $(".app-perset-cont ._btn-bg").on("click",function(){

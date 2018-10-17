@@ -96,7 +96,7 @@
 								<li>
 									<label>音量1</label>
 									<!-- 设置初始值 =data-val="70" 获取值 =$('.vue-slider').attr("data-val")-->
-									<div class="vue-slider" data-val="70">
+									<div class="vue-slider" data-val="70" data-min="0" data-max="100"  style="width: 200px;">
                                         <div class="vue-slider-bar">
                                             <div class="vue-slider-bg">
                                                 <div class="vue-slider-handler">
@@ -164,105 +164,49 @@
 					<!--个性设置-->
 					<div class="tab-pane " id="perset">
 						<div class="app-perset">
-							<!--<ul class="clearfix vue-check-big">
-								<li>
-
-									<img src="../../images/sysset/gx-slow.png" alt="慢速" />
-									<button class="btn btn-primary" type="button">慢速</button>
-
-								</li>
-								<li>
-									<img src="../../images/sysset/gx-mor.png" alt="中速" />
-									<button class="btn btn-primary active" type="button">中速</button>
-								</li>
-								<li>
-
-									<img src="../../images/sysset/gx-fast.png" alt="快速" />
-									<button class="btn btn-primary" type="button">快速</button>
-								</li>
-							</ul>
-
-							<div class="_subimt">
-								<button class="btn btn-primary" type="button">保存修改</button>
-							</div>-->
-
+							
 							<div class="app-perset-cont">
-								<!--更改壁纸-->
-								<div class="_item ">
-									<h5>更改壁纸</h5>
-									<ul class="clearfix">
-										<li class="active">
-											<img src="../../images/sysset/gx.png" alt="更改背景图片" />
-										</li>
-										<li>
-											<img src="../../images/sysset/gx.png" alt="更改背景图片" />
-										</li>
-										<li>
-											<img src="../../images/sysset/gx.png" alt="更改背景图片" />
-										</li>
-										<li>
-											<img src="../../images/sysset/gx.png" alt="更改背景图片" />
-										</li>
-										
-										<li class="_add-img _btn-bg">
-											<span class="glyphicon glyphicon-plus"></span>
-											<h5>从图片库导入图片</h5>
-										</li>
-									</ul>
-
-								</div>
-								<!--更改LOGO-->
-								<div class="_item">
-									<h5>更改LOGO</h5>
-									<ul class="clearfix">
-
-										<li>
-											<img src="../../images/sysset/gx.png" alt="更改背景图片" />
-										</li>
-										<li class="_add-img _btn-logo">
-											<span class="glyphicon glyphicon-plus"></span>
-											<h5>从图片库导入图片</h5>
-										</li>
-									</ul>
-
-								</div>
-
-								<!--更改欢迎页-->
-								<div class="_item">
-									<h5>更改欢迎页</h5>
-									<ul class="clearfix">
-
-										<li>
-											<img src="../../images/sysset/gx.png" alt="更改背景图片" />
-										</li>
-										<li class="_add-img _btn-hy">
-											<span class="glyphicon glyphicon-plus"></span>
-											<h5>从图片库导入图片</h5>
-										</li>
-									</ul>
-
-								</div>
-
-								<!--选择图片库-->
-								<div class="pop-mask">
-
-									<div class="pop-box">
-										<h5 class="pop-ttl">选择图片</h5>
-										<div class="pop-content">
-											
+								<h2>vue-check-组件</h2>
+								<ul class="_list">
+								
+								<li>单选vue-check</li>
+								<li>
+									<label>爱心:</label>
+									<div class="vue-check a1">
+										<div class="vue-check-item " data-val="true">
+											爱心
 										</div>
-										<div class="pop-footer text-center">
-												<button class="btn btn-warning cancel" type="button">取消</button>
-												<button class="btn btn-primary" type="button">确认</button>
-										</div>
-
 									</div>
-
-								</div>
-
+								</li>
+								
+								<li>
+									<label>激活:</label>
+									<div class="vue-check a2">
+										<div class="vue-check-item " data-val="true">
+											激活
+										</div>
+									</div>
+								</li>
+								
+								<li>多选组-vue-check-group</li>
+								
+								<li>
+									<label>编程:</label>
+									<div class="vue-check-group">
+										<div class="vue-check-item " data-val="js">js</div>
+										<div class="vue-check-item " data-val="jquery">jquery</div>
+										<div class="vue-check-item " data-val="java">java</div>
+										<div class="vue-check-item " data-val="c#">c#</div>
+										<div class="vue-check-item " data-val="nodejs">nodejs</div>
+										</div>
+									</div>
+								</li>
+							
+							</ul>
+								
 							</div>
 
-						</div>
+				
 
 					</div>
 

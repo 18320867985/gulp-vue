@@ -23697,7 +23697,7 @@ if (typeof jQuery === 'undefined') {
 	                <div class="vue-slider-handler">
 	                </div>
 	            </div>
-	            <div class="vue-slider-percent">0%</div>
+	            <div class="vue-slider-percent">0</div>
 	        </div>
 	    </div>
 	    
@@ -23727,6 +23727,7 @@ if (typeof jQuery === 'undefined') {
 		var _slider_w = $(".vue-slider-bar", p).width();
 		$(".vue-slider-bg", p).width(_left);
 		var _move_w = _slider_w - _w;
+
 		$(document).mousemove(function (event) {
 			event.preventDefault();
 			var new_x = event.clientX - src_x;
@@ -23744,7 +23745,7 @@ if (typeof jQuery === 'undefined') {
 			});
 			$(".vue-slider-bg", p).width(new_x + _w);
 			var _per = (new_x / _move_w * 100).toFixed(0);
-			$(".vue-slider-percent", p).html(_per + "%");
+			$(".vue-slider-percent", p).html(_per);
 			p.attr("data-val", _per);
 
 			// 触发自定义的事件
@@ -23758,12 +23759,25 @@ if (typeof jQuery === 'undefined') {
 
 	$(".vue-slider").each(function () {
 		var _v = $(this).attr("data-val");
-		var _w = $(this).find(".vue-slider-bar").width();
-		$(".vue-slider-bg", $(this)).width(_w * (_v / 100));
-		var _per = (_w * (_v / 100)).toFixed(0);
-		$(".vue-slider-percent", $(this)).html(_per + "%");
+		_v = isNaN(_v) ? 0 : Number(_v);
+		var min = $(this).attr("data-min") || 0;
+		var max = $(this).attr("data-max") || 100;
+		if (_v < min) {
+			_v = min;
+		}
+		if (_v > max) {
+			_v = max;
+		}
+
+		var _w = $(this).width();
+		var pv = _v / max;
+
+		$(".vue-slider-percent", $(this)).html((pv * 100).toFixed(0));
+
 		var _handler = $(".vue-slider-handler", $(this));
-		var _handler_w = _w * (_v / 100) - _handler.width();
+		$(".vue-slider-bg", $(this)).width(_w * pv + _handler.width());
+
+		var _handler_w = _w * pv; //- _handler.width();
 		_handler.css({
 			left: _handler_w
 		});
@@ -23773,15 +23787,27 @@ if (typeof jQuery === 'undefined') {
 	jQuery.fn.extend({
 
 		VueSlider: function VueSlider(val) {
-			if (val) {
-				var _v = typeof val === "number" ? val : 0; //$(this).attr("data-val");
-				var _w = $(this).find(".vue-slider-bar").width();
-				$(".vue-slider-bg", $(this)).width(_w * (_v / 100));
-				var _per = (_w * (_v / 100)).toFixed(0);
-				$(this).attr("data-val", _per);
-				$(".vue-slider-percent", $(this)).html(_per + "%");
+			if (typeof val !== "undefined") {
+				var _v = isNaN(val) ? 0 : Number(val);
+				var min = $(this).attr("data-min") || 0;
+				var max = $(this).attr("data-max") || 100;
+				if (_v < min) {
+					_v = min;
+				}
+				if (_v > max) {
+					_v = max;
+				}
+				_v = parseFloat(_v);
+
+				var _w = $(this).width();
+
+				var pv = _v / max;
 				var _handler = $(".vue-slider-handler", $(this));
-				var _handler_w = _w * (_v / 100) - _handler.width();
+				$(".vue-slider-bg", $(this)).width(_w * pv + _handler.width());
+				$(this).attr("data-val", (pv * 100).toFixed(0));
+				$(".vue-slider-percent", $(this)).html((pv * 100).toFixed(0));
+				var _handler = $(".vue-slider-handler", $(this));
+				var _handler_w = _w * pv;
 				_handler.css({
 					left: _handler_w
 				});
@@ -23866,6 +23892,10 @@ if (typeof jQuery === 'undefined') {
 			alert($(p).find(".num").val());
 								
 		});
+		
+		//	$(".vue-number").VueNumber("8");
+		// get
+		//var v=$(".vue-number").VueNumber();
 	 * */
 
 (function () {
@@ -24141,6 +24171,136 @@ if (typeof jQuery === 'undefined') {
 	});
 })();
 
+/*
+ * vue-check 组件
+ * <div class="vue-check">
+		<div class="vue-check-item " data-val="true">
+			爱心
+		</div>
+	</div>
+	
+	 // 自定义事件
+	$(".vue-check").on("vue-check", function(event, el,bl) {
+
+		$.alert("选择的值为:"+bl);
+	});
+	
+	// set 
+	$(".vue-check.a1").VueCheck(true);
+	// get
+	 var v=$(".vue-check.a1").VueCheck();
+	 alert(v)
+	
+ * */
+
+(function () {
+
+	// 单选
+	$(document).on("click", ".vue-check .vue-check-item", function () {
+
+		$(this).toggleClass("active");
+		var bl = $(this).hasClass("active");
+
+		// 触发自定义的事件
+		$(this).trigger("vue-check", [this, bl]);
+	});
+
+	jQuery.fn.extend({
+
+		VueCheck: function VueCheck(v) {
+			if (typeof v !== "undefined") {
+				v = !!v;
+
+				if (v) {
+					$(this).find(".vue-check-item").addClass("active");
+				} else {
+					$(this).find(".vue-check-item").removeClass("active");
+				}
+			} else {
+
+				return $(this).find(".vue-check-item").hasClass("active");
+			}
+		}
+	});
+
+	// 多选
+
+	/*
+ 	* vue-check-group 组件
+  <div class="vue-check-group">
+ 		<div class="vue-check-item " data-val="js">js</div>
+ 		<div class="vue-check-item " data-val="jquery">jquery</div>
+ 		<div class="vue-check-item " data-val="java">java</div>
+ 		<div class="vue-check-item " data-val="c#">c#</div>
+ 		<div class="vue-check-item " data-val="nodejs">nodejs</div>
+ 		</div>
+ </div>
+ 
+ // vue-check-group自定义事件
+ $(".vue-check-group").on("vue-check-group", function(event, el,bl,arrs) {
+ 	
+ 	$.alert("选择的值为:"+arrs);
+ });
+ 
+ //set 
+ $(".vue-check-group").VueCheckGroup([2,4]);
+ 
+ // get
+ var v=$(".vue-check-group").VueCheckGroup();
+ alert(v)
+ * */
+	$(document).on("click", ".vue-check-group .vue-check-item", function () {
+
+		$(this).toggleClass("active");
+		var bl = $(this).hasClass("active");
+		var arrs = [];
+
+		var p = $(this).parents(".vue-check-group");
+		$(".vue-check-item", p).each(function () {
+			if ($(this).hasClass("active")) {
+				var v = $(this).attr("data-val") || "";
+				if (v.trim() != "") {
+					arrs.push(v);
+				}
+			}
+		});
+
+		// 触发自定义的事件
+		$(this).trigger("vue-check-group", [this, bl, arrs]);
+	});
+
+	jQuery.fn.extend({
+
+		VueCheckGroup: function VueCheckGroup(args) {
+			if (args instanceof Array) {
+
+				var items = $(this).find(".vue-check-item");
+				for (var i = 0; i < items.length; i++) {
+					var item = items[i];
+					for (var y = 0; y < args.length; y++) {
+						if (i + 1 == args[y]) {
+							$(item).addClass("active");
+							break;
+						}
+					}
+				}
+			} else {
+				var arrs = [];
+				$(".vue-check-item", this).each(function () {
+					if ($(this).hasClass("active")) {
+						var v = $(this).attr("data-val") || "";
+						if (v.trim() != "") {
+							arrs.push(v);
+						}
+					}
+				});
+
+				return arrs;
+			}
+		}
+	});
+})();
+
 /*sysset模块*/
 
 // set scroll 
@@ -24169,9 +24329,6 @@ var sysset = {
 		basicset();
 
 		// 上下班设置
-		upDownSet();
-
-		// 个性设置
 		perset();
 
 		// 附属模块设置
@@ -24181,10 +24338,16 @@ var sysset = {
 	//app-modelset 模式切换
 };function modelset() {
 
-	// 单选 vue-radio 自定事件
-	$(".app-modelset .vue-radio").on("vue-radio", function (event, el) {
+	// 单选 vue-slider 自定事件
+	$(".app-modelset .vue-slider").on("vue-slider", function (event, el) {
 		//$.alert("选择为:" + $(el).attr("data-val"));
 	});
+
+	// set
+	$(".vue-slider").VueSlider("90");
+	// get
+	//	var v=$(".vue-slider").VueSlider()
+	//alert(v)
 }
 
 //app-modelset 基础设置
@@ -24242,40 +24405,35 @@ function basicset() {
 	//alert(radio_v);
 }
 
-//app-modelset 上下班设置
-function upDownSet() {
-
-	// 设置自动上下班 swicth 组件
-	//set
-	//$(".app-upDownSet .vue-swicth").VueSwicth(false)
-
-	//get
-	// var bl=$(".app-upDownSet .vue-swicth").VueSwicth()
-	//$.alert("选择："+bl)
-
-	// set
-	$(".vue-number").VueNumber("8");
-	// get
-	var v = $(".vue-number").VueNumber();
-	alert(v);
-}
-
 // 个性设置
 function perset() {
 
-	//个性设置-选择速度
-	//	$(document).on("click", ".vue-check-big .btn", function() {
-	//		var p = $(this).parents(".vue-check-big");
-	//		p.find(".btn").removeClass("active");
-	//		$(this).addClass("active");
-	//		$(this).trigger("vue-check-big", [this]);
-	//
-	//	});
-	//	// 个性设置-选择速度的自定义事件
-	//	$(".vue-check-big").on("vue-check-big", function(event, el) {
-	//
-	//		//$.alert("选择的速度为:"+$(el).text());
-	//	});
+	// 自定义事件
+	$(".vue-check").on("vue-check", function (event, el, bl) {
+
+		$.alert("选择的值为:" + bl);
+	});
+
+	// set 
+	$(".vue-check.a1").VueCheck(true);
+	// get
+	var v = $(".vue-check.a1").VueCheck();
+	//	 alert(v)
+	//	
+
+
+	// vue-check-group自定义事件
+	$(".vue-check-group").on("vue-check-group", function (event, el, bl, arrs) {
+
+		$.alert("选择的值为:" + arrs);
+	});
+
+	//set 
+	$(".vue-check-group").VueCheckGroup([2, 4]);
+
+	// get
+	var v = $(".vue-check-group").VueCheckGroup();
+	//alert(v)
 
 	// 添加壁纸背景
 	$(".app-perset-cont ._btn-bg").on("click", function () {

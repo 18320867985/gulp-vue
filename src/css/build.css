@@ -6657,14 +6657,16 @@ select.form-control {
 
 /*滑块组件*/
 .vue-slider {
+  position: relative;
   display: inline-block;
-  width: 100px;
+  width: 100%;
   margin-left: 20px;
   vertical-align: middle; }
   .vue-slider .vue-slider-bar {
     position: relative;
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
+    display: block;
     width: 100%;
     height: 15px;
     background: #eaeaea;
@@ -6866,6 +6868,42 @@ select.form-control {
     color: #333;
     text-align: center;
     font-size: 12px; }
+
+.vue-check {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 15px;
+  cursor: pointer; }
+  .vue-check .vue-check-item {
+    padding: 5px 10px;
+    color: #666;
+    background: #f0f0f0;
+    border-radius: 10px;
+    cursor: pointer; }
+    .vue-check .vue-check-item.active {
+      background: #467CC3;
+      color: #fff; }
+
+.vue-check-group {
+  position: relative;
+  display: inline-block;
+  margin-left: 15px;
+  vertical-align: middle;
+  cursor: pointer; }
+  .vue-check-group .vue-check-item {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 5px 10px;
+    color: #666;
+    background: #f0f0f0;
+    border-radius: 10px;
+    cursor: pointer; }
+    .vue-check-group .vue-check-item + .vue-check-item {
+      margin-left: 15px; }
+    .vue-check-group .vue-check-item.active {
+      background: #467CC3;
+      color: #fff; }
 
 /*加载iframe 的loading动画 加载提示
  * 

@@ -1,13 +1,15 @@
 /*滑块组件*/
 
 .vue-slider {
-    display: inline-block;
-    width: 100px;
+    position: relative;
+    display:inline-block;
+    width: 100%;
     margin-left: 20px;
     vertical-align: middle;
     .vue-slider-bar {
         position: relative;
         box-sizing: border-box;
+        display: block;
         width: 100%;
         height: 15px;
         $color: #eaeaea;

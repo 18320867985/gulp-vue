@@ -14,5 +14,7 @@ import  "./vue-number";
 
 import  "./vue-file"; 
 
+import  "./vue-check"; 
+
 
 
