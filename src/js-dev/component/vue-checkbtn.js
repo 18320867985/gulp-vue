@@ -78,6 +78,12 @@
 	// get
 	var v=$(".vue-checkbtn-group").VueCheckbtnGroup();
 	alert(v)
+	
+		 //set 
+	//var dst = ["视频监控", "音视频通话", "查看机器人状态","设置机器人"];
+	//$(" ._select-module .vue-checkbtn-group").VueCheckbtnGroup(item=>dst.some(o => o == item));
+	// get
+	//var v=$("._select-module .vue-checkbtn-group").VueCheckbtnGroup();
  * */
 	$(document).on("click", ".vue-checkbtn-group .vue-checkbtn-item", function() {
 
@@ -104,6 +110,23 @@
 	jQuery.fn.extend({
 
 		VueCheckbtnGroup: function(args) {
+			
+			if(typeof args==="function"){
+				var items=$(this).find(".vue-checkbtn-item");
+				for(var i=0;i<items.length;i++){
+					 var item=items[i];
+					 var val=$(item).attr("data-val")||"";
+					 var bl=args(val);
+					if(bl){
+						$(item).addClass("active");	
+					}else{
+						$(item).removeClass("active");	
+					}
+				}
+				
+				return;
+			}
+			
 			if( args instanceof Array){
 				
 				var items=$(this).find(".vue-checkbtn-item");

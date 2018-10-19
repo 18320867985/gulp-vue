@@ -16,5 +16,8 @@ import  "./vue-file";
 
 import  "./vue-checkbtn"; 
 
+import  "./vue-checkbox"; 
+
+
 
 
