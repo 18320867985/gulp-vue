@@ -6,7 +6,8 @@
   "author": "dell",
   "scripts": {
     "test": "node test",
-    "start": "node app.js"
+    "start": "node app.js",
+		"gulp":"gulp watch"
   },
   "license": "ISC",
   "dependencies": {},

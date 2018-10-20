@@ -15,6 +15,10 @@
 	// set 
 	$(".vue-checkbox").VueCheckbox(true,fn);
 	fn回调执行的函数
+	$(".vue-checkbox").VueCheckbox(true, (el) => {
+		$(el).parents("li").addClass("active");
+	});
+	
 	// get
 	 var v=$(".vue-checkbox").VueCheckbox();
 	 alert(v)
