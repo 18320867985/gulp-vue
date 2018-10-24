@@ -118,7 +118,7 @@ gulp.task('connect', function() {
  * 1. gulp.watch(path,task);
  * 2.gulp.watch(path,function(){});
  */
-gulp.task("watch", ['connect'], function() {
+gulp.task("watch", ['concat','connect'], function() {
 
 	//合拼压缩js文件
 	gulp.watch("./src/js-dev/**/*.js", ["build"]);
