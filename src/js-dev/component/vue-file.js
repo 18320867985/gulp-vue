@@ -100,7 +100,7 @@
 		}
 	};
 
-	jQuery.fn.extend({
+	$.fn.extend({
 
 		VueFile: function(option) {
 			

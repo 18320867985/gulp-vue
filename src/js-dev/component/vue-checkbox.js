@@ -49,7 +49,7 @@
 	});
 	
 	
-	jQuery.fn.extend({
+	$.fn.extend({
 
 		VueCheckbox: function(v,fn) {
 			if(typeof v!=="undefined") {
@@ -155,7 +155,7 @@
    	});
    	
    	
-   	jQuery.fn.extend({
+   	$.fn.extend({
    
    		VueCheckboxGroup: function(args) {
    			

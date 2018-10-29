@@ -36,7 +36,7 @@
 
 		});
 		//vue-switch 
-		jQuery.fn.extend({
+	$.fn.extend({
 
 			VueSwicth: function(bl) {
 				if(typeof bl != "undefined") {

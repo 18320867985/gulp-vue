@@ -33,7 +33,7 @@
 	});
 	
 
-	jQuery.fn.extend({
+$.fn.extend({
 
 		VueCheckbtn: function(v) {
 			if(typeof v!=="undefined") {
@@ -107,7 +107,7 @@
 	});
 	
 	
-	jQuery.fn.extend({
+	$.fn.extend({
 
 		VueCheckbtnGroup: function(args) {
 			

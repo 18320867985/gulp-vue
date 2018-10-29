@@ -9,23 +9,26 @@
 var sysset = {
 
 	init: function() {
-
-		$(".vue-checkbox-group").on("vue-checkbox-group", function(event, el,bl) {
+// 
+// 		$(".vue-checkbox-group").on("vue-checkbox-group", function(event, el,bl) {
+// 	
+// 			$.alert("选择的值为:"+bl);
+// 		});
+// 
+// 			
+// 	 //$(".vue-checkbox-group").VueCheckboxGroup([2,1,3]);
+// 	 
+// 	 //set 
+// 	 var dst = ["js","c#"];
+// 	 $(".vue-checkbox-group").VueCheckboxGroup(item=>dst.some(o => o == item));
+// 	 // get
+// 	 var v=$(".vue-checkbox-group").VueCheckboxGroup();
+// 	 alert(v)
+// 
+ 
 	
-			$.alert("选择的值为:"+bl);
-		});
-
-			
-	 //$(".vue-checkbox-group").VueCheckboxGroup([2,1,3]);
-	 
-	 //set 
-	 var dst = ["js","c#"];
-	 $(".vue-checkbox-group").VueCheckboxGroup(item=>dst.some(o => o == item));
-	 // get
-	 var v=$(".vue-checkbox-group").VueCheckboxGroup();
-	 alert(v)
-
-	}
+	
+	 }
 
 }
 

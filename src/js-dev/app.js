@@ -1,4 +1,4 @@
-﻿
+
 import   "./config.js";
 import   "./common/autoRun.js";
 import   "./libs/browser-moz.js";
@@ -12,6 +12,7 @@ Vue.http.options.emulateJSON=true;
 
 // jquery
 import   "./libs/jquery-1.11.0.js";
+
 import   "./libs/bootstrap.js";
 
 

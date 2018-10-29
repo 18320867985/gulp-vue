@@ -23651,7 +23651,7 @@ if (typeof jQuery === 'undefined') {
 		$(this).trigger("vue-radiobox", [this, bl]);
 	});
 
-	jQuery.fn.extend({
+	$.fn.extend({
 
 		VueRadiobox: function VueRadiobox(args) {
 			if (typeof args === "undefined") {
@@ -23719,7 +23719,7 @@ if (typeof jQuery === 'undefined') {
 		$(this).trigger("vue-radiobtn", [this]);
 	});
 
-	jQuery.fn.extend({
+	$.fn.extend({
 
 		VueRadiobtn: function VueRadiobtn(index, v) {
 			v = v || "";
@@ -23772,7 +23772,7 @@ if (typeof jQuery === 'undefined') {
 		$(this).trigger("vue-range", [this.value]);
 	});
 
-	jQuery.fn.extend({
+	$.fn.extend({
 
 		VueRange: function VueRange(val) {
 			var p = $(this);
@@ -23882,7 +23882,7 @@ if (typeof jQuery === 'undefined') {
 	});
 
 	//vue-slider 
-	jQuery.fn.extend({
+	$.fn.extend({
 
 		VueSlider: function VueSlider(val) {
 			if (typeof val !== "undefined") {
@@ -23953,7 +23953,7 @@ if (typeof jQuery === 'undefined') {
 		$(this).trigger("vue-swicth", [this]);
 	});
 	//vue-switch 
-	jQuery.fn.extend({
+	$.fn.extend({
 
 		VueSwicth: function VueSwicth(bl) {
 			if (typeof bl != "undefined") {
@@ -24091,7 +24091,7 @@ if (typeof jQuery === 'undefined') {
 						$(this).trigger("vue-number", [this]);
 			});
 
-			jQuery.fn.extend({
+			$.fn.extend({
 
 						VueNumber: function VueNumber(v) {
 
@@ -24210,7 +24210,7 @@ if (typeof jQuery === 'undefined') {
 		}
 	};
 
-	jQuery.fn.extend({
+	$.fn.extend({
 
 		VueFile: function VueFile(option) {
 
@@ -24303,7 +24303,7 @@ if (typeof jQuery === 'undefined') {
 		$(this).trigger("vue-checkbtn", [this, bl]);
 	});
 
-	jQuery.fn.extend({
+	$.fn.extend({
 
 		VueCheckbtn: function VueCheckbtn(v) {
 			if (typeof v !== "undefined") {
@@ -24373,7 +24373,7 @@ if (typeof jQuery === 'undefined') {
 		$(this).trigger("vue-checkbtn-group", [this, bl, arrs]);
 	});
 
-	jQuery.fn.extend({
+	$.fn.extend({
 
 		VueCheckbtnGroup: function VueCheckbtnGroup(args) {
 
@@ -24470,7 +24470,7 @@ if (typeof jQuery === 'undefined') {
 		$(this).trigger("vue-checkbox", [this, bl]);
 	});
 
-	jQuery.fn.extend({
+	$.fn.extend({
 
 		VueCheckbox: function VueCheckbox(v, fn) {
 			if (typeof v !== "undefined") {
@@ -24566,7 +24566,7 @@ if (typeof jQuery === 'undefined') {
 		$(this).trigger("vue-checkbox-group", [this, vals]);
 	});
 
-	jQuery.fn.extend({
+	$.fn.extend({
 
 		VueCheckboxGroup: function VueCheckboxGroup(args) {
 
@@ -24626,24 +24626,24 @@ if (typeof jQuery === 'undefined') {
 var sysset = {
 
 	init: function init() {
+		// 
+		// 		$(".vue-checkbox-group").on("vue-checkbox-group", function(event, el,bl) {
+		// 	
+		// 			$.alert("选择的值为:"+bl);
+		// 		});
+		// 
+		// 			
+		// 	 //$(".vue-checkbox-group").VueCheckboxGroup([2,1,3]);
+		// 	 
+		// 	 //set 
+		// 	 var dst = ["js","c#"];
+		// 	 $(".vue-checkbox-group").VueCheckboxGroup(item=>dst.some(o => o == item));
+		// 	 // get
+		// 	 var v=$(".vue-checkbox-group").VueCheckboxGroup();
+		// 	 alert(v)
+		// 
 
-		$(".vue-checkbox-group").on("vue-checkbox-group", function (event, el, bl) {
 
-			$.alert("选择的值为:" + bl);
-		});
-
-		//$(".vue-checkbox-group").VueCheckboxGroup([2,1,3]);
-
-		//set 
-		var dst = ["js", "c#"];
-		$(".vue-checkbox-group").VueCheckboxGroup(function (item) {
-			return dst.some(function (o) {
-				return o == item;
-			});
-		});
-		// get
-		var v = $(".vue-checkbox-group").VueCheckboxGroup();
-		alert(v);
 	}
 
 };

@@ -96,7 +96,7 @@
 	
 
 	//vue-slider 
-	jQuery.fn.extend({
+	$.fn.extend({
 
 		VueSlider: function(val) {
 			if(typeof val!=="undefined") {

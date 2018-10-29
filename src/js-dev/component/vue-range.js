@@ -31,7 +31,7 @@
 		$(this).trigger("vue-range", [this.value]);
 	});
 
-	jQuery.fn.extend({
+	$.fn.extend({
 
 		VueRange: function(val) {
 			var p = $(this);

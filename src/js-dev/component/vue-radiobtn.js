@@ -29,7 +29,7 @@
 		$(this).trigger("vue-radiobtn", [this]);
 	});
 
-	jQuery.fn.extend({
+$.fn.extend({
 
 		VueRadiobtn: function(index, v) {
 			v=v||"";

@@ -47,7 +47,7 @@
 	});
 
 
-	jQuery.fn.extend({
+	$.fn.extend({
 
 		VueRadiobox: function(args) {
 			if(typeof args ==="undefined"){

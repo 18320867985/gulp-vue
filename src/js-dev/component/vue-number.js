@@ -121,7 +121,7 @@
 
 		});
 
-		jQuery.fn.extend({
+	$.fn.extend({
 
 			VueNumber: function(v) {
 			
