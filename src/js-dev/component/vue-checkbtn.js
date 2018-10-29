@@ -79,7 +79,7 @@
 	var v=$(".vue-checkbtn-group").VueCheckbtnGroup();
 	alert(v)
 	
-		 //set 
+	//set 
 	//var dst = ["视频监控", "音视频通话", "查看机器人状态","设置机器人"];
 	//$(" ._select-module .vue-checkbtn-group").VueCheckbtnGroup(item=>dst.some(o => o == item));
 	// get

@@ -12,9 +12,9 @@ window.config = {
 };
 
 /*自动执行 rollup打包umd格式js模块
- 
- * <script   data-parent="umd" data-umd="test" src="./js/all.js" type="text/javascript" charset="utf-8"></script>
- * */
+	 
+	 * <script   data-parent="umd" data-umd="test" src="./js/all.js" type="text/javascript" charset="utf-8"></script>
+	 * */
 
 (function () {
 	window.onload = function () {
@@ -25,36 +25,48 @@ window.config = {
 			var el_umd = el_umds[i];
 			if (el_umd) {
 
+				parent = el_umd.getAttribute("data-parent") || parent;
 				var umd_str = el_umd.getAttribute("data-umd") || "";
-				parent = el_umd.getAttribute("data-parent") || "umd";
-				var arrs = umd_str.split(".");
-				var prop1 = "";
-				var prop2 = "";
-				if (arrs.length >= 0) {
-					prop1 = arrs[0];
-				}
-
-				if (arrs.length === 1) {
-					prop2 = "init";
-				} else if (arrs.length === 2) {
-					prop2 = arrs[1];
-				}
-
-				var obj = window[parent];
-				if (!obj) {
-					return;
-				}
-				if (!obj[prop1]) {
-					return;
-				}
-				var fn = obj[prop1][prop2];
-
-				if (typeof fn === "function") {
-					fn();
+				var umd_strs = umd_str.split(/,|;|&/);
+				for (var i = 0; i < umd_strs.length; i++) {
+					var item = umd_strs[i] || "";
+					if (item.trim() !== "") {
+						setUmd(parent, item.trim());
+					}
 				}
 			}
 		}
 	};
+
+	function setUmd(parent, umd_str) {
+
+		var arrs = umd_str.split(".");
+		var prop1 = "";
+		var prop2 = "";
+		if (arrs.length >= 0) {
+			prop1 = arrs[0] || "";
+			prop1 = prop1.trim();
+		}
+
+		if (arrs.length === 1) {
+			prop2 = "init";
+		} else if (arrs.length === 2) {
+			prop2 = arrs[1].trim();
+		}
+
+		var obj = window[parent];
+		if (!obj) {
+			return;
+		}
+		if (!obj[prop1]) {
+			return;
+		}
+		var fn = obj[prop1][prop2];
+
+		if (typeof fn === "function") {
+			fn();
+		}
+	}
 })();
 
 /**
@@ -23593,6 +23605,90 @@ if (typeof jQuery === 'undefined') {
 })();
 
 /*
+ * vue-radiobox 组件
+ 	
+ 	<div class="vue-radiobox" >
+		<span class="vue-radiobox-item iconfont">慢</span>
+		<span class="vue-radiobox-item iconfont">中</span>
+		<span class="vue-radiobox-item iconfont">快</span>
+	</div>
+	
+	 // 自定义事件
+	$(".vue-radiobox").on("vue-radiobox", function(event, el,bl) {
+
+		$.alert("选择的值为:"+bl);
+	});
+	
+	//set 1
+	$(".vue-radiobox").VueRadiobox(1);
+	
+	//set2
+	var v="快";
+	$(".vue-radiobox").VueRadiobox((val)=>{
+		return	val==v;
+			
+	});
+	
+	//get
+	var v=$(".vue-radiobox").VueRadiobox();
+	alert(v);
+
+	
+	
+ * */
+
+(function () {
+
+	// 单选 vue-radiobox
+	$(document).on("click", ".vue-radiobox  .vue-radiobox-item", function () {
+
+		var p = $(this).parents(".vue-radiobox");
+		$(".vue-radiobox-item", p).removeClass("active");
+		$(this).addClass("active");
+		var bl = $(this).hasClass("active");
+
+		// 触发自定义的事件
+		$(this).trigger("vue-radiobox", [this, bl]);
+	});
+
+	jQuery.fn.extend({
+
+		VueRadiobox: function VueRadiobox(args) {
+			if (typeof args === "undefined") {
+				return $(this).find(".vue-radiobox-item.active").attr("data-val");
+			}
+			if (typeof args === "number") {
+				var items = items.removeClass("active");
+				if (args > 0) {
+					args = args >= 1 ? args - 1 : 0;
+					items.eq(args).addClass("active");
+				}
+
+				return;
+			}
+
+			if (typeof args === "function") {
+				var items = $(this).find(".vue-radiobox-item");
+				items.removeClass("active");
+				for (var i = 0; i < items.length; i++) {
+					var item = items[i];
+					var val = $(item).attr("data-val") || "";
+					var bl = args(val);
+					if (bl) {
+						$(item).addClass("active");
+						break;
+					} else {
+						$(item).removeClass("active");
+					}
+				}
+
+				return;
+			}
+		}
+	});
+})();
+
+/*
  * vue-radiobtn 组件
  * <div class="vue-radiobtn">
 		<div class="vue-radiobtn-item" data-val="lingju">灵聚</div>
@@ -24250,6 +24346,12 @@ if (typeof jQuery === 'undefined') {
  // get
  var v=$(".vue-checkbtn-group").VueCheckbtnGroup();
  alert(v)
+ 
+ //set 
+ //var dst = ["视频监控", "音视频通话", "查看机器人状态","设置机器人"];
+ //$(" ._select-module .vue-checkbtn-group").VueCheckbtnGroup(item=>dst.some(o => o == item));
+ // get
+ //var v=$("._select-module .vue-checkbtn-group").VueCheckbtnGroup();
  * */
 	$(document).on("click", ".vue-checkbtn-group .vue-checkbtn-item", function () {
 
@@ -24274,6 +24376,23 @@ if (typeof jQuery === 'undefined') {
 	jQuery.fn.extend({
 
 		VueCheckbtnGroup: function VueCheckbtnGroup(args) {
+
+			if (typeof args === "function") {
+				var items = $(this).find(".vue-checkbtn-item");
+				for (var i = 0; i < items.length; i++) {
+					var item = items[i];
+					var val = $(item).attr("data-val") || "";
+					var bl = args(val);
+					if (bl) {
+						$(item).addClass("active");
+					} else {
+						$(item).removeClass("active");
+					}
+				}
+
+				return;
+			}
+
 			if (args instanceof Array) {
 
 				var items = $(this).find(".vue-checkbtn-item");
@@ -24303,6 +24422,199 @@ if (typeof jQuery === 'undefined') {
 	});
 })();
 
+/*
+ * vue-checkbox 组件
+ 	
+ 	<div class="vue-checkbox" >
+		<span class="vue-checkbox-item iconfont"></span>
+	</div>
+	
+	 // 自定义事件
+	$(".vue-checkbox").on("vue-checkbox", function(event, el,bl) {
+
+		$.alert("选择的值为:"+bl);
+	});
+	
+	// set 
+	$(".vue-checkbox").VueCheckbox(true,fn);
+	fn回调执行的函数
+	$(".vue-checkbox").VueCheckbox(true, (el) => {
+		$(el).parents("li").addClass("active");
+	});
+	
+	// get
+	 var v=$(".vue-checkbox").VueCheckbox();
+	 alert(v)
+ * */
+
+(function () {
+
+	// 单选 vue-checkbox
+	$(document).on("click", ".vue-checkbox  .vue-checkbox-item", function () {
+
+		$(this).toggleClass("active");
+		var bl = $(this).hasClass("active");
+
+		// 触发自定义的事件
+		$(this).trigger("vue-checkbox", [this, bl]);
+	});
+
+	// 单选 vue-checkbox
+	$(document).on("click", ".vue-checkbox  .vue-checkbox-text", function () {
+
+		var p = $(this).parents(".vue-checkbox");
+		$(".vue-checkbox-item", p).toggleClass("active");
+		var bl = $(".vue-checkbox-item", p).hasClass("active");
+
+		// 触发自定义的事件
+		$(this).trigger("vue-checkbox", [this, bl]);
+	});
+
+	jQuery.fn.extend({
+
+		VueCheckbox: function VueCheckbox(v, fn) {
+			if (typeof v !== "undefined") {
+				v = !!v;
+
+				if (v) {
+					$(this).find(".vue-checkbox-item").addClass("active");
+					if (typeof fn === "function") {
+						fn($(this).find(".vue-checkbox-item"), true);
+					}
+				} else {
+					$(this).find(".vue-checkbox-item").removeClass("active");
+
+					if (typeof fn === "function") {
+						fn($(this).find(".vue-checkbox-item"), false);
+					}
+				}
+			} else {
+
+				return $(this).find(".vue-checkbox-item").hasClass("active");
+			}
+		}
+	});
+})();
+
+/* vue-checkbox-group 组件
+	<div class="vue-checkbox-group">
+		<div class="vue-checkbox-group-item">
+			<span class="vue-checkbox-item iconfont" data-val="js"></span>
+			<span class="vue-checkbox-text">js</span>
+		</div>
+		<div class="vue-checkbox-group-item">
+			<span class="vue-checkbox-item iconfont" data-val="jquery"></span>
+			<span class="vue-checkbox-text">jquery</span>
+		</div>
+		<div class="vue-checkbox-group-item">
+			<span class="vue-checkbox-item iconfont" data-val="c#"></span>
+			<span class="vue-checkbox-text">c#</span>
+		</div>
+
+	</div>
+	
+	 // 自定义事件
+		$(".vue-checkbox-group").on("vue-checkbox-group", function(event, el,bl) {
+	
+			$.alert("选择的值为:"+bl);
+		});
+		
+		//set 
+		$(".vue-checkbox-group").VueCheckboxGroup([2,4]);
+		
+		// get
+		var v=$(".vue-checkbox-group").VueCheckboxGroup();
+		alert(v)
+		
+		//set 
+		//var dst = ["js", "c#"];
+		//$(".vue-checkbox-group").VueCheckboxGroup(item=>dst.some(o => o == item));
+		// get
+		//var v=$(".vue-checkbox-group").VueCheckboxGroup();
+	*/
+
+(function () {
+
+	// 单选组 vue-checkbox-group
+	$(document).on("click", ".vue-checkbox-group  .vue-checkbox-item", function () {
+
+		$(this).toggleClass("active");
+		var p = $(this).parents(".vue-checkbox-group");
+		var vals = [];
+		$(".vue-checkbox-item.active", p).each(function () {
+			var v = $(this).attr("data-val");
+			vals.push(v);
+		});
+
+		// 触发自定义的事件
+		$(this).trigger("vue-checkbox-group", [this, vals]);
+	});
+
+	// 单选 vue-checkbox
+	$(document).on("click", ".vue-checkbox-group  .vue-checkbox-text", function () {
+
+		var p = $(this).parents(".vue-checkbox-group-item");
+		$(".vue-checkbox-item", p).toggleClass("active");
+		var p2 = $(this).parents(".vue-checkbox-group");
+		var vals = [];
+		$(".vue-checkbox-item.active", p2).each(function () {
+			var v = $(this).attr("data-val");
+			vals.push(v);
+		});
+
+		// 触发自定义的事件
+		$(this).trigger("vue-checkbox-group", [this, vals]);
+	});
+
+	jQuery.fn.extend({
+
+		VueCheckboxGroup: function VueCheckboxGroup(args) {
+
+			if (typeof args === "function") {
+				var items = $(this).find(".vue-checkbox-item");
+				for (var i = 0; i < items.length; i++) {
+					var item = items[i];
+					var val = $(item).attr("data-val") || "";
+					var bl = args(val);
+					if (bl) {
+						$(item).addClass("active");
+					} else {
+						$(item).removeClass("active");
+					}
+				}
+
+				return;
+			}
+
+			if (args instanceof Array) {
+
+				var items = $(this).find(".vue-checkbox-item");
+				for (var i = 0; i < items.length; i++) {
+					var item = items[i];
+					for (var y = 0; y < args.length; y++) {
+						if (i + 1 == args[y]) {
+							$(item).addClass("active");
+							break;
+						}
+					}
+				}
+			} else {
+				var arrs = [];
+				$(".vue-checkbox-item", this).each(function () {
+					if ($(this).hasClass("active")) {
+						var v = $(this).attr("data-val") || "";
+						if (v.trim() != "") {
+							arrs.push(v);
+						}
+					}
+				});
+
+				return arrs;
+			}
+		}
+	});
+})();
+
 /*sysset模块*/
 
 // set scroll 
@@ -24315,176 +24627,25 @@ var sysset = {
 
 	init: function init() {
 
-		//日历插件
-		setDate();
+		$(".vue-checkbox-group").on("vue-checkbox-group", function (event, el, bl) {
 
-		// swicth 自定事件
-		$(".vue-swicth").on("vue-swicth", function (event, el) {
-
-			//$.alert("选择为:"+$(el).hasClass("active"));
+			$.alert("选择的值为:" + bl);
 		});
 
-		// 模式切换 
-		modelset();
+		//$(".vue-checkbox-group").VueCheckboxGroup([2,1,3]);
 
-		// 基础设置
-		basicset();
-
-		// 上下班设置
-		perset();
-
-		// 附属模块设置
-		
+		//set 
+		var dst = ["js", "c#"];
+		$(".vue-checkbox-group").VueCheckboxGroup(function (item) {
+			return dst.some(function (o) {
+				return o == item;
+			});
+		});
+		// get
+		var v = $(".vue-checkbox-group").VueCheckboxGroup();
+		alert(v);
 	}
 
-	//app-modelset 模式切换
-};function modelset() {
-
-	// 单选 vue-slider 自定事件
-	$(".app-modelset .vue-slider").on("vue-slider", function (event, el) {
-		//$.alert("选择为:" + $(el).attr("data-val"));
-	});
-
-	// set
-	$(".vue-slider").VueSlider("50");
-	// get
-	//	var v=$(".vue-slider").VueSlider()
-	//alert(v)
-}
-
-//app-modelset 基础设置
-function basicset() {
-	// 单选 vue-radiobtn 自定事件
-	$(" .vue-radiobtn").on("vue-radiobtn", function (event, el) {
-
-		$.alert("选择为:" + $(el).text());
-	});
-
-	//发音人
-	$(".vue-radiobtn._fayin").on("vue-radiobtn", function (event, el) {
-
-		$.alert("选择为:" + $(el).find("h5").text().trim());
-	});
-	$(".vue-radiobtn.base_semanticLibrary").VueRadiobtn(2);
-	// 数字框
-	$(document).on("number_click", function (event, element) {
-		//element 当前点击的元素	
-		var p = $(element).parents(".number");
-		$.alert("选择：" + $(p).find(".num").val());
-	});
-
-	// vue-slider音量滑动触发事件
-	//		$(document).on("vue-slider",function(event,v){
-	//			console.log("音量："+v);
-	//		});
-
-	//  vue-slider設置音量
-	//$(".app-basicset .vue-slider").VueSlider(90);
-
-	//  vue-slider獲取音量
-	//var v=$(".app-basicset .vue-slider").VueSlider();
-	//alert(v)
-
-	// vue-range設置音量
-	//set
-	//$(".vue-range._yingling").VueRange(3);
-
-	// vue-range獲取音量
-	//get
-	//var v=$(".app-basicset .vue-slider").VueRnge();
-	//alert(v)
-
-	// vue-range音量滑动触发事件
-	$(document).on("vue-range", function (event, v) {
-		console.log("音量：" + v);
-	});
-
-	// 单选 vue-radiobtn
-	//set
-	//$(".base_semanticLibrary.vue-radiobtn").VueRadio(1,"lingju");
-	//get
-	//var radio_v=$(".base_semanticLibrary.vue-radiobtn").VueRadio();
-	//alert(radio_v);
-}
-
-// 个性设置
-function perset() {
-
-	// 自定义事件
-	$(".vue-checkbtn").on("vue-checkbtnbtn", function (event, el, bl) {
-
-		$.alert("选择的值为:" + bl);
-	});
-
-	// set 
-	$(".vue-checkbtn.a1").VueCheck(true);
-	// get
-	var v = $(".vue-checkbtn.a1").VueCheck();
-	//	 alert(v)
-	//	
-
-
-	// vue-checkbtn-group自定义事件
-	$(".vue-checkbtn-group").on("vue-checkbtn-group", function (event, el, bl, arrs) {
-
-		$.alert("选择的值为:" + arrs);
-	});
-
-	//set 
-	$(".vue-checkbtn-group").VueCheckGroup([2, 4]);
-
-	// get
-	var v = $(".vue-checkbtn-group").VueCheckGroup();
-	//alert(v)
-
-	// 添加壁纸背景
-	$(".app-perset-cont ._btn-bg").on("click", function () {
-
-		$(".pop-mask").addClass("active");
-	});
-
-	// 添加 logo
-	$(".app-perset-cont ._btn-logo").on("click", function () {
-
-		$(".pop-mask").addClass("active");
-	});
-
-	// 添加更改欢迎页
-
-	$(".app-perset-cont ._btn-hy").on("click", function () {
-
-		$(".pop-mask").addClass("active");
-	});
-
-	// 选择图片
-	$(".pop-mask ._imgs li").click(function () {
-
-		$(this).siblings().removeClass("active");
-		$(this).addClass("active");
-	});
-}
-
-// 日历插件
-var setDate = function setDate() {
-
-	// bs 日历插件
-	$('.bs-date').datetimepicker({
-		format: "hh:ii  ", //'yyyy-mm-dd hh:ii:ss'
-		//showMeridian: true,
-		autoclose: true,
-		todayBtn: true,
-		startView: "day",
-		minView: 0 //选择日期
-
-		//forceParse :true  //转换格式
-
-	});
-
-	//日期不准输入
-	$('.bs-date').focus(function () {
-
-		$(this).blur();
-	});
 };
 
 /*test模块*/

@@ -12,9 +12,9 @@
 		<!--check css-->
 		<script src="../../js/modernizr-2.6.2.min.js" type="text/javascript" charset="utf-8"></script>
 
-		<link rel="stylesheet" type="text/css" href="../../css/cstFonts/iconfont.css" />
-		<link rel="stylesheet" type="text/css" href="../../css/build.css" />
-		<link rel="stylesheet" type="text/css" href="../../css/bs-date/css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/cstFonts/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/build.css" />
+		<link rel="stylesheet" type="text/css" href="../css/bs-date/css/bootstrap-datetimepicker.min.css" />
 
 	</head>
 
@@ -40,7 +40,7 @@
 					<li>
 						<a href="#attrset" data-toggle="tab">vue-swicth</a>
 					</li>
-					
+
 				</ul>
 			</div>
 			<!--content-->
@@ -49,37 +49,37 @@
 
 					<!--vue-radio-组件-单选-->
 					<div class="tab-pane  active  fade in" id="modelset">
-						 <h2>vue-radiobtn-组件-单选</h2>
+						<h2>vue-radiobtn-组件-单选</h2>
 						<ul class="_list">
-								<li>
-									<label>语速</label>
-									<div class="base_speedOfSpeech vue-radiobtn">
-										<div class="vue-radiobtn-item active  slow" data-val="slow">慢</div>
-										<div class="vue-radiobtn-item medium" data-val="medium">中</div>
-										<div class="vue-radiobtn-item fast" data-val="fast">快</div>
-									</div>
-								</li>
-								<li>
-									<label>导航行走速度</label>
-									<div class="vue-radiobtn base_walkingSpeed">
-										<div class="vue-radiobtn-item  active slow" data-val="slow">慢</div>
-										<div class="vue-radiobtn-item medium" data-val="medium">中</div>
-										<div class="vue-radiobtn-item fast" data-val="fast">快</div>
-									</div>
-								</li>
-							</ul>
-							<h2>vue-radiobox-组件-单选</h2>
-							<ul class="_list">
-									<li>
-										<label>语速</label>
-										<div class=" vue-radiobox">
-											<span class="vue-checkbox-item iconfont">慢</span>
-											<span class="vue-checkbox-item iconfont">中</span>
-											<span class="vue-checkbox-item iconfont">快</span>
-										</div>
-									</li>
-									
-								</ul>
+							<li>
+								<label>语速</label>
+								<div class="base_speedOfSpeech vue-radiobtn">
+									<div class="vue-radiobtn-item active  slow" data-val="slow">慢</div>
+									<div class="vue-radiobtn-item medium" data-val="medium">中</div>
+									<div class="vue-radiobtn-item fast" data-val="fast">快</div>
+								</div>
+							</li>
+							<li>
+								<label>导航行走速度</label>
+								<div class="vue-radiobtn base_walkingSpeed">
+									<div class="vue-radiobtn-item  active slow" data-val="slow">慢</div>
+									<div class="vue-radiobtn-item medium" data-val="medium">中</div>
+									<div class="vue-radiobtn-item fast" data-val="fast">快</div>
+								</div>
+							</li>
+						</ul>
+						<h2>vue-radiobox-组件-单选</h2>
+						<ul class="_list">
+							<li>
+								<label>语速</label>
+								<div class=" vue-radiobox">
+									<span class="vue-radiobox-item iconfont" data-val="慢">慢</span>
+									<span class="vue-radiobox-item iconfont" data-val="中">中</span>
+									<span class="vue-radiobox-item iconfont" data-val="快">快</span>
+								</div>
+							</li>
+
+						</ul>
 
 
 					</div>
@@ -87,37 +87,37 @@
 					<!--vue-slider组件-->
 					<div class="tab-pane  " id="basicset">
 						<div class="app-basicset">
-							
+
 							<h2>vue-slider组件</h2>
 							<ul class="_list">
 								<li>
 									<label>音量1</label>
 									<!-- 设置初始值 =data-val="70" 获取值 =$('.vue-slider').attr("data-val")-->
-									<div class="vue-slider" data-val="70" data-min="0" data-max="100"  style="width: 200px;">
-                                        <div class="vue-slider-bar">
-                                            <div class="vue-slider-bg">
-                                                <div class="vue-slider-handler">
-                                                </div>
-                                            </div>
-                                            <div class="vue-slider-percent">0%</div>
-                                        </div>
-                                    </div>
+									<div class="vue-slider" data-val="70" data-min="0" data-max="100" style="width: 200px;">
+										<div class="vue-slider-bar">
+											<div class="vue-slider-bg">
+												<div class="vue-slider-handler">
+												</div>
+											</div>
+											<div class="vue-slider-percent">0%</div>
+										</div>
+									</div>
 
 								</li>
 								<li>
 
-									
+
 									<label>音量2</label>
-									
+
 									<div class="vue-range _yingling">
 										<input type="range" name="" step="1" min="0" max="10" value="8" />
 										<span>5</span>
 									</div>
-									
+
 								</li>
 								</li>
 
-								
+
 								<li>
 									<label>亮度</label>
 									<div class="vue-range">
@@ -125,8 +125,8 @@
 										<span>5</span>
 									</div>
 								</li>
-								
-							
+
+
 							</ul>
 
 							<div class="_subimt">
@@ -161,49 +161,81 @@
 					<!--个性设置-->
 					<div class="tab-pane " id="perset">
 						<div class="app-perset">
-							
+
 							<div class="app-perset-cont">
 								<h2>vue-checkbtn-组件</h2>
 								<ul class="_list">
-								
-								<li>单选vue-checkbtn</li>
-								<li>
-									<label>爱心:</label>
-									<div class="vue-checkbtn a1">
-										<div class="vue-checkbtn-item " data-val="true">
-											爱心
-										</div>
-									</div>
-								</li>
-								
-								<li>
-									<label>激活:</label>
-									<div class="vue-checkbtn a2">
-										<div class="vue-checkbtn-item " data-val="true">
-											激活
-										</div>
-									</div>
-								</li>
-								
-								<li>多选组-vue-check-group</li>
-								
-								<li>
-									<label>编程:</label>
-									<div class="vue-checkbtn-group">
-										<div class="vue-checkbtn-item " data-val="js">js</div>
-										<div class="vue-checkbtn-item " data-val="jquery">jquery</div>
-										<div class="vue-checkbtn-item " data-val="java">java</div>
-										<div class="vue-checkbtn-item " data-val="c#">c#</div>
-										<div class="vue-checkbtn-item " data-val="nodejs">nodejs</div>
-										</div>
-									</div>
-								</li>
-							
-							</ul>
-								
-							</div>
 
-				
+									<li>单选vue-checkbtn</li>
+									<li>
+										<label>爱心:</label>
+										<div class="vue-checkbtn a1">
+											<div class="vue-checkbtn-item " data-val="true">
+												爱心
+											</div>
+										</div>
+									</li>
+
+									<li>
+										<label>激活:</label>
+										<div class="vue-checkbtn a2">
+											<div class="vue-checkbtn-item " data-val="true">
+												激活
+											</div>
+										</div>
+									</li>
+
+									<li>多选组-vue-check-group</li>
+
+									<li>
+										<label>编程:</label>
+										<div class="vue-checkbtn-group">
+											<div class="vue-checkbtn-item " data-val="js">js</div>
+											<div class="vue-checkbtn-item " data-val="jquery">jquery</div>
+											<div class="vue-checkbtn-item " data-val="java">java</div>
+											<div class="vue-checkbtn-item " data-val="c#">c#</div>
+											<div class="vue-checkbtn-item " data-val="nodejs">nodejs</div>
+										</div>
+							</div>
+							</li>
+							<li>
+								<h2>vue-checkbox-组件</h2>
+								<label>自动登录:</label>
+
+								<div class="vue-checkbox">
+									<span class="vue-checkbox-item iconfont"></span>
+									<span class="vue-checkbox-text">是</span>
+								</div>
+							</li>
+
+							<li>
+								<h2>vue-checkbox-group-组件</h2>
+								<label>自动登录:</label>
+
+								<div class="vue-checkbox-group">
+									<div class="vue-checkbox-group-item">
+										<span class="vue-checkbox-item iconfont" data-val="js"></span>
+										<span class="vue-checkbox-text">js</span>
+									</div>
+									<div class="vue-checkbox-group-item">
+										<span class="vue-checkbox-item iconfont" data-val="jquery"></span>
+										<span class="vue-checkbox-text">jquery</span>
+									</div>
+									<div class="vue-checkbox-group-item">
+										<span class="vue-checkbox-item iconfont" data-val="c#"></span>
+										<span class="vue-checkbox-text">c#</span>
+									</div>
+						
+								</div>
+							</li>
+							</ul>
+
+
+
+
+						</div>
+
+
 
 					</div>
 
@@ -232,7 +264,7 @@
 									</div>
 
 								</li>
-								
+
 
 							</ul>
 
@@ -249,12 +281,12 @@
 
 		</section>
 		<!--[if lte IE 9]>
-			<script src="../../js/ie9.js" type="text/javascript" charset="utf-8"></script>
+			<script src="../js/ie9.js" type="text/javascript" charset="utf-8"></script>
 		<![endif]-->
-		<script data-parent="umd" data-umd="sysset" src="../../js/build.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../css/bs-date/js/bootstrap-datetimepicker-ch.js" type="text/javascript" charset="utf-8"></script>
+		<script data-parent="umd" data-umd="sysset" src="../js/build.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../css/bs-date/js/bootstrap-datetimepicker-ch.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			
+
 		</script>
 	</body>
 

@@ -6720,6 +6720,29 @@ select.form-control {
     background: #467CC3;
     color: #fff; }
 
+/*vue-radiokbox*/
+.vue-radiobox {
+  display: inline-block;
+  vertical-align: middle; }
+  .vue-radiobox .vue-radiobox-item {
+    font-size: 15px;
+    color: #777;
+    cursor: pointer; }
+    .vue-radiobox .vue-radiobox-item:before {
+      margin-right: 5px;
+      font-size: 24px;
+      content: '\e672';
+      color: #999;
+      vertical-align: middle; }
+    .vue-radiobox .vue-radiobox-item.active:before {
+      margin-right: 5px;
+      font-size: 24px;
+      content: '\e600';
+      color: #467CC3;
+      vertical-align: middle; }
+    .vue-radiobox .vue-radiobox-item + .vue-radiobox-item {
+      margin-left: 10px; }
+
 .vue-swicth {
   position: relative;
   display: inline-block;
@@ -6903,6 +6926,41 @@ select.form-control {
     .vue-checkbtn-group .vue-checkbtn-item.active {
       background: #467CC3;
       color: #fff; }
+
+/*vue-checkbox*/
+.vue-checkbox {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer; }
+  .vue-checkbox > * {
+    vertical-align: middle; }
+  .vue-checkbox .vue-checkbox-item {
+    font-size: 24px; }
+    .vue-checkbox .vue-checkbox-item:before {
+      content: '\e602';
+      color: #999; }
+    .vue-checkbox .vue-checkbox-item.active:before {
+      content: '\e9c4';
+      color: #467CC3; }
+
+.vue-checkbox-group {
+  display: inline-block;
+  vertical-align: middle; }
+  .vue-checkbox-group .vue-checkbox-group-item {
+    display: inline-block;
+    cursor: pointer; }
+    .vue-checkbox-group .vue-checkbox-group-item + .vue-checkbox-group-item {
+      margin-left: 10px; }
+    .vue-checkbox-group .vue-checkbox-group-item > * {
+      vertical-align: middle; }
+    .vue-checkbox-group .vue-checkbox-group-item .vue-checkbox-item {
+      font-size: 24px; }
+      .vue-checkbox-group .vue-checkbox-group-item .vue-checkbox-item:before {
+        content: '\e602';
+        color: #999; }
+      .vue-checkbox-group .vue-checkbox-group-item .vue-checkbox-item.active:before {
+        content: '\e9c4';
+        color: #467CC3; }
 
 /*加载iframe 的loading动画 加载提示
  * 

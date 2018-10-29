@@ -2,6 +2,8 @@ import "./message";
 
 import  "./pop"; 
 
+import "./vue-radiobox"; 
+
 import "./vue-radiobtn"; 
 
 import "./vue-range"; 

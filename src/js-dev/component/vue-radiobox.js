@@ -1,9 +1,10 @@
-
 /*
  * vue-radiobox 组件
  	
  	<div class="vue-radiobox" >
-		<span class="vue-radiobox-item iconfont"></span>
+		<span class="vue-radiobox-item iconfont">慢</span>
+		<span class="vue-radiobox-item iconfont">中</span>
+		<span class="vue-radiobox-item iconfont">快</span>
 	</div>
 	
 	 // 自定义事件
@@ -12,60 +13,78 @@
 		$.alert("选择的值为:"+bl);
 	});
 	
-	// set 
-	$(".vue-radiobox").VueRadiobox(true,fn);
-	fn回调执行的函数
-	$(".vue-radiobox").Vueradiobox(true, (el) => {
-		$(el).parents("li").addClass("active");
+	//set 1
+	$(".vue-radiobox").VueRadiobox(1);
+	
+	//set2
+	var v="快";
+	$(".vue-radiobox").VueRadiobox((val)=>{
+		return	val==v;
+			
 	});
 	
-	// get
-	 var v=$(".vue-radiobox").VueRadiobox();
-	 alert(v)
+	//get
+	var v=$(".vue-radiobox").VueRadiobox();
+	alert(v);
+
+	
+	
  * */
 
 
 (function() {
-	
+
 	// 单选 vue-radiobox
 	$(document).on("click", ".vue-radiobox  .vue-radiobox-item", function() {
-		
-		$(this).toggleClass("active");
- 		var bl=$(this).hasClass("active");
- 		
+
+		var p = $(this).parents(".vue-radiobox");
+		$(".vue-radiobox-item", p).removeClass("active");
+		$(this).addClass("active");
+		var bl = $(this).hasClass("active");
+
 		// 触发自定义的事件
-		$(this).trigger("vue-radiobox", [this,bl]);
+		$(this).trigger("vue-radiobox", [this, bl]);
 	});
-	
-	
+
+
 	jQuery.fn.extend({
 
-		VueRadiobox: function(v,fn) {
-			if(typeof v!=="undefined") {
-				v=!!v;
-				
-				if(v){
-					$(this).find(".vue-radiobox-item").addClass("active");
-					if(typeof fn==="function"){ 
-						fn($(this).find(".vue-radiobox-item"),true);
-						
-					}
-				}else{
-					$(this).find(".vue-radiobox-item").removeClass("active");
-					
-					if(typeof fn==="function"){ 
-						fn($(this).find(".vue-radiobox-item"),false);
-						
-					}
+		VueRadiobox: function(args) {
+			if(typeof args ==="undefined"){
+				return  $(this).find(".vue-radiobox-item.active").attr("data-val");
+			}
+			if(typeof args==="number"){
+				var items =
+				items.removeClass("active");
+				if(args>0){
+					args=args>=1?args-1:0;
+					items.eq(args).addClass("active");
 				}
 				
-			} else {
-
-				return $(this).find(".vue-radiobox-item").hasClass("active");
+				return;
 			}
+
+			if (typeof args === "function") {
+				var items = $(this).find(".vue-radiobox-item");
+				items.removeClass("active");
+				for (var i = 0; i < items.length; i++) {
+					var item = items[i];
+					var val = $(item).attr("data-val") || "";
+					var bl = args(val);
+					if (bl) {
+						$(item).addClass("active");
+						break;
+					} else {
+						$(item).removeClass("active");
+					}
+				}
+
+				return;
+			}
+
+		
 		}
 	});
-	
-	
-})();
 
+
+})();

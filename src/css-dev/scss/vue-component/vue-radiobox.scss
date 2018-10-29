@@ -1,22 +1,35 @@
 /*vue-radiokbox*/
 
-.vue-radiokbox {
+.vue-radiobox {
     display: inline-block;
     vertical-align: middle;
-    .vue-radiokbox-item {
-        vertical-align: middle;
-        font-size: 24px;
+
+    .vue-radiobox-item {
+        font-size: 15px;
+		color:#777;
+        cursor: pointer;
+		>*{
+			//vertical-align: middle;
+		}
         &:before {
-            content: "\e602";
-            color:#ccc;
+			margin-right: 5px;
+            font-size: 24px;
+            content: '\e672';
+            color: #999;
+			vertical-align: middle;
         }
         &.active {
-            
             &:before {
-                content: "\e9c4";
-                color:$text-primary;
+				margin-right: 5px;
+                font-size: 24px;
+                content: '\e600';
+                color: $text-primary;
+				vertical-align: middle;
             }
+        }
+
+        & + .vue-radiobox-item {
+            margin-left: 10px;
         }
     }
 }
-
