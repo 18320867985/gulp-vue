@@ -1,0 +1,25 @@
+	
+	1.引用js
+	<script type="text/javascript" charset="utf-8" src="/editor/kindeditor-min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/editor/lang/zh_CN.js"></script>
+	
+	
+ 2. 初始化编辑器
+	window.editorMini = KindEditor.create('#Article', {
+			width: '100%',
+			height: '400px',
+			resizeType: 1,
+			uploadJson: '/Files/UploadImage',
+			items: [
+				'source', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+				'insertunorderedlist', '|', 'image', 'link', 'fullscreen'
+			]
+	});
+	
+	3.
+	editorMini.html("提交的内容");  //设置编辑器的值
+	var  editor_val=editorMini.html();  //获取编辑器的值
+		
+	
+	
