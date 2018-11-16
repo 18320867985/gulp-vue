@@ -107,6 +107,7 @@
 			$(document).on("click",".vue-file-btn", function(e) {
 				e.stopPropagation();
 				e.preventDefault();
+				
 				var p = $(this).parents(".vue-file");
 				// 点击文件上传框
 				$(".fileUp", p).click();

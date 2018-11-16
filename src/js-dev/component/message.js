@@ -47,7 +47,7 @@
 (function() {
 
 	//  confirm
-	jQuery.fn.extend({
+	$.fn.extend({
 
 		confirm: function(mess, okfun, cancelfun, obj) {
 			if(!arguments.length >= 2) {
@@ -124,7 +124,7 @@
 	});
 
 	//  confirm
-	jQuery.extend({
+	$.extend({
 		confirm: function(mess, okfun, cancelfun, obj) {
 			if(!arguments.length >= 2) {
 
@@ -192,13 +192,13 @@
 	});
 
 	//  alert
-	jQuery.fn.extend({
+	$.fn.extend({
 
 		alert: _alert
 	});
 
 	//  alert
-	jQuery.extend({
+	$.extend({
 
 		alert: _alert
 	});
@@ -245,12 +245,12 @@
 	}
 
 	//  info
-	jQuery.fn.extend({
+	$.fn.extend({
 		info: _info
 	});
 
 	//  info
-	jQuery.extend({
+	$.extend({
 		info: _info
 	});
 
@@ -326,7 +326,7 @@
 	}
 
 	// loading 加载动画
-	jQuery.extend({
+	$.extend({
 		loadingAdd: function(el,loadingText) {
 			var _loadingText = "正在加载数据...";
 			if(loadingText) {

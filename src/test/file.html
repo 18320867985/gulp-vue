@@ -10,7 +10,6 @@
 		<title>文件上传</title>
 
 		<!--check css-->
-		<script src="../../js/modernizr-2.6.2.min.js" type="text/javascript" charset="utf-8"></script>
 		<link rel="stylesheet" type="text/css" href="../css/cstFonts/iconfont.css" />
 		<link rel="stylesheet" type="text/css" href="../css/build.css" />
 
@@ -18,38 +17,45 @@
 	</head>
 
 	<body class=" sysset-bg">
-		<div class="form-horizontal" style="width: 600px; margin: 0 auto;">
+		<div class="form-horizontal " style="width: 600px; margin: 0 auto;">
 			<div class="form-group">
 				<label class="control-label col-xs-2" for="">上传文件</label>
 				<div class="col-xs-4">
 					<input class="form-control" type="text">
 				</div>
 				<div class="col-xs-4">
-					<a class="vue-file-btn btn  btn-warning" name="up" href="javascript:">
-						<span class="glyphicon glyphicon-file"></span>上传图片
-					</a>
-					<input class=" fileUp v-hide-text-index" type="file" name="" id="fileUp" value="" />
-					<!--进度条-->
-					<div class="progress-all v-hide">
-						<div class="progress-now"></div>
-						<div class="progress-num">0%</div>
+					<div class="vue-file">
+							<a class="vue-file-btn btn  btn-warning" name="up" href="javascript:">
+								<span class="glyphicon glyphicon-file"></span>上传图片
+							</a>
+							<input class=" fileUp v-hide-text-index" type="file" name="" id="fileUp" value="" />
+							<!--进度条-->
+							<div class="progress-all v-hide">
+								<div class="progress-now"></div>
+								<div class="progress-num">0%</div>
+							</div>
 					</div>
+					
+					
+								
+					
 				</div>
 
 
 			</div>
-
+						
 		</div>
 
 
 		<!--[if lte IE 9]>
 			<script src="../js/ie9.js" type="text/javascript" charset="utf-8"></script>
 		<![endif]-->
+		<script src="../js-dev/libs/mobile-1.0.8.js" type="text/javascript" charset="utf-8"></script>
 		<script data-parent="umd" data-umd="" src="../js/build.js" type="text/javascript" charset="utf-8"></script>
 
 		<script type="text/javascript">
 			$(".vue-file").VueFile({
-				url: "./index.html", //上传网址
+				url: "./component.html", //上传网址
 				outTime: 30000,
 				size: 300000, // 大小 m
 				contentType: false,
@@ -62,6 +68,22 @@
 					//console.log(el);
 				}
 			});
+			
+//			$.get("./test.json",function(data){
+//				alert(data)
+//			})
+
+$.ajax({
+	url:"./test.json",
+	data:{},
+	type:"get",
+	success:function(data){
+	console.log(data)
+	},error:function(){
+		alert("error")
+	}
+})
+			
 		</script>
 	</body>
 
